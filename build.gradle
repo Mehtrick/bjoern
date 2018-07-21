@@ -1,13 +1,19 @@
 
-apply plugin: 'java-library'
-apply plugin: 'eclipse'
 
-repositories {
-    jcenter()
+allprojects{
+    repositories {
+        jcenter()
+    }
 }
 
 dependencies {
+    apply plugin: 'java-library'
     implementation 'com.google.guava:guava:22.0'
     testImplementation 'junit:junit:4.12'
+}
+
+subprojects {
+    apply plugin: 'eclipse'
+    version = '0.1.0'
 }
 

@@ -16,3 +16,6 @@ include 'services:webservice'
 */
 
 rootProject.name = 'jvior'
+
+include 'jvior-parser'
+include 'jvior-generator'
