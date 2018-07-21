@@ -4,6 +4,8 @@
  */
 import org.junit.Test;
 
+import de.mehtrick.jvior.parser.modell.Jvior;
+import de.mehtrick.jvior.parser.modell.JviorStatement;
 import de.mehtrick.jvior.parser.modell.yaml.JviorYMLModell;
 import de.mehtrick.jvior.parser.reader.JviorYMLReader;
 
@@ -12,6 +14,15 @@ public class JviorParserTest {
 	@Test
 	public void testSomeLibraryMethod() {
 		JviorYMLModell readSpec = new JviorYMLReader().readSpec(null);
-		System.out.println(readSpec);
+		Jvior jvior = new Jvior(readSpec);
+		System.out.println(jvior);
 	}
+
+	@Test
+	public void testSplit() {
+		String string = "Hallo wie \"geht es dir\" du \"1\" stricher";
+		JviorStatement statement = new JviorStatement(string);
+		System.out.println(statement);
+	}
+
 }
