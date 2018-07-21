@@ -17,6 +17,8 @@ subprojects {
         compileOnly 'org.projectlombok:lombok:1.18.0'
 
         testImplementation 'junit:junit:4.12'
+        testImplementation 'org.assertj:assertj-core:3.10.0'
+
     }
 }
 

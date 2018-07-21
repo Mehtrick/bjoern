@@ -1,5 +1,5 @@
 
-package de.mehtrick.jvior.parser.modell.yaml;
+package de.mehtrick.jvior.parser.modell;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +17,7 @@ public class JviorYMLModell implements Serializable {
 	@JsonProperty("Feature")
 	private String feature;
 	@JsonProperty("Scenarios")
-	private List<Scenario> scenarios = null;
+	private List<JviorYMLScenario> jviorYMLScenarios = null;
 	private final static long serialVersionUID = -5118234148570119505L;
 
 	@JsonProperty("Feature")
@@ -31,13 +31,13 @@ public class JviorYMLModell implements Serializable {
 	}
 
 	@JsonProperty("Scenarios")
-	public List<Scenario> getScenarios() {
-		return scenarios;
+	public List<JviorYMLScenario> getScenarios() {
+		return jviorYMLScenarios;
 	}
 
 	@JsonProperty("Scenarios")
-	public void setScenarios(List<Scenario> scenarios) {
-		this.scenarios = scenarios;
+	public void setScenarios(List<JviorYMLScenario> jviorYMLScenarios) {
+		this.jviorYMLScenarios = jviorYMLScenarios;
 	}
 
 }

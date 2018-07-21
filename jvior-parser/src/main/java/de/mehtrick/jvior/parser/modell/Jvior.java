@@ -3,7 +3,6 @@ package de.mehtrick.jvior.parser.modell;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.mehtrick.jvior.parser.modell.yaml.JviorYMLModell;
 import lombok.Data;
 import lombok.ToString;
 

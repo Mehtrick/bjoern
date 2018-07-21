@@ -1,5 +1,5 @@
 
-package de.mehtrick.jvior.parser.modell.yaml;
+package de.mehtrick.jvior.parser.modell;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,12 +12,12 @@ import lombok.ToString;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "Scenario",
+    "JviorYMLScenario",
     "Given",
     "When",
     "Then"
 })
-public class Scenario implements Serializable
+class JviorYMLScenario implements Serializable
 {
 
     @JsonProperty("Scenario")

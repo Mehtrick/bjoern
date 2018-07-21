@@ -1,6 +1,6 @@
 package de.mehtrick.jvior.parser.reader;
 
-public class JviorYMLReaderException extends RuntimeException {
+class JviorYMLReaderException extends RuntimeException {
 
 	/**
 	 * 
