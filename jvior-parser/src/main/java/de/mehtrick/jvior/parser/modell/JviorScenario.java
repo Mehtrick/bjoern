@@ -6,6 +6,15 @@ import java.util.stream.Collectors;
 
 import lombok.Data;
 
+/**
+ * A Scenario contains of 
+ * - a name which describes it
+ * - {@link #given}
+ * - {@link #when}
+ * - {@link #then}
+ * @author mehtrick
+ *
+ */
 @Data
 public class JviorScenario {
 	private String name;

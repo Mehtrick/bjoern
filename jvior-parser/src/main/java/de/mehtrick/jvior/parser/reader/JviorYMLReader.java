@@ -8,6 +8,13 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import de.mehtrick.jvior.parser.modell.JviorYMLModell;
 
+/**
+ * Reads the jvior spec file and parses it into a simple modell which represents
+ * the structure of the spec. 
+ * 
+ * @author mehtrick
+ *
+ */
 public class JviorYMLReader {
 
 	public JviorYMLModell readSpec(String path) {

@@ -9,6 +9,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.ToString;
 
+
+/**
+ * Representation of the jvior spec file as a pojo
+ * @author mehtrick
+ *
+ */
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "Feature", "Scenarios" })

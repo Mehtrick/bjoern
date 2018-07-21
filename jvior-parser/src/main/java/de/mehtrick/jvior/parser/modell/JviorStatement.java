@@ -12,10 +12,19 @@ import org.apache.commons.text.WordUtils;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * A more complex extraction of the jvior-spec statement
+ * A statement is part of a given, when or then
+ * This class contains the original statement as {@link #primitiveStatement}
+ * Also it contains a camelCased {@link #StatementWithoutParameters}. The parameters are extracted in a list found in {@link #parameters}
+ * @author mehtrick
+ *
+ */
 @Data
 @ToString
 public class JviorStatement {
 
+	private static final String PARAMETERPATTERN = "\"(.*?)\"";
 	private String primitiveStatement;
 	private String StatementWithoutParameters;
 	private List<String> parameters = new ArrayList<>();
@@ -27,7 +36,7 @@ public class JviorStatement {
 	}
 
 	private void parseParameters(String statement) {
-		Pattern MY_PATTERN = Pattern.compile("\"(.*?)\"");
+		Pattern MY_PATTERN = Pattern.compile(PARAMETERPATTERN);
 		Matcher matcher = MY_PATTERN.matcher(statement);
 		while (matcher.find()) {
 			parameters.add(matcher.group().replaceAll("\"", ""));
@@ -35,7 +44,7 @@ public class JviorStatement {
 	}
 
 	private String removeParametersFromStatement(String statement) {
-		return Arrays.asList(statement.split("\"(.*?)\"")).stream().map(WordUtils::capitalizeFully)
+		return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(WordUtils::capitalizeFully)
 				.map(s -> s.replaceAll(" ", "")).collect(Collectors.joining());
 	}
 

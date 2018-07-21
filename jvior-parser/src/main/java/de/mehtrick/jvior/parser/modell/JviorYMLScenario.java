@@ -9,65 +9,65 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.ToString;
 
+/**
+ * Representation of the jvior spec file scenario as a pojo
+ * 
+ * @author mehtrick
+ *
+ */
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "JviorYMLScenario",
-    "Given",
-    "When",
-    "Then"
-})
-class JviorYMLScenario implements Serializable
-{
+@JsonPropertyOrder({ "JviorYMLScenario", "Given", "When", "Then" })
+class JviorYMLScenario implements Serializable {
 
-    @JsonProperty("Scenario")
-    private String scenario;
-    @JsonProperty("Given")
-    private List<String> given = null;
-    @JsonProperty("When")
-    private List<String> when = null;
-    @JsonProperty("Then")
-    private List<String> then = null;
-    private final static long serialVersionUID = -2873042134445817561L;
+	@JsonProperty("Scenario")
+	private String scenario;
+	@JsonProperty("Given")
+	private List<String> given = null;
+	@JsonProperty("When")
+	private List<String> when = null;
+	@JsonProperty("Then")
+	private List<String> then = null;
+	private final static long serialVersionUID = -2873042134445817561L;
 
-    @JsonProperty("Scenario")
-    public String getScenario() {
-        return scenario;
-    }
+	@JsonProperty("Scenario")
+	public String getScenario() {
+		return scenario;
+	}
 
-    @JsonProperty("Scenario")
-    public void setScenario(String scenario) {
-        this.scenario = scenario;
-    }
+	@JsonProperty("Scenario")
+	public void setScenario(String scenario) {
+		this.scenario = scenario;
+	}
 
-    @JsonProperty("Given")
-    public List<String> getGiven() {
-        return given;
-    }
+	@JsonProperty("Given")
+	public List<String> getGiven() {
+		return given;
+	}
 
-    @JsonProperty("Given")
-    public void setGiven(List<String> given) {
-        this.given = given;
-    }
+	@JsonProperty("Given")
+	public void setGiven(List<String> given) {
+		this.given = given;
+	}
 
-    @JsonProperty("When")
-    public List<String> getWhen() {
-        return when;
-    }
+	@JsonProperty("When")
+	public List<String> getWhen() {
+		return when;
+	}
 
-    @JsonProperty("When")
-    public void setWhen(List<String> when) {
-        this.when = when;
-    }
+	@JsonProperty("When")
+	public void setWhen(List<String> when) {
+		this.when = when;
+	}
 
-    @JsonProperty("Then")
-    public List<String> getThen() {
-        return then;
-    }
+	@JsonProperty("Then")
+	public List<String> getThen() {
+		return then;
+	}
 
-    @JsonProperty("Then")
-    public void setThen(List<String> then) {
-        this.then = then;
-    }
+	@JsonProperty("Then")
+	public void setThen(List<String> then) {
+		this.then = then;
+	}
 
 }
