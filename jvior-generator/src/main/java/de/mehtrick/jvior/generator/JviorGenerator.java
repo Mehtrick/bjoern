@@ -1,6 +1,7 @@
 package de.mehtrick.jvior.generator;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 import de.mehtrick.jvior.parser.JviorParser;
@@ -19,8 +20,12 @@ public class JviorGenerator {
 	}
 
 	private static void generateSingleJvior(JviorGeneratorConfig config, String path) {
-		Jvior jvior = new JviorParser().parseSpec(path);
-		JviorCodeGenerator.generate(config, jvior);
+		try {
+			Jvior jvior = new JviorParser().parseSpec(path);
+			JviorCodeGenerator.generate(config, jvior);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private static File[] getFilesFromFolder(String folder) {

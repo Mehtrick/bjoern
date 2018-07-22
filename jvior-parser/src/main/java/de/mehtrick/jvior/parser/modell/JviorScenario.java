@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.mehtrick.jvior.parser.JviorUtil;
 import lombok.Data;
 
 /**
- * A Scenario contains of 
- * - a name which describes it
- * - {@link #given}
- * - {@link #when}
- * - {@link #then}
+ * A Scenario contains of - a name which describes it - {@link #given} -
+ * {@link #when} - {@link #then}
+ * 
  * @author mehtrick
  *
  */
@@ -24,14 +23,17 @@ public class JviorScenario {
 
 	public JviorScenario(JviorYMLScenario jviorYMLScenario) {
 		setName(jviorYMLScenario.getScenario());
-		given = parseStatements(jviorYMLScenario.getGiven());
-		when = parseStatements(jviorYMLScenario.getWhen());
-		then = parseStatements(jviorYMLScenario.getThen());
+		given = parseStatements(jviorYMLScenario.getGiven(), "given");
+		when = parseStatements(jviorYMLScenario.getWhen(), "when");
+		then = parseStatements(jviorYMLScenario.getThen(), "then");
 	}
 
-	private List<JviorStatement> parseStatements(List<String> yamlStatementList) {
-		return yamlStatementList.stream().map(JviorStatement::new).collect(Collectors.toList());
+	private List<JviorStatement> parseStatements(List<String> yamlStatementList, String keyword) {
+		return yamlStatementList.stream().map(s -> new JviorStatement(s, keyword)).collect(Collectors.toList());
+	}
 
+	public String getNameFormatted() {
+		return JviorUtil.parseTextToCamelCase(getName());
 	}
 
 }

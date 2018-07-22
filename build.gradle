@@ -2,6 +2,9 @@ allprojects{
     apply plugin: 'java-library'
     repositories {
         jcenter()
+        maven{
+    	    url = "https://nexus.ppvoting.de/content/repositories/release/"
+        }
     }
 }
 
@@ -20,6 +23,5 @@ subprojects {
         testImplementation 'org.assertj:assertj-core:3.10.0'
 
     }
-}
 
-"src/test/resources/jvior.yaml"
+}

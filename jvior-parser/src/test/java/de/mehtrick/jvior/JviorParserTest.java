@@ -20,7 +20,7 @@ public class JviorParserTest {
 	@Test
 	public void testJviorStatementBuilder() {
 		String string = "Hallo wie \"geht es dir\" du \"1\" stricher";
-		JviorStatement statement = new JviorStatement(string);
+		JviorStatement statement = new JviorStatement(string, "given");
 		assertThat(statement.getPrimitiveStatement()).isEqualTo(string);
 		assertThat(statement.getStatementWithoutParameters()).isEqualTo("HalloWieDuStricher");
 		assertThat(statement.getParameters()).hasSize(2).contains("geht es dir", "1");
