@@ -31,9 +31,9 @@ public class JviorStatement {
 	private String statementWithoutParameters;
 	private List<String> parameters = new ArrayList<>();
 
-	public JviorStatement(String statement, String keyword) {
+	public JviorStatement(String statement, BDDKeyword keyword) {
 		setPrimitiveStatement(statement);
-		setStatementWithoutParameters(keyword + "_" + removeParametersFromStatement(statement));
+		setStatementWithoutParameters(keyword.name().toLowerCase() + "_" + removeParametersFromStatement(statement));
 		parseParameters(statement);
 	}
 

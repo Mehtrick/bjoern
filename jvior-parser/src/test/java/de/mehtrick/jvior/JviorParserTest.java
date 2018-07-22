@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 import de.mehtrick.jvior.parser.JviorParser;
+import de.mehtrick.jvior.parser.modell.BDDKeyword;
 import de.mehtrick.jvior.parser.modell.JviorStatement;
 
 public class JviorParserTest {
@@ -20,7 +21,7 @@ public class JviorParserTest {
 	@Test
 	public void testJviorStatementBuilder() {
 		String string = "Hallo wie \"geht es dir\" du \"1\" stricher";
-		JviorStatement statement = new JviorStatement(string, "given");
+		JviorStatement statement = new JviorStatement(string, BDDKeyword.GIVEN);
 		assertThat(statement.getPrimitiveStatement()).isEqualTo(string);
 		assertThat(statement.getStatementWithoutParameters()).isEqualTo("HalloWieDuStricher");
 		assertThat(statement.getParameters()).hasSize(2).contains("geht es dir", "1");

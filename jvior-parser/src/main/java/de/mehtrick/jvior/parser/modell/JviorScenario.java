@@ -23,12 +23,12 @@ public class JviorScenario {
 
 	public JviorScenario(JviorYMLScenario jviorYMLScenario) {
 		setName(jviorYMLScenario.getScenario());
-		given = parseStatements(jviorYMLScenario.getGiven(), "given");
-		when = parseStatements(jviorYMLScenario.getWhen(), "when");
-		then = parseStatements(jviorYMLScenario.getThen(), "then");
+		given = parseStatements(jviorYMLScenario.getGiven(), BDDKeyword.GIVEN);
+		when = parseStatements(jviorYMLScenario.getWhen(), BDDKeyword.WHEN);
+		then = parseStatements(jviorYMLScenario.getThen(), BDDKeyword.THEN);
 	}
 
-	private List<JviorStatement> parseStatements(List<String> yamlStatementList, String keyword) {
+	private List<JviorStatement> parseStatements(List<String> yamlStatementList, BDDKeyword keyword) {
 		return yamlStatementList.stream().map(s -> new JviorStatement(s, keyword)).collect(Collectors.toList());
 	}
 
