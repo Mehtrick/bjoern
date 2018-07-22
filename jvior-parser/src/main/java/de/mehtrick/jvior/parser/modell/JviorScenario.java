@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.mehtrick.jvior.parser.JviorUtil;
+import de.mehtrick.jvior.parser.JviorTextParser;
 import lombok.Data;
 
 /**
@@ -33,7 +33,7 @@ public class JviorScenario {
 	}
 
 	public String getNameFormatted() {
-		return JviorUtil.parseTextToCamelCase(getName());
+		return JviorTextParser.parseTextToCamelCase(getName());
 	}
 
 }

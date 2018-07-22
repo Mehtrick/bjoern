@@ -29,7 +29,6 @@ public class JviorScenarioTestMethodBuilder {
 				.forEach(given -> main.addStatement(JviorScenarioTestMethodBuilder.parseStatement(given)));
 		scenario.getWhen().stream()
 				.forEach(when -> main.addStatement(JviorScenarioTestMethodBuilder.parseStatement(when)));
-
 		scenario.getThen().stream()
 				.forEach(then -> main.addStatement(JviorScenarioTestMethodBuilder.parseStatement(then)));
 
@@ -39,7 +38,7 @@ public class JviorScenarioTestMethodBuilder {
 	private static String parseStatement(JviorStatement statement) {
 		String parameters = statement.getParameters().stream().map(p -> String.format("\"%s\"", p))
 				.collect(Collectors.joining(", "));
-		return statement.getStatementWithoutParameters() + "(" + parameters + ")";
+		return statement.getStatementWithoutParameters() + String.format("(%s)", parameters);
 	}
 
 }

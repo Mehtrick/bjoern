@@ -16,6 +16,8 @@ import de.mehtrick.jvior.parser.modell.JviorStatement;
 
 public class JviorAbstractTestMethodBuilder {
 
+	private static final String PARAM_NAME = "param";
+
 	public static Set<MethodSpec> build(List<JviorScenario> list) {
 		Set<JviorStatement> statements = new HashSet<>();
 
@@ -33,7 +35,7 @@ public class JviorAbstractTestMethodBuilder {
 		List<ParameterSpec> parameterSpecs = new ArrayList<>();
 
 		for (int i = 0; i < statement.getParameters().size(); i++) {
-			ParameterSpec parameter = ParameterSpec.builder(String.class, "param" + (i + 1)).build();
+			ParameterSpec parameter = ParameterSpec.builder(String.class, PARAM_NAME + (i + 1)).build();
 			parameterSpecs.add(parameter);
 		}
 

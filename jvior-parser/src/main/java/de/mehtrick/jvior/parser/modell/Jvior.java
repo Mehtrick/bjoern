@@ -3,7 +3,7 @@ package de.mehtrick.jvior.parser.modell;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.mehtrick.jvior.parser.JviorUtil;
+import de.mehtrick.jvior.parser.JviorTextParser;
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,7 +19,7 @@ public class Jvior {
 	}
 
 	public String getFeatureNameFormatted() {
-		return JviorUtil.parseTextToCamelCase(getFeature());
+		return JviorTextParser.parseTextToCamelCase(getFeature());
 	}
 
 }

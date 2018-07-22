@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import de.mehtrick.jvior.parser.JviorUtil;
+import de.mehtrick.jvior.parser.JviorTextParser;
 import lombok.Data;
 import lombok.ToString;
 
@@ -46,8 +46,8 @@ public class JviorStatement {
 	}
 
 	private String removeParametersFromStatement(String statement) {
-		return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(JviorUtil::parseTextToCamelCase)
-				.collect(Collectors.joining());
+		return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(JviorTextParser::parseTextToCamelCase)
+				.collect(Collectors.joining(JviorTextParser.BLANK_REPLACEMENT));
 	}
 
 	@Override
