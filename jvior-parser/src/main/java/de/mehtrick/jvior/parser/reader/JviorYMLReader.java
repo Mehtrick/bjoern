@@ -21,12 +21,10 @@ import de.mehtrick.umloud.UmloudReplacer;
  */
 public class JviorYMLReader {
 
-	private String yamlAsString;
-
 	public JviorYMLModell readSpec(String path) {
 		try {
 			File yaml = new File(path);
-			yamlAsString = FileUtils.readFileToString(yaml, Charset.defaultCharset());
+			String yamlAsString = FileUtils.readFileToString(yaml, Charset.defaultCharset());
 			yamlAsString = UmloudReplacer.replaceUmlaute(yamlAsString);
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			return mapper.readValue(yamlAsString, JviorYMLModell.class);

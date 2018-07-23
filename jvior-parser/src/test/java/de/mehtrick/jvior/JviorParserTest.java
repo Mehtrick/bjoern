@@ -23,7 +23,7 @@ public class JviorParserTest {
 		String string = "Hallo wie \"geht es dir\" du \"1\" stricher";
 		JviorStatement statement = new JviorStatement(string, BDDKeyword.GIVEN);
 		assertThat(statement.getPrimitiveStatement()).isEqualTo(string);
-		assertThat(statement.getStatementWithoutParameters()).isEqualTo("HalloWieDuStricher");
+		assertThat(statement.getStatementWithoutParameters()).isEqualTo("given_HalloWieDuStricher");
 		assertThat(statement.getParameters()).hasSize(2).contains("geht es dir", "1");
 	}
 
