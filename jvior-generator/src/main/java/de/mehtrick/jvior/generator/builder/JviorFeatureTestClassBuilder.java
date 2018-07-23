@@ -5,19 +5,35 @@ import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import com.squareup.javapoet.TypeSpec.Builder;
 
+import de.mehtrick.jvior.generator.JviorGeneratorConfig;
 import de.mehtrick.jvior.parser.modell.Jvior;
 
 public class JviorFeatureTestClassBuilder {
 
 	private static final String ABSTRACT_CLASS_PREFIX = "Abstract";
 
-	public static TypeSpec build(Jvior jvior, List<MethodSpec> scenarios, Set<MethodSpec> abstractMethods) {
-		return TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + jvior.getFeatureNameFormatted())
+	public static TypeSpec build(JviorGeneratorConfig config, Jvior jvior, List<MethodSpec> scenarios,
+			Set<MethodSpec> abstractMethods) {
+
+		Builder featureClassBuilder = TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + jvior.getFeatureNameFormatted())
 				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT).addMethods(scenarios).addMethods(abstractMethods)
-				.addJavadoc(jvior.getFeature()).build();
+				.addJavadoc(jvior.getFeature());
+		if (StringUtils.isNotBlank(config.getExtendedTestclass())) {
+			String className = StringUtils.substringAfterLast(config.getExtendedTestclass(), ".");
+			String packageName = StringUtils.substringBeforeLast(config.getExtendedTestclass(), ".");
+
+			ClassName superClass = ClassName.get(packageName, className);
+
+			featureClassBuilder.superclass(superClass);
+		}
+		return featureClassBuilder.build();
 	}
 
 }

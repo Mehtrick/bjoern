@@ -22,7 +22,7 @@ class JviorCodeGenerator {
 		log.info("Generate Feature: " + jvior.getFeatureNameFormatted());
 		Set<MethodSpec> abstractMethods = JviorAbstractTestMethodBuilder.build(jvior.getScenarios());
 		List<MethodSpec> scenarios = JviorScenarioTestMethodBuilder.build(jvior);
-		TypeSpec jviorClass = JviorFeatureTestClassBuilder.build(jvior, scenarios, abstractMethods);
+		TypeSpec jviorClass = JviorFeatureTestClassBuilder.build(config,jvior, scenarios, abstractMethods);
 		writeToSystem(config, jviorClass);
 	}
 
