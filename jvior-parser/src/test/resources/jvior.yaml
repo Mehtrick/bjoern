@@ -1,8 +1,11 @@
 Feature: Test eines Getraenkeautomaten
+Background:
+  Given: 
+    - Ein Automat
+    - Ein KassenSystem
 Scenarios: 
   - Scenario: Getraenk nicht vorhanden
     Given: 
-      - Ein Automat
       - Mit "2" Flaschen Cola
       - Mit "0" Flaschen Sprite
     When:
@@ -12,7 +15,6 @@ Scenarios:
       - Es existieren "2" Cola im Automaten   
   - Scenario: Getraenk vorhanden
     Given: 
-      - Ein Automat
       - Mit "2" Flaschen Cola
       - Mit "0" Flaschen Sprite
     When:

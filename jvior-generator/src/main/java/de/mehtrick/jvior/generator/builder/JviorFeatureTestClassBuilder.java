@@ -23,8 +23,14 @@ public class JviorFeatureTestClassBuilder {
 			Set<MethodSpec> abstractMethods) {
 
 		Builder featureClassBuilder = TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + jvior.getFeatureNameFormatted())
-				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT).addMethods(scenarios).addMethods(abstractMethods)
-				.addJavadoc(jvior.getFeature());
+				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
+		if (jvior.getBackground() != null) {
+			MethodSpec background = JviorBackgroundTestBuilder.build(jvior.getBackground());
+			featureClassBuilder.addMethod(background);
+		}
+
+		featureClassBuilder.addMethods(scenarios).addMethods(abstractMethods).addJavadoc(jvior.getFeature());
+
 		if (StringUtils.isNotBlank(config.getExtendedTestclass())) {
 			String className = StringUtils.substringAfterLast(config.getExtendedTestclass(), ".");
 			String packageName = StringUtils.substringBeforeLast(config.getExtendedTestclass(), ".");

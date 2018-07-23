@@ -20,9 +20,10 @@ class JviorCodeGenerator {
 
 	public static void generate(JviorGeneratorConfig config, Jvior jvior) throws IOException {
 		log.info("Generate Feature: " + jvior.getFeatureNameFormatted());
-		Set<MethodSpec> abstractMethods = JviorAbstractTestMethodBuilder.build(jvior.getScenarios());
+		Set<MethodSpec> abstractMethods = JviorAbstractTestMethodBuilder.build(jvior.getBackground(),
+				jvior.getScenarios());
 		List<MethodSpec> scenarios = JviorScenarioTestMethodBuilder.build(jvior);
-		TypeSpec jviorClass = JviorFeatureTestClassBuilder.build(config,jvior, scenarios, abstractMethods);
+		TypeSpec jviorClass = JviorFeatureTestClassBuilder.build(config, jvior, scenarios, abstractMethods);
 		writeToSystem(config, jviorClass);
 	}
 

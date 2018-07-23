@@ -12,7 +12,6 @@ import com.squareup.javapoet.MethodSpec.Builder;
 
 import de.mehtrick.jvior.parser.modell.Jvior;
 import de.mehtrick.jvior.parser.modell.JviorScenario;
-import de.mehtrick.jvior.parser.modell.JviorStatement;
 
 public class JviorScenarioTestMethodBuilder {
 
@@ -26,19 +25,13 @@ public class JviorScenarioTestMethodBuilder {
 				.addModifiers(Modifier.PUBLIC).addJavadoc(scenario.getName());
 
 		scenario.getGiven().stream()
-				.forEach(given -> main.addStatement(JviorScenarioTestMethodBuilder.parseStatement(given)));
+				.forEach(given -> main.addStatement(JviorStatementParser.parseStatement(given)));
 		scenario.getWhen().stream()
-				.forEach(when -> main.addStatement(JviorScenarioTestMethodBuilder.parseStatement(when)));
+				.forEach(when -> main.addStatement(JviorStatementParser.parseStatement(when)));
 		scenario.getThen().stream()
-				.forEach(then -> main.addStatement(JviorScenarioTestMethodBuilder.parseStatement(then)));
+				.forEach(then -> main.addStatement(JviorStatementParser.parseStatement(then)));
 
 		return main.build();
-	}
-
-	private static String parseStatement(JviorStatement statement) {
-		String parameters = statement.getParameters().stream().map(p -> String.format("\"%s\"", p))
-				.collect(Collectors.joining(", "));
-		return statement.getStatementWithoutParameters() + String.format("(%s)", parameters);
 	}
 
 }

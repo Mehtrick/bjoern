@@ -3,15 +3,16 @@ package de.mehtrick.jvior.parser.modell;
 
 import java.io.Serializable;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.ToString;
 
-
 /**
  * Representation of the jvior spec file as a pojo
+ * 
  * @author mehtrick
  *
  */
@@ -22,6 +23,10 @@ public class JviorYMLModell implements Serializable {
 
 	@JsonProperty("Feature")
 	private String feature;
+
+	@JsonProperty("Background")
+	private JviorYMLBackground background;
+
 	@JsonProperty("Scenarios")
 	private List<JviorYMLScenario> jviorYMLScenarios = null;
 	private final static long serialVersionUID = -5118234148570119505L;
@@ -44,6 +49,16 @@ public class JviorYMLModell implements Serializable {
 	@JsonProperty("Scenarios")
 	public void setScenarios(List<JviorYMLScenario> jviorYMLScenarios) {
 		this.jviorYMLScenarios = jviorYMLScenarios;
+	}
+
+	@JsonProperty("Background")
+	public JviorYMLBackground getBackground() {
+		return background;
+	}
+
+	@JsonProperty("Background")
+	public void setBackground(JviorYMLBackground background) {
+		this.background = background;
 	}
 
 }

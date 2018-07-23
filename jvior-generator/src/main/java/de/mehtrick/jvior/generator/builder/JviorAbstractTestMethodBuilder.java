@@ -11,6 +11,7 @@ import javax.lang.model.element.Modifier;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 
+import de.mehtrick.jvior.parser.modell.JviorBackground;
 import de.mehtrick.jvior.parser.modell.JviorScenario;
 import de.mehtrick.jvior.parser.modell.JviorStatement;
 
@@ -18,8 +19,12 @@ public class JviorAbstractTestMethodBuilder {
 
 	private static final String PARAM_NAME = "param";
 
-	public static Set<MethodSpec> build(List<JviorScenario> list) {
+	public static Set<MethodSpec> build(JviorBackground jviorBackground, List<JviorScenario> list) {
 		Set<JviorStatement> statements = new HashSet<>();
+
+		if (jviorBackground != null) {
+			statements.addAll(jviorBackground.getGiven());
+		}
 
 		for (JviorScenario scenario : list) {
 			statements.addAll(scenario.getGiven());

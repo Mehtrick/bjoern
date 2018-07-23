@@ -2,10 +2,10 @@ package de.mehtrick.jvior.parser.modell;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import de.mehtrick.jvior.parser.JviorTextParser;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * A Scenario contains of - a name which describes it - {@link #given} -
@@ -15,21 +15,16 @@ import lombok.Data;
  *
  */
 @Data
-public class JviorScenario {
+@EqualsAndHashCode(callSuper = false)
+public class JviorScenario extends JviorBackground {
 	private String name;
-	private List<JviorStatement> given = new ArrayList<>();
 	private List<JviorStatement> when = new ArrayList<>();
-	private List<JviorStatement> then = new ArrayList<>();
 
 	public JviorScenario(JviorYMLScenario jviorYMLScenario) {
 		setName(jviorYMLScenario.getScenario());
-		given = parseStatements(jviorYMLScenario.getGiven(), BDDKeyword.GIVEN);
-		when = parseStatements(jviorYMLScenario.getWhen(), BDDKeyword.WHEN);
-		then = parseStatements(jviorYMLScenario.getThen(), BDDKeyword.THEN);
-	}
-
-	private List<JviorStatement> parseStatements(List<String> yamlStatementList, BDDKeyword keyword) {
-		return yamlStatementList.stream().map(s -> new JviorStatement(s, keyword)).collect(Collectors.toList());
+		this.setGiven(parseStatements(jviorYMLScenario.getGiven(), BDDKeyword.GIVEN));
+		this.setWhen(parseStatements(jviorYMLScenario.getWhen(), BDDKeyword.WHEN));
+		this.setThen(parseStatements(jviorYMLScenario.getThen(), BDDKeyword.THEN));
 	}
 
 	public String getNameFormatted() {

@@ -11,11 +11,15 @@ import lombok.ToString;
 @ToString
 public class Jvior {
 	private String feature;
+	private JviorBackground background;
 	private List<JviorScenario> scenarios;
 
 	public Jvior(JviorYMLModell yamlModell) {
 		setFeature(yamlModell.getFeature());
 		setScenarios(yamlModell.getScenarios().stream().map(JviorScenario::new).collect(Collectors.toList()));
+		if (yamlModell.getBackground() != null) {
+			setBackground(new JviorBackground(yamlModell.getBackground()));
+		}
 	}
 
 	public String getFeatureNameFormatted() {
