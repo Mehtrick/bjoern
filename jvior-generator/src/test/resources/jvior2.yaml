@@ -1,4 +1,4 @@
-Feature: Test eines Getränkeautomaten
+Feature: Test eines KassenAutomaten
 Scenarios: 
   - Scenario: Getränk nicht vorhanden
     Given: 
