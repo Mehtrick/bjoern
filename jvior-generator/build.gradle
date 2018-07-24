@@ -4,3 +4,8 @@ dependencies{
     compile 'junit:junit:4.12'
     
 }
+
+jar {
+	baseName = "jvior-generator"
+	version = project.version
+}

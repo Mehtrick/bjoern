@@ -1,0 +1,20 @@
+
+dependencies{
+    compile project(":jvior-generator")
+}
+
+apply plugin: 'java-gradle-plugin'
+
+gradlePlugin {
+  plugins {
+    jvior {
+      id = 'de.mehtrick.jvior.gradle-plugin'
+      implementationClass = 'de.mehtrick.jvior.gradle.JviorPlugin'
+    }
+  }
+}
+
+jar {
+	baseName = "jvior-gradle-plugin"
+	version = project.version
+}

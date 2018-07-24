@@ -1,4 +1,12 @@
+def projectname = "jvior-parser"
+
+
 dependencies{
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.6'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
+}
+
+jar {
+	baseName = "jvior-parser"
+	version = project.version
 }

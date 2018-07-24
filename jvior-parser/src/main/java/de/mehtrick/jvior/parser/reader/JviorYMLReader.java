@@ -1,6 +1,7 @@
 package de.mehtrick.jvior.parser.reader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
@@ -24,6 +25,9 @@ public class JviorYMLReader {
 	public JviorYMLModell readSpec(String path) {
 		try {
 			File yaml = new File(path);
+			if (!yaml.exists()) {
+				throw new FileNotFoundException("No file found under the path " + path);
+			}
 			String yamlAsString = FileUtils.readFileToString(yaml, Charset.defaultCharset());
 			yamlAsString = UmloudReplacer.replaceUmlaute(yamlAsString);
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());

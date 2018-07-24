@@ -19,8 +19,7 @@ public class JviorFeatureTestClassBuilder {
 
 	private static final String ABSTRACT_CLASS_PREFIX = "Abstract";
 
-	public static TypeSpec build(JviorGeneratorConfig config, Jvior jvior, List<MethodSpec> scenarios,
-			Set<MethodSpec> abstractMethods) {
+	public static TypeSpec build(Jvior jvior, List<MethodSpec> scenarios, Set<MethodSpec> abstractMethods) {
 
 		Builder featureClassBuilder = TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + jvior.getFeatureNameFormatted())
 				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
@@ -31,9 +30,9 @@ public class JviorFeatureTestClassBuilder {
 
 		featureClassBuilder.addMethods(scenarios).addMethods(abstractMethods).addJavadoc(jvior.getFeature());
 
-		if (StringUtils.isNotBlank(config.getExtendedTestclass())) {
-			String className = StringUtils.substringAfterLast(config.getExtendedTestclass(), ".");
-			String packageName = StringUtils.substringBeforeLast(config.getExtendedTestclass(), ".");
+		if (StringUtils.isNotBlank(JviorGeneratorConfig.getExtendedTestclass())) {
+			String className = StringUtils.substringAfterLast(JviorGeneratorConfig.getExtendedTestclass(), ".");
+			String packageName = StringUtils.substringBeforeLast(JviorGeneratorConfig.getExtendedTestclass(), ".");
 
 			ClassName superClass = ClassName.get(packageName, className);
 
