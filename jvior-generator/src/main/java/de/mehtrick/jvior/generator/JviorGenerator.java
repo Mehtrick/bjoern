@@ -1,6 +1,7 @@
 package de.mehtrick.jvior.generator;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -9,12 +10,13 @@ import de.mehtrick.jvior.parser.modell.Jvior;
 
 public class JviorGenerator {
 
-	public static void gen(String[] args) {
+	public static void gen(String[] args) throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.init(args);
 		generateJviorClasses();
 	}
 
-	public static void generateJviorClasses() {
+	public static void generateJviorClasses() throws JviorMissingPropertyException, FileNotFoundException {
+		JviorGeneratorConfig.validate();
 		if (JviorGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(JviorGeneratorConfig.getFolder());
 			Arrays.asList(files).forEach(f -> generateSingleJvior(f.getPath()));
@@ -32,8 +34,13 @@ public class JviorGenerator {
 		}
 	}
 
-	private static File[] getFilesFromFolder(String folder) {
+	private static File[] getFilesFromFolder(String folder) throws FileNotFoundException {
 		File file = new File(folder);
-		return file.listFiles();
+		File[] ymlFiles = file.listFiles(new JviorFileNameFilter());
+		if (ymlFiles.length == 0) {
+			throw new FileNotFoundException("No yaml files Found in Folder " + folder
+					+ ". The file has to end with .yml or .yaml to be detected");
+		}
+		return file.listFiles(new JviorFileNameFilter());
 	}
 }

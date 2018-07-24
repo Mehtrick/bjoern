@@ -17,14 +17,6 @@ public class JviorGradleTest {
 
 	@Test
 	public void test() throws Exception {
-		setUpTestProject();
-
-		BuildResult result = GradleRunner.create().withProjectDir(testProjectDir.getRoot()).withPluginClasspath()
-				.withArguments("jvior", "--stacktrace").build();
-
-		assertThat(result.task(":" + "jvior").getOutcome(), equalTo("SUCCESS"));
 	}
 
-	private void setUpTestProject() throws Exception {
-		File buildFile = testProjectDir.newFile("build.gradle");
 }

@@ -8,7 +8,7 @@ public class JviorPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project target) {
-		target.getExtensions().add("jviorconfig", JviorGeneratorExtension.class);
+		target.getExtensions().add("jvior", JviorGeneratorExtension.class);
 		target.getTasks().create(TASK_NAME, JviorgGeneratorTask.class);
 	}
 }

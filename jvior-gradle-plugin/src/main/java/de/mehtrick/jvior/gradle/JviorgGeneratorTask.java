@@ -22,7 +22,6 @@ public class JviorgGeneratorTask extends DefaultTask {
 		JviorGeneratorConfig.setGendir(extension.getGendir());
 		JviorGeneratorConfig.setPckg(extension.getPckg());
 		JviorGeneratorConfig.setExtendedTestclass(extension.getExtendedTestClass());
-		System.out.println("Generiere mit " + this);
 		JviorGenerator.generateJviorClasses();
 
 	}

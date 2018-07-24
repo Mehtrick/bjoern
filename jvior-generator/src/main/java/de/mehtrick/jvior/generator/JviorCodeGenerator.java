@@ -13,13 +13,11 @@ import de.mehtrick.jvior.generator.builder.JviorAbstractTestMethodBuilder;
 import de.mehtrick.jvior.generator.builder.JviorFeatureTestClassBuilder;
 import de.mehtrick.jvior.generator.builder.JviorScenarioTestMethodBuilder;
 import de.mehtrick.jvior.parser.modell.Jvior;
-import lombok.extern.java.Log;
 
-@Log
 class JviorCodeGenerator {
 
 	public static void generate(Jvior jvior) throws IOException {
-		log.info("Generate Feature: " + jvior.getFeatureNameFormatted());
+		System.out.println("Generate Feature: " + jvior.getFeatureNameFormatted());
 		Set<MethodSpec> abstractMethods = JviorAbstractTestMethodBuilder.build(jvior.getBackground(),
 				jvior.getScenarios());
 		List<MethodSpec> scenarios = JviorScenarioTestMethodBuilder.build(jvior);

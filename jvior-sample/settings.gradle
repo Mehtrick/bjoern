@@ -15,7 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'jvior'
-include 'jvior-parser'
-include 'jvior-generator'
-include 'jvior-gradle-plugin'
+rootProject.name = 'jvior-sample'

@@ -9,7 +9,6 @@ import org.junit.Test;
 public class JviorGeneratorTest {
 	@Test
 	public void testSomeLibraryMethod() {
-		JviorGenerator.gen(new String[] { "path=src/test/resources/jvior.yaml","folder=src/test/resources/","package=de.mehtrick.jvior","gendir=src/gen/java","extendedTestclass=de.mehtrick.jvior.AbstractTestclass" });
 	}
 
 }
