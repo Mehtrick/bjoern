@@ -1,21 +1,34 @@
+buildscript {
+ 	ext{
+        nexusUsername = ""
+        nexusPassword = ""
+        publishRepo = "release"
+        nexusBasePath = "https://nexus.ppvoting.de"
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.kageiit:url-cache-plugin:1.0.0"
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
+
+
+
+
 allprojects{
+    group = 'de.mehtrick.jvior'
     apply plugin: 'java-library'
     apply plugin: 'eclipse'
+    apply plugin: 'com.kageiit.url-cache'
+    apply plugin: "com.bmuschko.nexus"
     repositories {
         jcenter()
         maven{
     	    url = "https://nexus.ppvoting.de/content/repositories/release/"
         }
     }
-    
-    eclipseJdt << {
-	ant.propertyfile(file: ".settings/org.eclipse.core.resources.prefs") {
-		ant.entry(key: "eclipse.preferences.version", value: "1")
-		ant.entry(key: "encoding/<project>", value: "utf-8")
-		}
-	}
-	compileJava.options.encoding = "UTF-8"
-	compileTestJava.options.encoding = "UTF-8"
 }
 
 
@@ -31,7 +44,8 @@ subprojects {
 
         testImplementation 'junit:junit:4.12'
         testImplementation 'org.assertj:assertj-core:3.10.0'
-
     }
+
+    apply from: "https://bitbucket.org/Mehtrick/gradle-module/raw/0c379000383ebb1578691925f2a9be39698aef9a/backend/publish%2Brelease.gradle"
 
 }

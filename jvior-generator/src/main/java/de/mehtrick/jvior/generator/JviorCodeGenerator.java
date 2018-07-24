@@ -18,18 +18,18 @@ import lombok.extern.java.Log;
 @Log
 class JviorCodeGenerator {
 
-	public static void generate(JviorGeneratorConfig config, Jvior jvior) throws IOException {
+	public static void generate(Jvior jvior) throws IOException {
 		log.info("Generate Feature: " + jvior.getFeatureNameFormatted());
 		Set<MethodSpec> abstractMethods = JviorAbstractTestMethodBuilder.build(jvior.getBackground(),
 				jvior.getScenarios());
 		List<MethodSpec> scenarios = JviorScenarioTestMethodBuilder.build(jvior);
-		TypeSpec jviorClass = JviorFeatureTestClassBuilder.build(config, jvior, scenarios, abstractMethods);
-		writeToSystem(config, jviorClass);
+		TypeSpec jviorClass = JviorFeatureTestClassBuilder.build(jvior, scenarios, abstractMethods);
+		writeToSystem(jviorClass);
 	}
 
-	private static void writeToSystem(JviorGeneratorConfig config, TypeSpec jviorClass) throws IOException {
-		JavaFile javaFile = JavaFile.builder(config.getPckg(), jviorClass).build();
-		File dir = new File(config.getGendir());
+	private static void writeToSystem(TypeSpec jviorClass) throws IOException {
+		JavaFile javaFile = JavaFile.builder(JviorGeneratorConfig.getPckg(), jviorClass).build();
+		File dir = new File(JviorGeneratorConfig.getGendir());
 		dir.mkdirs();
 		javaFile.writeTo(dir);
 	}
