@@ -7,8 +7,8 @@ apply plugin: 'java-gradle-plugin'
 
 gradlePlugin {
   plugins {
-    yourPluginName {
-      id = 'jvior-plugin'
+    jvior {
+      id = 'de.mehtrick.jvior.gradle-plugin'
       implementationClass = 'de.mehtrick.jvior.gradle.JviorPlugin'
     }
   }

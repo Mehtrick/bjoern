@@ -33,7 +33,7 @@ allprojects{
 
 
 subprojects {
-    version = '0.1.0'
+    version = '0.1.2'
     dependencies {
         implementation 'org.apache.commons:commons-lang3:3.7'
         implementation 'commons-io:commons-io:2.6'
