@@ -30,7 +30,7 @@ jvior{
 	gendir = "${projectDir}/src/gen/jvior"
 }
 ```
-
+## List of Parameters
 | Parameter name |required| Description | example |
 |----------------|--------|-------------|---------|
 |path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/jvior.yml"|
