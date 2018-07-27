@@ -1,24 +1,22 @@
-Feature: Test eines Getränkeautomaten
+Feature: Test Foo
 Background:
   Given: 
-    - Ein Automat
-    - Ein KassenSystem
+    - A Foo
+    - A Bar
 Scenarios: 
-  - Scenario: Getränk nicht vorhanden
+  - Scenario: Foo is not happy
     Given: 
-      - Mit "2" Flaschen Cola und "3" Flaschen Fanta
-      - Mit "0" Flaschen Sprite
+      - there are "2" bottles of wine
+      - there are "0" bottles of beer
     When:
-      - Kaufe "1" Sprite
+      - Foo wants to drink "1" bottle of beer
     Then:
-      - Automat sagt "alle"
-      - Es existieren "2" Cola im Automaten   
+      - Foo says "why is my beer empty"  
   - Scenario: Getraenk vorhanden
     Given: 
-      - Mit "2" Flaschen Cola
-      - Mit "0" Flaschen Sprite
+      - there are "2" bottles of wine
+      - there are "1" bottles of beer
     When:
-      - Kaufe "1" Cola
+      - Foo wants to drink "1" bottle of beer
     Then:
-      - Automat sagt "ok"
-      - Es existieren "1" Cola im Automaten  
+      - Foo says "yeah beer"
