@@ -5,7 +5,7 @@ Jvior is a universal bdd test generater.
 # How to use
 
 As a gradle plugin
-```
+```gradle
 buildscript {
     repositories {
         jcenter()
@@ -23,7 +23,7 @@ apply plugin: "de.mehtrick.jvior.gradle-plugin"
 you then have to configure the generator in gradle
 
 
-```
+```gradle
 jvior{
 	folder = "${projectDir}/src/test/resources"
 	pckg ="de.mehtrick.jvior-sample"
@@ -44,7 +44,7 @@ To run the generator just hit the gradle task `jvior`
 # Specification
 The specification is yaml based. You will find the typical BDD keywords in it
 
-```
+```yaml
 Feature: Test Foo
 Background:
   Given: 
@@ -73,7 +73,7 @@ Scenarios:
 
 Jvior will then generate the TestClasses based on the spec
 
-```
+```java
 import java.lang.String;
 import org.junit.Before;
 import org.junit.Test;
