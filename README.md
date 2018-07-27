@@ -59,7 +59,7 @@ Scenarios:
       - Foo wants to drink "1" bottle of beer
     Then:
       - Foo says "why is my beer empty"  
-  - Scenario: Getraenk vorhanden
+  - Scenario: Foo is happy
     Given: 
       - there are "2" bottles of wine
       - there are "1" bottles of beer
@@ -98,7 +98,7 @@ public abstract class AbstractTestFoo {
   }
 
   /**
-   * Getraenk vorhanden */
+   * Foo is happy */
   @Test
   public void GetraenkVorhanden() {
     given_ThereAreBottlesOfWine("2");
