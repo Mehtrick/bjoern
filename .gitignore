@@ -172,7 +172,7 @@ GitHub.sublime-settings
 .mtj.tmp/
 
 # Package Files #
-*.jar
+
 *.war
 *.ear
 
