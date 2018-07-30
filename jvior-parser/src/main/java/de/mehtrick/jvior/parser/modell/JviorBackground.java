@@ -20,7 +20,11 @@ public class JviorBackground {
 	}
 
 	protected List<JviorStatement> parseStatements(List<String> yamlStatementList, BDDKeyword keyword) {
-		return yamlStatementList.stream().map(s -> new JviorStatement(s, keyword)).collect(Collectors.toList());
+		if (yamlStatementList != null) {
+			return yamlStatementList.stream().map(s -> new JviorStatement(s, keyword)).collect(Collectors.toList());
+		} else {
+			return null;
+		}
 	}
 
 }

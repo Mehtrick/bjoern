@@ -46,7 +46,7 @@ public class JviorStatement {
 	}
 
 	private String removeParametersFromStatement(String statement) {
-		return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(JviorTextParser::parseTextToCamelCase)
+		return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(JviorTextParser::parseText)
 				.collect(Collectors.joining(JviorTextParser.BLANK_REPLACEMENT));
 	}
 

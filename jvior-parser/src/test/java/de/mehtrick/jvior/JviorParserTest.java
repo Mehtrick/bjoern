@@ -15,7 +15,7 @@ public class JviorParserTest {
 
 	@Test
 	public void testJviorFullWithoutErrors() {
-		new JviorParser().parseSpec("src/test/resources/jvior.yaml");
+		new JviorParser().parseSpec("src/test/resources/JnarioBasisFeature.yml");
 	}
 
 	@Test

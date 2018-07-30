@@ -2,7 +2,6 @@ package de.mehtrick.jvior.generator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 
 import de.mehtrick.jvior.parser.JviorParser;
@@ -29,8 +28,8 @@ public class JviorGenerator {
 		try {
 			Jvior jvior = new JviorParser().parseSpec(path);
 			JviorCodeGenerator.generate(jvior);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		} catch (Throwable e) {
+			throw new JviorGeneratorException(path,e);
 		}
 	}
 

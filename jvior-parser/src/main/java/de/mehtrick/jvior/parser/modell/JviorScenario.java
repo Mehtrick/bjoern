@@ -28,7 +28,7 @@ public class JviorScenario extends JviorBackground {
 	}
 
 	public String getNameFormatted() {
-		return JviorTextParser.parseTextToCamelCase(getName());
+		return JviorTextParser.parseText(getName());
 	}
 
 }

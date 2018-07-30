@@ -27,9 +27,17 @@ public class JviorAbstractTestMethodBuilder {
 		}
 
 		for (JviorScenario scenario : list) {
-			statements.addAll(scenario.getGiven());
-			statements.addAll(scenario.getWhen());
-			statements.addAll(scenario.getThen());
+
+			if (scenario.getGiven() != null) {
+				statements.addAll(scenario.getGiven());
+			}
+			if (scenario.getWhen() != null) {
+				statements.addAll(scenario.getWhen());
+			}
+			if (scenario.getThen() != null) {
+				statements.addAll(scenario.getThen());
+			}
+
 		}
 
 		return statements.stream().map(JviorAbstractTestMethodBuilder::parseToMethodSpec).collect(Collectors.toSet());

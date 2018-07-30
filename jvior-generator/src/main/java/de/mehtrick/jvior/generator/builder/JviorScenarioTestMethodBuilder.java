@@ -23,13 +23,16 @@ public class JviorScenarioTestMethodBuilder {
 	private static MethodSpec parseJviroScenario(JviorScenario scenario) {
 		Builder main = MethodSpec.methodBuilder(scenario.getNameFormatted()).addAnnotation(Test.class)
 				.addModifiers(Modifier.PUBLIC).addJavadoc(scenario.getName());
-
-		scenario.getGiven().stream()
-				.forEach(given -> main.addStatement(JviorStatementParser.parseStatement(given)));
-		scenario.getWhen().stream()
-				.forEach(when -> main.addStatement(JviorStatementParser.parseStatement(when)));
-		scenario.getThen().stream()
-				.forEach(then -> main.addStatement(JviorStatementParser.parseStatement(then)));
+		if (scenario.getGiven() != null) {
+			scenario.getGiven().stream()
+					.forEach(given -> main.addStatement(JviorStatementParser.parseStatement(given)));
+		}
+		if (scenario.getWhen() != null) {
+			scenario.getWhen().stream().forEach(when -> main.addStatement(JviorStatementParser.parseStatement(when)));
+		}
+		if (scenario.getThen() != null) {
+			scenario.getThen().stream().forEach(then -> main.addStatement(JviorStatementParser.parseStatement(then)));
+		}
 
 		return main.build();
 	}

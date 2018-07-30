@@ -33,7 +33,7 @@ public class JviorYMLReader {
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			return mapper.readValue(yamlAsString, JviorYMLModell.class);
 		} catch (IOException e) {
-			throw new JviorYMLReaderException(e);
+			throw new JviorYMLReaderException(path,e);
 		}
 	}
 

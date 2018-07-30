@@ -23,7 +23,7 @@ public class Jvior {
 	}
 
 	public String getFeatureNameFormatted() {
-		return JviorTextParser.parseTextToCamelCase(getFeature());
+		return JviorTextParser.parseText(getFeature());
 	}
 
 }
