@@ -1,6 +1,11 @@
 # Jvior
 
 Jvior is a universal bdd test generater.
+The main focus is to generate java-classes from bdd-style text files to ensure **synchronisation** between the specification and the code. 
+
+The generated classes are **simple** and are designed to be generated **each time**. You **should not** edit the generated files because they will be deleted on every run of the generator.
+
+The generated classes are plain Junit. You cann extend them to define your own runners wich makes it compatible with **spring** or **mockito**.
 
 # How to use
 
@@ -123,3 +128,27 @@ public abstract class AbstractTestFoo {
 ```
 
 The Developer now has to implement the missing methods. In one feature class the methods will be reused if their name is written the same all over the specification
+
+
+## Project Structure
+
+### Jvior Parser
+The parser project reads the jvior file and parses it to java-classes using mainly jackson. It does not just convert it to pojos but reads things like parameters from the statements.
+
+### Jvior Generator
+Is basend on the ```Jvior Parser``` and generates java class files from the pojos of the ```Jvior Parser```. This is done by using java poet. Every feature will generate a coresponding class and every scenario in that feature will become a test method. The BDD statements like ```Given When Then``` will generate abstract methods which need to be implemented by the developer.
+
+### Jvior Gradle Generator
+Is basend on the ```Jvior Generator``` and wraps its functionality into a gradle plugin. The major task is called ```jvior``` which will generate the java classes based on your gradle-jvior-config.
+
+
+## How to build
+### Eclipse
+```gradle
+gradlew cleanEclipse eclipse
+```
+
+### Build
+```gradle
+gradlew build
+```
