@@ -1,6 +1,6 @@
 package de.mehtrick.jvior.parser.reader;
 
-class JviorYMLReaderException extends RuntimeException {
+public class JviorYMLReaderException extends RuntimeException {
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ class JviorYMLReaderException extends RuntimeException {
 	 * @param cause
 	 */
 	public JviorYMLReaderException(String path, Throwable cause) {
-		super(String.format("The File under %s could not be read", path), cause);
+		super(String.format("The File under %s could not be read. " + cause.getMessage(), path), cause);
 	}
 
 }

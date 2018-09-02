@@ -19,9 +19,9 @@ public class JviorParser {
 	 * @param path - expects the path to the jvior spec file
 	 * @return parsed jvior modell
 	 */
-	public Jvior parseSpec(String path) {
-		JviorYMLModell yamlModell = new JviorYMLReader().readSpec(path);
-		return new Jvior(yamlModell);
+	public static Jvior parseSpec(String path) {
+		JviorYMLModell yamlModell = JviorYMLReader.readSpec(path);
+		return new Jvior(yamlModell,path);
 	}
 
 }

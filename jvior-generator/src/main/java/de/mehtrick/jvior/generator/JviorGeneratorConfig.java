@@ -18,20 +18,21 @@ public class JviorGeneratorConfig {
 
 	public static void init(String[] args) {
 		setPath(findPropertyInArgs(PROPERTY_PATH, args));
-		folder = findPropertyInArgs(PROPERTY_FOLDER, args);
+		setFolder(findPropertyInArgs(PROPERTY_FOLDER, args));
 		setPckg(findPropertyInArgs(PROPERTY_PACKAGE, args));
 		setGendir(findPropertyInArgs(PROPERTY_GENDIR, args));
 		setExtendedTestclass(findPropertyInArgs(PROPERTY_EXTENDED_TESTCLASS, args));
 	}
 
 	public static void validate() throws JviorMissingPropertyException {
-		if(StringUtils.isAllBlank(path,folder)) {
+		if (StringUtils.isAllBlank(path, folder)) {
 			throw new JviorMissingPropertyException("Please configure a path or folder");
 		}
-		if(StringUtils.isAllBlank(pckg)) {
-			throw new JviorMissingPropertyException("Please configure the package name by setting the \"pckg\" property");
+		if (StringUtils.isAllBlank(pckg)) {
+			throw new JviorMissingPropertyException(
+					"Please configure the package name by setting the \"pckg\" property");
 		}
-		if(StringUtils.isAllBlank(gendir)) {
+		if (StringUtils.isAllBlank(gendir)) {
 			throw new JviorMissingPropertyException("Please configure the gendir where the classes will be generated");
 		}
 
@@ -87,7 +88,9 @@ public class JviorGeneratorConfig {
 	}
 
 	public static void setFolder(String folder) {
-		JviorGeneratorConfig.folder = folder;
+		if (!folder.isEmpty()) {
+			JviorGeneratorConfig.folder = folder;
+		}
 	}
 
 }

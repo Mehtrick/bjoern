@@ -13,10 +13,12 @@ public class Jvior {
 	private String feature;
 	private JviorBackground background;
 	private List<JviorScenario> scenarios;
+	private String filePath;
 
-	public Jvior(JviorYMLModell yamlModell) {
+	public Jvior(JviorYMLModell yamlModell, String path) {
 		setFeature(yamlModell.getFeature());
 		setScenarios(yamlModell.getScenarios().stream().map(JviorScenario::new).collect(Collectors.toList()));
+		setFilePath(path);
 		if (yamlModell.getBackground() != null) {
 			setBackground(new JviorBackground(yamlModell.getBackground()));
 		}

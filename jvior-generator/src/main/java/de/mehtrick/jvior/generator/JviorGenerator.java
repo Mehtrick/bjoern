@@ -26,10 +26,10 @@ public class JviorGenerator {
 
 	private static void generateSingleJvior(String path) {
 		try {
-			Jvior jvior = new JviorParser().parseSpec(path);
+			Jvior jvior = JviorParser.parseSpec(path);
 			JviorCodeGenerator.generate(jvior);
 		} catch (Throwable e) {
-			throw new JviorGeneratorException(path,e);
+			throw new JviorGeneratorException(path, e);
 		}
 	}
 
