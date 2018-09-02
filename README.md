@@ -1,4 +1,4 @@
-# Jvior
+# Jvior [![Build Status](https://travis-ci.org/Mehtrick/jvior.svg?branch=master)](https://travis-ci.org/Mehtrick/jvior)
 
 Jvior is a universal bdd test generater.
 The main focus is to generate java-classes from bdd-style text files to ensure **synchronisation** between the specification and the code. 
