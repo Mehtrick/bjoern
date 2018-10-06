@@ -12,5 +12,6 @@ public class JviorGeneratorExtension {
 	private String pckg;
 	private String gendir;
 	private String extendedTestClass;
+	private String docdir;
 
 }

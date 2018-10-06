@@ -13,14 +13,14 @@ import de.mehtrick.jvior.base.JviorMissingPropertyException;
 public class JviorGeneratorTest {
 	@Test
 	public void testSomeLibraryMethod() throws JviorMissingPropertyException, FileNotFoundException {
-		JviorGenerator.gen(new String[] { "path=src/test/resources/jvior.yaml", "folder=src/test/resources/",
+		JviorCodeGeneratorApplication.main(new String[] { "path=src/test/resources/jvior.yaml", "folder=src/test/resources/",
 				"package=de.mehtrick.jvior", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.jvior.AbstractTestclass" });
 	}
 	
 	@Test
 	public void testMissingParameter() throws JviorMissingPropertyException, FileNotFoundException {
-		JviorGenerator.gen(new String[] { "path=src/test/resources/jvior.yaml", "folder=src/test/resources/",
+		JviorCodeGeneratorApplication.main(new String[] { "path=src/test/resources/jvior.yaml", "folder=src/test/resources/",
 				"package=de.mehtrick.jvior", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.jvior.AbstractTestclass" });
 	}

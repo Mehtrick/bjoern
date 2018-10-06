@@ -9,12 +9,14 @@ public class JviorGeneratorConfig {
 	private static final String PROPERTY_PATH = "path";
 	private static final String PROPERTY_GENDIR = "gendir";
 	private static final String PROPERTY_EXTENDED_TESTCLASS = "extendedTestclass";
+	private static final String PROPERTY_DOCDIR = "docdir";
 	private static String path;
 	private static String folder;
 
 	private static String pckg;
 	private static String gendir;
 	private static String extendedTestclass;
+	private static String docdir;
 
 	public static void init(String[] args) {
 		setPath(findPropertyInArgs(PROPERTY_PATH, args));
@@ -22,18 +24,12 @@ public class JviorGeneratorConfig {
 		setPckg(findPropertyInArgs(PROPERTY_PACKAGE, args));
 		setGendir(findPropertyInArgs(PROPERTY_GENDIR, args));
 		setExtendedTestclass(findPropertyInArgs(PROPERTY_EXTENDED_TESTCLASS, args));
+		setDocdir(findPropertyInArgs(PROPERTY_DOCDIR, args));
 	}
 
 	public static void validate() throws JviorMissingPropertyException {
 		if (StringUtils.isAllBlank(path, folder)) {
 			throw new JviorMissingPropertyException("Please configure a path or folder");
-		}
-		if (StringUtils.isAllBlank(pckg)) {
-			throw new JviorMissingPropertyException(
-					"Please configure the package name by setting the \"pckg\" property");
-		}
-		if (StringUtils.isAllBlank(gendir)) {
-			throw new JviorMissingPropertyException("Please configure the gendir where the classes will be generated");
 		}
 
 	}
@@ -91,6 +87,14 @@ public class JviorGeneratorConfig {
 		if (!folder.isEmpty()) {
 			JviorGeneratorConfig.folder = folder;
 		}
+	}
+
+	public static String getDocdir() {
+		return docdir;
+	}
+
+	public static void setDocdir(String docdir) {
+		JviorGeneratorConfig.docdir = docdir;
 	}
 
 }

@@ -1,0 +1,9 @@
+dependencies{
+    api project(":jvior-base-generator") 
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+	baseName = "jvior-ascii-doc"
+	version = project.version
+}

@@ -1,8 +1,10 @@
-package de.mehtrick.jvior.generator;
+package de.mehtrick.jvior.asciidoc;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+
+import org.apache.commons.lang3.StringUtils;
 
 import de.mehtrick.jvior.base.AbstractJviorGenerator;
 import de.mehtrick.jvior.base.JviorGeneratorConfig;
@@ -11,15 +13,18 @@ import de.mehtrick.jvior.base.JviorMissingPropertyException;
 import de.mehtrick.jvior.parser.JviorParser;
 import de.mehtrick.jvior.parser.modell.Jvior;
 
-public class JviorGenerator extends AbstractJviorGenerator {
+public class JviorAsciiDocApplication extends AbstractJviorGenerator {
 
-	public static void gen(String[] args) throws JviorMissingPropertyException, FileNotFoundException {
+	public static void main(String[] args) throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.init(args);
-		generateJviorClasses();
+		generateJviorDocs();
 	}
 
-	public static void generateJviorClasses() throws JviorMissingPropertyException, FileNotFoundException {
+	public static void generateJviorDocs() throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.validate();
+		if (StringUtils.isAllBlank(JviorGeneratorConfig.getGendir())) {
+			throw new JviorMissingPropertyException("Please configure the gendir where the classes will be generated");
+		}
 		if (JviorGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(JviorGeneratorConfig.getFolder());
 			Arrays.asList(files).forEach(f -> generateSingleJvior(f.getPath()));
@@ -31,7 +36,7 @@ public class JviorGenerator extends AbstractJviorGenerator {
 	private static void generateSingleJvior(String path) {
 		try {
 			Jvior jvior = JviorParser.parseSpec(path);
-			JviorCodeGenerator.generate(jvior);
+			JviorAsciiDocGenerator.generate(jvior);
 		} catch (Throwable e) {
 			throw new JviorGeneratorException(path, e);
 		}
