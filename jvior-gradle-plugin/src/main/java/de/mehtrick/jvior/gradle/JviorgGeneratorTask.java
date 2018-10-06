@@ -3,8 +3,8 @@ package de.mehtrick.jvior.gradle;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.TaskAction;
 
+import de.mehtrick.jvior.base.JviorGeneratorConfig;
 import de.mehtrick.jvior.generator.JviorGenerator;
-import de.mehtrick.jvior.generator.JviorGeneratorConfig;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

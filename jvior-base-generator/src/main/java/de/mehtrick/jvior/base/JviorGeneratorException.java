@@ -1,4 +1,4 @@
-package de.mehtrick.jvior.generator;
+package de.mehtrick.jvior.base;
 
 public class JviorGeneratorException extends RuntimeException {
 

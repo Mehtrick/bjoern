@@ -9,6 +9,7 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
+import de.mehtrick.jvior.base.JviorGeneratorConfig;
 import de.mehtrick.jvior.generator.builder.JviorAbstractTestMethodBuilder;
 import de.mehtrick.jvior.generator.builder.JviorFeatureTestClassBuilder;
 import de.mehtrick.jvior.generator.builder.JviorScenarioTestMethodBuilder;

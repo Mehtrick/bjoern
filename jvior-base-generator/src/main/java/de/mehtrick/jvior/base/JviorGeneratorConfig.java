@@ -1,4 +1,4 @@
-package de.mehtrick.jvior.generator;
+package de.mehtrick.jvior.base;
 
 import org.apache.commons.lang3.StringUtils;
 
