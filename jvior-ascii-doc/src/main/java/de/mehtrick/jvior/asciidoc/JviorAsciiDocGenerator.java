@@ -1,7 +1,6 @@
 package de.mehtrick.jvior.asciidoc;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -32,15 +31,19 @@ public class JviorAsciiDocGenerator {
 	}
 
 	private static void writeToFile(String text, String path) throws IOException {
-		
-		new File(JviorGeneratorConfig.getDocdir()).deleteOnExit();
-		new File(JviorGeneratorConfig.getDocdir()).mkdirs();
+		cleanDocDir();
 		String filename = FilenameUtils.removeExtension(new File(path).getName());
-		File file = new File(JviorGeneratorConfig.getDocdir() + "/" + filename + ".adoc");
-		try (PrintWriter out = new PrintWriter(file)) {
+		File asciiDocFile = new File(JviorGeneratorConfig.getDocdir() + "/" + filename + ".adoc");
+		try (PrintWriter out = new PrintWriter(asciiDocFile)) {
 			out.println(text);
 		}
 
+	}
+
+	private static void cleanDocDir() {
+		File gendir = new File(JviorGeneratorConfig.getDocdir());
+		gendir.deleteOnExit();
+		gendir.mkdirs();
 	}
 
 	private static Configuration createDefaultFreemarkerConfig() throws IOException {

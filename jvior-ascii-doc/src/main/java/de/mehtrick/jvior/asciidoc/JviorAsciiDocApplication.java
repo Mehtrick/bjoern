@@ -27,13 +27,13 @@ public class JviorAsciiDocApplication extends AbstractJviorGenerator {
 		}
 		if (JviorGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(JviorGeneratorConfig.getFolder());
-			Arrays.asList(files).forEach(f -> generateSingleJvior(f.getPath()));
+			Arrays.asList(files).forEach(f -> generateSingleJviorDocs(f.getPath()));
 		} else {
-			generateSingleJvior(JviorGeneratorConfig.getPath());
+			generateSingleJviorDocs(JviorGeneratorConfig.getPath());
 		}
 	}
 
-	private static void generateSingleJvior(String path) {
+	private static void generateSingleJviorDocs(String path) {
 		try {
 			Jvior jvior = JviorParser.parseSpec(path);
 			JviorAsciiDocGenerator.generate(jvior);

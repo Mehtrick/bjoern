@@ -11,7 +11,7 @@ public class AsciiDocBuildTest {
 
 	@Test
 	public void testFreemarker() throws IOException, TemplateException, JviorMissingPropertyException {
-		JviorAsciiDocApplication.main(new String[] { "folder=src/test/resources/", "docdir=src/gen/java" });
+		JviorAsciiDocApplication.main(new String[] { "folder=src/test/resources/", "docdir=src/gen/resources" });
 	}
 
 }
