@@ -22,8 +22,8 @@ public class JviorAsciiDocApplication extends AbstractJviorGenerator {
 
 	public static void generateJviorDocs() throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.validate();
-		if (StringUtils.isAllBlank(JviorGeneratorConfig.getGendir())) {
-			throw new JviorMissingPropertyException("Please configure the gendir where the classes will be generated");
+		if (StringUtils.isAllBlank(JviorGeneratorConfig.getDocdir())) {
+			throw new JviorMissingPropertyException("Please configure the docDir where the documentation will be generated");
 		}
 		if (JviorGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(JviorGeneratorConfig.getFolder());
