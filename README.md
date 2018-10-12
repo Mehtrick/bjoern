@@ -7,9 +7,10 @@ The generated classes are **simple** and are designed to be generated **each tim
 
 The generated classes are plain Junit. You cann extend them to define your own runners wich makes it compatible with **spring** or **mockito**.
 
-# How to use
+## How to use
 
 As a gradle plugin
+
 ```gradle
 buildscript {
     repositories {
@@ -27,7 +28,6 @@ apply plugin: "de.mehtrick.jvior.gradle-plugin"
 
 you then have to configure the generator in gradle
 
-
 ```gradle
 jvior{
 	folder = "${projectDir}/src/test/resources"
@@ -36,14 +36,15 @@ jvior{
 }
 ```
 
+### Available Tasks
 
-## Available Tasks
 |       |                         |
 |-------|-------------------------|
 |`jvior`|Generates the abstract test classes| 
 |`jviordoc`|Generates documentation of the jvior files. (Default is asciidoc)|
 
-## List of Parameters
+### List of Parameters
+
 | Parameter name |required| Description | example |
 |----------------|--------|-------------|---------|
 |path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/jvior.yml"|
@@ -56,8 +57,8 @@ jvior{
 |templatefolder|no|The folder where selfwritten freemarker templates for documentationgeneration can be placed|"${projectDir}/src/main/resources/templates"|
 |docExtension|no|The extension of the generated Doc Files. Default is adoc|"adoc"|
 
+## Specification
 
-# Specification
 The specification is yaml based. You will find the typical BDD keywords in it
 
 ```yaml
@@ -85,7 +86,7 @@ Scenarios:
       - Foo says "yeah beer"  
 ```
 
-# Code generation
+## Code generation
 
 Jvior will then generate the TestClasses based on the spec
 
@@ -139,8 +140,10 @@ public abstract class AbstractTestFoo {
 ```
 
 ## Doc Generation
+
 ### Example Asciidoc
-```
+
+```adoc
 = Test Foo
 :toc:
 
@@ -173,26 +176,31 @@ public abstract class AbstractTestFoo {
 
 The Developer now has to implement the missing methods. In one feature class the methods will be reused if their name is written the same all over the specification
 
-
 ## Project Structure
 
 ### Jvior Parser
+
 The parser project reads the jvior file and parses it to java-classes using mainly jackson. It does not just convert it to pojos but reads things like parameters from the statements.
 
 ### Jvior Generator
+
 Is basend on the ```Jvior Parser``` and generates java class files from the pojos of the ```Jvior Parser```. This is done by using java poet. Every feature will generate a coresponding class and every scenario in that feature will become a test method. The BDD statements like ```Given When Then``` will generate abstract methods which need to be implemented by the developer.
 
 ### Jvior Gradle Generator
+
 Is basend on the ```Jvior Generator``` and wraps its functionality into a gradle plugin. The major task is called ```jvior``` which will generate the java classes based on your gradle-jvior-config.
 
-
 ## How to build
+
 ### Eclipse
+
 ```gradle
 gradlew cleanEclipse eclipse
 ```
 
 ### Build
+
 ```gradle
+
 gradlew build
 ```
