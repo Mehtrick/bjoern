@@ -20,7 +20,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.4'
+        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.7'
     }
 }
 apply plugin: "de.mehtrick.jvior.gradle-plugin"
