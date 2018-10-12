@@ -13,5 +13,8 @@ public class JviorGeneratorExtension {
 	private String gendir;
 	private String extendedTestClass;
 	private String docdir;
+	private String template;
+	private String templateFolder;
+	private String docExtension;
 
 }

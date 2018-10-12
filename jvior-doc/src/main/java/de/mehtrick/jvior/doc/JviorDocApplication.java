@@ -1,4 +1,4 @@
-package de.mehtrick.jvior.asciidoc;
+package de.mehtrick.jvior.doc;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +13,7 @@ import de.mehtrick.jvior.base.JviorMissingPropertyException;
 import de.mehtrick.jvior.parser.JviorParser;
 import de.mehtrick.jvior.parser.modell.Jvior;
 
-public class JviorAsciiDocApplication extends AbstractJviorGenerator {
+public class JviorDocApplication extends AbstractJviorGenerator {
 
 	public static void main(String[] args) throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.init(args);
@@ -36,7 +36,7 @@ public class JviorAsciiDocApplication extends AbstractJviorGenerator {
 	private static void generateSingleJviorDocs(String path) {
 		try {
 			Jvior jvior = JviorParser.parseSpec(path);
-			JviorAsciiDocGenerator.generate(jvior);
+			JviorDocGenerator.generate(jvior);
 		} catch (Throwable e) {
 			throw new JviorGeneratorException(path, e);
 		}

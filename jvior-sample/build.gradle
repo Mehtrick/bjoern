@@ -6,7 +6,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.4'
+        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.7'
     }
 }
 
@@ -17,7 +17,8 @@ apply plugin: 'eclipse'
 jvior{
 	folder = "${projectDir}/src/test/resources"
 	pckg ="de.mehtrick.jvior-sample"
-	gendir = "${projectDir}/src/gen/jvior"
+	gendir = "${projectDir}/src/gen/jvior/tests"
+    docdir = "${projectDir}/src/gen/jvior/docs"
 }
 
 dependencies {

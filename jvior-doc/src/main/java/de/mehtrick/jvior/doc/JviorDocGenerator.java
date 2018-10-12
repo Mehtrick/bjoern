@@ -1,4 +1,4 @@
-package de.mehtrick.jvior.asciidoc;
+package de.mehtrick.jvior.doc;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,12 +19,13 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
 
-public class JviorAsciiDocGenerator {
+public class JviorDocGenerator {
 
 	public static void generate(Jvior jvior) throws IOException, TemplateException {
 		Configuration cfg = createDefaultFreemarkerConfig();
+		@SuppressWarnings("unchecked")
 		Map<String, Object> convertValue = new ObjectMapper().convertValue(jvior, Map.class);
-		Template temp = cfg.getTemplate("asciidoc.ftlh");
+		Template temp = cfg.getTemplate(JviorGeneratorConfig.getTemplate());
 		StringWriter stringWriter = new StringWriter();
 		temp.process(convertValue, stringWriter);
 		writeToFile(stringWriter.toString(), jvior.getFilePath());
@@ -33,7 +35,8 @@ public class JviorAsciiDocGenerator {
 	private static void writeToFile(String text, String path) throws IOException {
 		cleanDocDir();
 		String filename = FilenameUtils.removeExtension(new File(path).getName());
-		File asciiDocFile = new File(JviorGeneratorConfig.getDocdir() + "/" + filename + ".adoc");
+		File asciiDocFile = new File(
+				JviorGeneratorConfig.getDocdir() + "/" + filename + "." + JviorGeneratorConfig.getDocExtension());
 		try (PrintWriter out = new PrintWriter(asciiDocFile)) {
 			out.println(text);
 		}
@@ -48,7 +51,11 @@ public class JviorAsciiDocGenerator {
 
 	private static Configuration createDefaultFreemarkerConfig() throws IOException {
 		Configuration cfg = new Configuration(new Version(2, 3, 23));
-		cfg.setDirectoryForTemplateLoading(new File("src/main/resources"));
+		if(StringUtils.isNotBlank(JviorGeneratorConfig.getTemplateFolder())) {
+			cfg.setDirectoryForTemplateLoading(new File(JviorGeneratorConfig.getTemplateFolder()));
+		}else {
+			cfg.setClassForTemplateLoading(JviorDocGenerator.class, "/");
+		}
 		cfg.setDefaultEncoding("UTF-8");
 		cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 		return cfg;

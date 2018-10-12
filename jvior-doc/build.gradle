@@ -6,6 +6,6 @@ dependencies{
 }
 
 jar {
-	baseName = "jvior-ascii-doc"
+	baseName = "jvior-doc"
 	version = project.version
 }

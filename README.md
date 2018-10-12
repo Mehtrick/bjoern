@@ -43,8 +43,10 @@ jvior{
 |pckg|yes|The package declaration of the generated classes|"de.mehtrick.jvior-sample"|
 |gendir|yes|The folder where all of the files will be generated|"${projectDir}/src/test/gen"|
 |extendedTestClass|no|Fully qualified Name of class which all of the generated files will extend|"de.mehtrick.AbstractTestClass"|
+|docdir|no(only when generating Docs)|The folder where all the documentations will be generated|"${projectDir}/src/test/resources"|
 
 To run the generator just hit the gradle task `jvior`
+To run the documentationg generator just hit the gradle task `jviordoc`
 
 # Specification
 The specification is yaml based. You will find the typical BDD keywords in it
@@ -124,6 +126,42 @@ public abstract class AbstractTestFoo {
 
   public abstract void then_FooSays(String param1);
 }
+
+```
+
+## Doc Generation
+```
+= Test Foo
+:toc:
+
+== Background
+[cols="10%,90%"]
+|===
+|*Given* |A Foo
+>|*And* |A Bar
+|===
+
+
+== Scenario: Foo is not happy
+[cols="10%,90%"]
+|===
+|*Given* |there are "2" bottles of wine
+>|*And* |there are "0" bottles of beer
+|*When* |Foo wants to drink "1" bottle of beer
+|*Then* |Foo says "why is my beer empty"
+|===
+
+== Scenario: Foo is happy
+[cols="10%,90%"]
+|===
+|*Given* |there are "2" bottles of wine
+>|*And* |there are "1" bottles of beer
+|*When* |Foo wants to drink "1" bottle of beer
+|*Then* |Foo says "yeah beer"
+|===
+
+
+
 
 ```
 
