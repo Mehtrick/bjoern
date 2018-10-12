@@ -35,6 +35,14 @@ jvior{
 	gendir = "${projectDir}/src/gen/jvior"
 }
 ```
+
+
+## Available Tasks
+|       |                         |
+|-------|-------------------------|
+|`jvior`|Generates the abstract test classes| 
+|`jviordoc`|Generates documentation of the jvior files. (Default is asciidoc)|
+
 ## List of Parameters
 | Parameter name |required| Description | example |
 |----------------|--------|-------------|---------|
@@ -44,9 +52,10 @@ jvior{
 |gendir|yes|The folder where all of the files will be generated|"${projectDir}/src/test/gen"|
 |extendedTestClass|no|Fully qualified Name of class which all of the generated files will extend|"de.mehtrick.AbstractTestClass"|
 |docdir|no(only when generating Docs)|The folder where all the documentations will be generated|"${projectDir}/src/test/resources"|
+|template|no|Name of the freemarker Templatefile that will be loaded during generation. Default is an asciidoc template, which is part of the classpath|"/asciidoc.ftlh"|
+|templatefolder|no|The folder where selfwritten freemarker templates for documentationgeneration can be placed|"${projectDir}/src/main/resources/templates"|
+|docExtension|no|The extension of the generated Doc Files. Default is adoc|"adoc"|
 
-To run the generator just hit the gradle task `jvior`
-To run the documentationg generator just hit the gradle task `jviordoc`
 
 # Specification
 The specification is yaml based. You will find the typical BDD keywords in it
@@ -130,6 +139,7 @@ public abstract class AbstractTestFoo {
 ```
 
 ## Doc Generation
+### Example Asciidoc
 ```
 = Test Foo
 :toc:
@@ -159,10 +169,6 @@ public abstract class AbstractTestFoo {
 |*When* |Foo wants to drink "1" bottle of beer
 |*Then* |Foo says "yeah beer"
 |===
-
-
-
-
 ```
 
 The Developer now has to implement the missing methods. In one feature class the methods will be reused if their name is written the same all over the specification
