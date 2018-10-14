@@ -1,0 +1,8 @@
+dependencies{
+    api project(":jvior-parser")
+}
+
+jar {
+	baseName = "jvior-base-generator"
+	version = project.version
+}

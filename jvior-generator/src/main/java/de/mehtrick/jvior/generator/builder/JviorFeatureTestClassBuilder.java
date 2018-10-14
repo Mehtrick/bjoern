@@ -12,7 +12,7 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeSpec.Builder;
 
-import de.mehtrick.jvior.generator.JviorGeneratorConfig;
+import de.mehtrick.jvior.base.JviorGeneratorConfig;
 import de.mehtrick.jvior.parser.modell.Jvior;
 
 public class JviorFeatureTestClassBuilder {

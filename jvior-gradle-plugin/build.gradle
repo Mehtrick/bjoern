@@ -1,6 +1,7 @@
 
 dependencies{
     compile project(":jvior-generator")
+    compile project(":jvior-doc")
 }
 
 apply plugin: 'java-gradle-plugin'

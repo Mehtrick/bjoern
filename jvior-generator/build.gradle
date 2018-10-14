@@ -1,8 +1,7 @@
 dependencies{
-    compile project(":jvior-parser")
-    compile 'com.squareup:javapoet:1.2.0'
-    compile 'junit:junit:4.12'
-    
+    api project(":jvior-base-generator")   
+    api 'com.squareup:javapoet:1.2.0'
+    api 'junit:junit:4.12'
 }
 
 jar {

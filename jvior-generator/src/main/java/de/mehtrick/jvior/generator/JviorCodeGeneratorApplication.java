@@ -4,18 +4,32 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 
+import org.apache.commons.lang3.StringUtils;
+
+import de.mehtrick.jvior.base.AbstractJviorGenerator;
+import de.mehtrick.jvior.base.JviorGeneratorConfig;
+import de.mehtrick.jvior.base.JviorGeneratorException;
+import de.mehtrick.jvior.base.JviorMissingPropertyException;
 import de.mehtrick.jvior.parser.JviorParser;
 import de.mehtrick.jvior.parser.modell.Jvior;
 
-public class JviorGenerator {
+public class JviorCodeGeneratorApplication extends AbstractJviorGenerator {
 
-	public static void gen(String[] args) throws JviorMissingPropertyException, FileNotFoundException {
+	public static void main(String[] args) throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.init(args);
 		generateJviorClasses();
 	}
 
 	public static void generateJviorClasses() throws JviorMissingPropertyException, FileNotFoundException {
 		JviorGeneratorConfig.validate();
+		if (StringUtils.isAllBlank(JviorGeneratorConfig.getPckg())) {
+			throw new JviorMissingPropertyException(
+					"Please configure the package name by setting the \"pckg\" property");
+		}
+		if (StringUtils.isAllBlank(JviorGeneratorConfig.getGendir())) {
+			throw new JviorMissingPropertyException("Please configure the gendir where the classes will be generated");
+		}
+
 		if (JviorGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(JviorGeneratorConfig.getFolder());
 			Arrays.asList(files).forEach(f -> generateSingleJvior(f.getPath()));
@@ -27,19 +41,10 @@ public class JviorGenerator {
 	private static void generateSingleJvior(String path) {
 		try {
 			Jvior jvior = JviorParser.parseSpec(path);
-			JviorCodeGenerator.generate(jvior);
+			new JviorCodeGenerator().generate(jvior);
 		} catch (Throwable e) {
 			throw new JviorGeneratorException(path, e);
 		}
 	}
 
-	private static File[] getFilesFromFolder(String folder) throws FileNotFoundException {
-		File file = new File(folder);
-		File[] ymlFiles = file.listFiles(new JviorFileNameFilter());
-		if (ymlFiles.length == 0) {
-			throw new FileNotFoundException("No yaml files Found in Folder " + folder
-					+ ". The file has to end with .yml or .yaml to be detected");
-		}
-		return file.listFiles(new JviorFileNameFilter());
-	}
 }

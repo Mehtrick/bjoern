@@ -6,7 +6,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.4'
+        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.7'
     }
 }
 
@@ -16,16 +16,25 @@ apply plugin: 'eclipse'
 
 jvior{
 	folder = "${projectDir}/src/test/resources"
-	pckg ="de.mehtrick.jvior-sample"
-	gendir = "${projectDir}/src/gen/jvior"
+	pckg ="de.mehtrick.jvior.sample"
+	gendir = "${projectDir}/src/gen/jvior/"
+    docdir = "${projectDir}/src/gen/jvior/docs"
 }
 
 dependencies {
         testImplementation 'junit:junit:4.12'
         testImplementation 'org.assertj:assertj-core:3.10.0'
+        compileOnly 'org.projectlombok:lombok:1.18.0'
 }
 
 repositories {
 	jcenter()
 }
 
+sourceSets {
+    test {
+        java {
+            srcDirs 'src/gen/jvior'
+        }
+    }
+ }
