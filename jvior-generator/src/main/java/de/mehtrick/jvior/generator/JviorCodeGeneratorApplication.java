@@ -41,7 +41,7 @@ public class JviorCodeGeneratorApplication extends AbstractJviorGenerator {
 	private static void generateSingleJvior(String path) {
 		try {
 			Jvior jvior = JviorParser.parseSpec(path);
-			JviorCodeGenerator.generate(jvior);
+			new JviorCodeGenerator().generate(jvior);
 		} catch (Throwable e) {
 			throw new JviorGeneratorException(path, e);
 		}

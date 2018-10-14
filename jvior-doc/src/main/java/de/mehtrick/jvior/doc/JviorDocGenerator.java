@@ -21,7 +21,7 @@ import freemarker.template.Version;
 
 public class JviorDocGenerator {
 
-	public static void generate(Jvior jvior) throws IOException, TemplateException {
+	public void generate(Jvior jvior) throws IOException, TemplateException {
 		Configuration cfg = createDefaultFreemarkerConfig();
 		@SuppressWarnings("unchecked")
 		Map<String, Object> convertValue = new ObjectMapper().convertValue(jvior, Map.class);
@@ -32,7 +32,7 @@ public class JviorDocGenerator {
 		stringWriter.close();
 	}
 
-	private static void writeToFile(String text, String path) throws IOException {
+	private void writeToFile(String text, String path) throws IOException {
 		cleanDocDir();
 		String filename = FilenameUtils.removeExtension(new File(path).getName());
 		File asciiDocFile = new File(
@@ -43,18 +43,18 @@ public class JviorDocGenerator {
 
 	}
 
-	private static void cleanDocDir() {
+	private void cleanDocDir() {
 		File gendir = new File(JviorGeneratorConfig.getDocdir());
 		gendir.deleteOnExit();
 		gendir.mkdirs();
 	}
 
-	private static Configuration createDefaultFreemarkerConfig() throws IOException {
+	private Configuration createDefaultFreemarkerConfig() throws IOException {
 		Configuration cfg = new Configuration(new Version(2, 3, 23));
-		if(StringUtils.isNotBlank(JviorGeneratorConfig.getTemplateFolder())) {
+		if (StringUtils.isNotBlank(JviorGeneratorConfig.getTemplateFolder())) {
 			cfg.setDirectoryForTemplateLoading(new File(JviorGeneratorConfig.getTemplateFolder()));
-		}else {
-			cfg.setClassForTemplateLoading(JviorDocGenerator.class, "/");
+		} else {
+			cfg.setClassForTemplateLoading(this.getClass(), "/");
 		}
 		cfg.setDefaultEncoding("UTF-8");
 		cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);

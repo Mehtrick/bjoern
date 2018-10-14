@@ -36,7 +36,7 @@ public class JviorDocApplication extends AbstractJviorGenerator {
 	private static void generateSingleJviorDocs(String path) {
 		try {
 			Jvior jvior = JviorParser.parseSpec(path);
-			JviorDocGenerator.generate(jvior);
+			new JviorDocGenerator().generate(jvior);
 		} catch (Throwable e) {
 			throw new JviorGeneratorException(path, e);
 		}

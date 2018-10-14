@@ -17,7 +17,7 @@ import de.mehtrick.jvior.parser.modell.Jvior;
 
 class JviorCodeGenerator {
 
-	public static void generate(Jvior jvior) throws IOException {
+	public void generate(Jvior jvior) throws IOException {
 		System.out.println("Generate Feature: " + jvior.getFeatureNameFormatted());
 		Set<MethodSpec> abstractMethods = JviorAbstractTestMethodBuilder.build(jvior.getBackground(),
 				jvior.getScenarios());
@@ -26,7 +26,7 @@ class JviorCodeGenerator {
 		writeToSystem(jviorClass);
 	}
 
-	private static void writeToSystem(TypeSpec jviorClass) throws IOException {
+	private void writeToSystem(TypeSpec jviorClass) throws IOException {
 		JavaFile javaFile = JavaFile.builder(JviorGeneratorConfig.getPckg(), jviorClass).build();
 		File dir = new File(JviorGeneratorConfig.getGendir());
 		dir.mkdirs();
