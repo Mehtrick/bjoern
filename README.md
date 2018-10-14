@@ -190,6 +190,14 @@ Is basend on the ```Jvior Parser``` and generates java class files from the pojo
 
 Is basend on the ```Jvior Generator``` and wraps its functionality into a gradle plugin. The major task is called ```jvior``` which will generate the java classes based on your gradle-jvior-config.
 
+### Jvior Base Generator
+
+Project to share base functionality like configuration or file-filter for every generator
+
+### Jvior Doc Generator
+
+Generates documentations based on the jvior files. It uses apache freemarker as template engine. As default the generator will create asciidoc files. Other formats aren't supported yet. However you can create your own freemarker templates and configure them via gradle
+
 ## How to build
 
 ### Eclipse
