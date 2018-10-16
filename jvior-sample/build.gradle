@@ -30,7 +30,7 @@ dependencies {
 repositories {
 	jcenter()
 }
-
+// Added generated classes to classpath
 sourceSets {
     test {
         java {
