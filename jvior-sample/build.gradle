@@ -18,7 +18,7 @@ jvior{
 	folder = "${projectDir}/src/test/resources"
 	pckg ="de.mehtrick.jvior.sample"
 	gendir = "${projectDir}/src/gen/jvior/"
-    docdir = "${projectDir}/src/gen/jvior/docs"
+    	docdir = "${projectDir}/src/gen/jvior/docs"
 }
 
 dependencies {
