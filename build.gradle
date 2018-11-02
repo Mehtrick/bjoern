@@ -42,7 +42,7 @@ subprojects {
         compileOnly 'org.projectlombok:lombok:1.18.0'
 
         testImplementation 'junit:junit:4.12'
-        testImplementation 'org.assertj:assertj-core:3.10.0'
+        testImplementation 'org.assertj:assertj-core:3.11.1'
     }
 
     apply from: "https://bitbucket.org/Mehtrick/gradle-module/raw/0c379000383ebb1578691925f2a9be39698aef9a/backend/publish%2Brelease.gradle"
