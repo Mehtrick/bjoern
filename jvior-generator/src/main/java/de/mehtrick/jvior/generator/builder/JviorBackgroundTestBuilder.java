@@ -14,7 +14,7 @@ public class JviorBackgroundTestBuilder {
 	public static MethodSpec build(JviorBackground background) {
 
 		Builder backgroundMethodBuilder = MethodSpec.methodBuilder("background").addAnnotation(Before.class)
-				.addModifiers(Modifier.PUBLIC);
+				.addModifiers(Modifier.PUBLIC).addException(Exception.class);
 
 		background.getGiven().stream()
 				.forEach(given -> backgroundMethodBuilder.addStatement(JviorStatementParser.parseStatement(given)));

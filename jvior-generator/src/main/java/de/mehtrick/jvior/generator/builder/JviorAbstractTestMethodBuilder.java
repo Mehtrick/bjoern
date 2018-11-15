@@ -53,7 +53,7 @@ public class JviorAbstractTestMethodBuilder {
 		}
 
 		return MethodSpec.methodBuilder(statement.getStatementWithoutParameters())
-				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT).addParameters(parameterSpecs).build();
+				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT).addParameters(parameterSpecs).addException(Exception.class).build();
 
 	}
 

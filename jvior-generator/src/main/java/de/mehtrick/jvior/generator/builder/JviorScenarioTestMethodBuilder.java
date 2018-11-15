@@ -22,7 +22,7 @@ public class JviorScenarioTestMethodBuilder {
 
 	private static MethodSpec parseJviroScenario(JviorScenario scenario) {
 		Builder main = MethodSpec.methodBuilder(scenario.getNameFormatted()).addAnnotation(Test.class)
-				.addModifiers(Modifier.PUBLIC).addJavadoc(scenario.getName());
+				.addModifiers(Modifier.PUBLIC).addException(Exception.class).addJavadoc(scenario.getName());
 		if (scenario.getGiven() != null) {
 			scenario.getGiven().stream()
 					.forEach(given -> main.addStatement(JviorStatementParser.parseStatement(given)));
