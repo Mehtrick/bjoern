@@ -4,7 +4,7 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
 public class JviorPlugin implements Plugin<Project> {
-	static final String GEN_TASK_NAME = "jvior";
+	static final String GEN_TASK_NAME = "jviorGen";
 	static final String DOC_TASK_NAME = "jviorDoc";
 
 	@Override

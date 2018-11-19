@@ -20,7 +20,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.7'
+        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.9'
     }
 }
 apply plugin: "de.mehtrick.jvior.gradle-plugin"
@@ -40,7 +40,7 @@ jvior{
 
 |       |                         |
 |-------|-------------------------|
-|`jvior`|Generates the abstract test classes| 
+|`jviorgen`|Generates the abstract test classes| 
 |`jviordoc`|Generates documentation of the jvior files. (Default is asciidoc)|
 
 ### List of Parameters
