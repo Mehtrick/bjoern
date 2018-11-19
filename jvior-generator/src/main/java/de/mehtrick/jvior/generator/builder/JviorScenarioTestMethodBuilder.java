@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.lang.model.element.Modifier;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.squareup.javapoet.MethodSpec;
@@ -21,7 +22,7 @@ public class JviorScenarioTestMethodBuilder {
 	}
 
 	private static MethodSpec parseJviroScenario(JviorScenario scenario) {
-		Builder main = MethodSpec.methodBuilder(scenario.getNameFormatted()).addAnnotation(Test.class)
+		Builder main = MethodSpec.methodBuilder(StringUtils.uncapitalize(scenario.getNameFormatted())).addAnnotation(Test.class)
 				.addModifiers(Modifier.PUBLIC).addException(Exception.class).addJavadoc(scenario.getName());
 		if (scenario.getGiven() != null) {
 			scenario.getGiven().stream()

@@ -1,7 +1,7 @@
 buildscript {
  	ext{
-        nexusUsername = "$System.env.NexusUser"
-        nexusPassword = "$System.env.NexusPassword"
+        nexusUsername = "admin"
+        nexusPassword = "#mNisukngw4111"
         publishRepo = "release"
         nexusBasePath = "https://nexus.ppvoting.de"
     }
@@ -32,7 +32,7 @@ allprojects{
 
 
 subprojects {
-    version = '0.1.8'
+    version = '0.1.10'
     dependencies {
         implementation 'org.apache.commons:commons-lang3:3.7'
         implementation 'commons-io:commons-io:2.6'
