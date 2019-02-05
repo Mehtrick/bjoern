@@ -1,6 +1,10 @@
-# Jvior [![Build Status](https://travis-ci.org/Mehtrick/jvior.svg?branch=master)](https://travis-ci.org/Mehtrick/jvior)
+# Bjoern [![Build Status](https://travis-ci.org/Mehtrick/bjoern.svg?branch=master)](https://travis-ci.org/Mehtrick/bjoern)
 
-Jvior is a universal bdd test generater.
+### **B**ehaviordriven **J**avabased **O**nehundret and ten percent **E**fficient **R**eadable **N**otation
+
+
+
+Bjoern is a universal bdd test generater.
 The main focus is to generate java-classes from bdd-style text files to ensure **synchronisation** between the specification and the code. 
 
 The generated classes are **simple** and are designed to be generated **each time**. You **should not** edit the generated files because they will be deleted on every run of the generator.
@@ -20,19 +24,19 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'de.mehtrick.jvior:jvior-gradle-plugin:0.1.9'
+        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.0.0'
     }
 }
-apply plugin: "de.mehtrick.jvior.gradle-plugin"
+apply plugin: "de.mehtrick.bjoern.gradle-plugin"
 ```
 
 you then have to configure the generator in gradle
 
 ```gradle
-jvior{
+bjoern{
 	folder = "${projectDir}/src/test/resources"
-	pckg ="de.mehtrick.jvior-sample"
-	gendir = "${projectDir}/src/gen/jvior"
+	pckg ="de.mehtrick.bjoern-sample"
+	gendir = "${projectDir}/src/gen/bjoern"
 }
 ```
 
@@ -40,16 +44,16 @@ jvior{
 
 |       |                         |
 |-------|-------------------------|
-|`jviorgen`|Generates the abstract test classes| 
-|`jviordoc`|Generates documentation of the jvior files. (Default is asciidoc)|
+|`bjoerngen`|Generates the abstract test classes| 
+|`bjoerndoc`|Generates documentation of the bjoern files. (Default is asciidoc)|
 
 ### List of Parameters
 
 | Parameter name |required| Description | example |
 |----------------|--------|-------------|---------|
-|path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/jvior.yml"|
+|path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/bjoern.yml"|
 |folder|yes (if the path is not set. If both are set folder wins)|The absoulte path to the folder where all specifications are placed|"${projectDir}/src/test/resources"|
-|pckg|yes|The package declaration of the generated classes|"de.mehtrick.jvior-sample"|
+|pckg|yes|The package declaration of the generated classes|"de.mehtrick.bjoern-sample"|
 |gendir|yes|The folder where all of the files will be generated|"${projectDir}/src/test/gen"|
 |extendedTestClass|no|Fully qualified Name of class which all of the generated files will extend|"de.mehtrick.AbstractTestClass"|
 |docdir|no(only when generating Docs)|The folder where all the documentations will be generated|"${projectDir}/src/test/resources"|
@@ -88,7 +92,7 @@ Scenarios:
 
 ## Code generation
 
-Jvior will then generate the TestClasses based on the spec
+Bjoern will then generate the TestClasses based on the spec
 
 ```java
 import java.lang.String;
@@ -178,25 +182,25 @@ The Developer now has to implement the missing methods. In one feature class the
 
 ## Project Structure
 
-### Jvior Parser
+### Bjoern Parser
 
-The parser project reads the jvior file and parses it to java-classes using mainly jackson. It does not just convert it to pojos but reads things like parameters from the statements.
+The parser project reads the bjoern file and parses it to java-classes using mainly jackson. It does not just convert it to pojos but reads things like parameters from the statements.
 
-### Jvior Generator
+### Bjoern Generator
 
-Is basend on the ```Jvior Parser``` and generates java class files from the pojos of the ```Jvior Parser```. This is done by using java poet. Every feature will generate a coresponding class and every scenario in that feature will become a test method. The BDD statements like ```Given When Then``` will generate abstract methods which need to be implemented by the developer.
+Is basend on the ```Bjoern Parser``` and generates java class files from the pojos of the ```Bjoern Parser```. This is done by using java poet. Every feature will generate a coresponding class and every scenario in that feature will become a test method. The BDD statements like ```Given When Then``` will generate abstract methods which need to be implemented by the developer.
 
-### Jvior Gradle Generator
+### Bjoern Gradle Generator
 
-Is basend on the ```Jvior Generator``` and wraps its functionality into a gradle plugin. The major task is called ```jvior``` which will generate the java classes based on your gradle-jvior-config.
+Is basend on the ```Bjoern Generator``` and wraps its functionality into a gradle plugin. The major task is called ```bjoern``` which will generate the java classes based on your gradle-bjoern-config.
 
-### Jvior Base Generator
+### Bjoern Base Generator
 
 Project to share base functionality like configuration or file-filter for every generator
 
-### Jvior Doc Generator
+### Bjoern Doc Generator
 
-Generates documentations based on the jvior files. It uses apache freemarker as template engine. As default the generator will create asciidoc files. Other formats aren't supported yet. However you can create your own freemarker templates and configure them via gradle
+Generates documentations based on the bjoern files. It uses apache freemarker as template engine. As default the generator will create asciidoc files. Other formats aren't supported yet. However you can create your own freemarker templates and configure them via gradle
 
 ## How to build
 

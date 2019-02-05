@@ -1,0 +1,21 @@
+
+dependencies{
+    compile project(":bjoern-generator")
+    compile project(":bjoern-doc")
+}
+
+apply plugin: 'java-gradle-plugin'
+
+gradlePlugin {
+  plugins {
+    bjoern {
+      id = 'de.mehtrick.bjoern.gradle-plugin'
+      implementationClass = 'de.mehtrick.bjoern.gradle.BjoernPlugin'
+    }
+  }
+}
+
+jar {
+	baseName = "bjoern-gradle-plugin"
+	version = project.version
+}

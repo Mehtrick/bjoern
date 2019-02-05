@@ -15,9 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'bjoern'
-include 'bjoern-doc'
-include 'bjoern-parser'
-include 'bjoern-base-generator'
-include 'bjoern-generator'
-include 'bjoern-gradle-plugin'
+rootProject.name = 'bjoern-sample'

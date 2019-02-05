@@ -1,0 +1,8 @@
+dependencies{
+    api project(":bjoern-parser")
+}
+
+jar {
+	baseName = "bjoern-base-generator"
+	version = project.version
+}
