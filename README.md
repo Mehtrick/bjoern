@@ -43,7 +43,7 @@ bjoern{
 
 ### Available Tasks
 
-|       |                         |
+| Taskname      | Description|
 |-------|-------------------------|
 |`bjoerngen`|Generates the abstract test classes| 
 |`bjoerndoc`|Generates documentation of the bjoern files. (Default is asciidoc)|
