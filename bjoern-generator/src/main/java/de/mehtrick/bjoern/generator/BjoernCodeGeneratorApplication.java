@@ -2,8 +2,10 @@ package de.mehtrick.bjoern.generator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import de.mehtrick.bjoern.base.AbstractBjoernGenerator;
@@ -15,12 +17,12 @@ import de.mehtrick.bjoern.parser.modell.Bjoern;
 
 public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 
-	public static void main(String[] args) throws BjoernMissingPropertyException, FileNotFoundException {
+	public static void main(String[] args) throws BjoernMissingPropertyException, IOException {
 		BjoernGeneratorConfig.init(args);
 		generateBjoernClasses();
 	}
 
-	public static void generateBjoernClasses() throws BjoernMissingPropertyException, FileNotFoundException {
+	public static void generateBjoernClasses() throws BjoernMissingPropertyException, IOException {
 		BjoernGeneratorConfig.validate();
 		if (StringUtils.isAllBlank(BjoernGeneratorConfig.getPckg())) {
 			throw new BjoernMissingPropertyException(
@@ -29,12 +31,19 @@ public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 		if (StringUtils.isAllBlank(BjoernGeneratorConfig.getGendir())) {
 			throw new BjoernMissingPropertyException("Please configure the gendir where the classes will be generated");
 		}
-
+		File file = new File(BjoernGeneratorConfig.getGendir());
+		cleanGenDir(file);
 		if (BjoernGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(BjoernGeneratorConfig.getFolder());
 			Arrays.asList(files).forEach(f -> generateSingleBjoern(f.getPath()));
 		} else {
 			generateSingleBjoern(BjoernGeneratorConfig.getPath());
+		}
+	}
+
+	private static void cleanGenDir(File file) throws IOException {
+		if(file.exists()) {
+			FileUtils.forceDelete(file);
 		}
 	}
 

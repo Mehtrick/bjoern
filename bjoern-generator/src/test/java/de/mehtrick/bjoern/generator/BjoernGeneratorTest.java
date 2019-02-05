@@ -1,6 +1,7 @@
 package de.mehtrick.bjoern.generator;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -13,16 +14,16 @@ import de.mehtrick.bjoern.generator.BjoernCodeGeneratorApplication;
 
 public class BjoernGeneratorTest {
 	@Test
-	public void testSomeLibraryMethod() throws BjoernMissingPropertyException, FileNotFoundException {
-		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/specification/bjoern.yaml", "folder=src/test/resources/",
-				"package=de.mehtrick.bjoern", "gendir=src/gen/java",
+	public void testSomeLibraryMethod() throws BjoernMissingPropertyException, IOException {
+		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/specification/bjoern.yaml",
+				"folder=src/test/resources/", "package=de.mehtrick.bjoern", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.bjoern.AbstractTestclass" });
 	}
-	
+
 	@Test
-	public void testMissingParameter() throws BjoernMissingPropertyException, FileNotFoundException {
-		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/bjoern.yaml", "folder=src/test/resources/",
-				"package=de.mehtrick.bjoern", "gendir=src/gen/java",
+	public void testMissingParameter() throws BjoernMissingPropertyException, IOException {
+		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/bjoern.yaml",
+				"folder=src/test/resources/", "package=de.mehtrick.bjoern", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.bjoern.AbstractTestclass" });
 	}
 
