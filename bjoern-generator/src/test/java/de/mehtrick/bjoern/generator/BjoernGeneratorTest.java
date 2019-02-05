@@ -14,7 +14,7 @@ import de.mehtrick.bjoern.generator.BjoernCodeGeneratorApplication;
 public class BjoernGeneratorTest {
 	@Test
 	public void testSomeLibraryMethod() throws BjoernMissingPropertyException, FileNotFoundException {
-		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/bjoern.yaml", "folder=src/test/resources/",
+		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/specification/bjoern.yaml", "folder=src/test/resources/",
 				"package=de.mehtrick.bjoern", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.bjoern.AbstractTestclass" });
 	}

@@ -15,7 +15,7 @@ apply plugin: 'java-library'
 apply plugin: 'eclipse'
 
 bjoern{
-	folder = "${projectDir}/src/test/resources"
+	folder = "${projectDir}/src/test/resources/specification"
 	pckg ="de.mehtrick.bjoern.sample"
 	gendir = "${projectDir}/src/gen/bjoern/"
     	docdir = "${projectDir}/src/gen/bjoern/docs"

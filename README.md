@@ -25,7 +25,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.0.0'
+        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.0.1'
     }
 }
 apply plugin: "de.mehtrick.bjoern.gradle-plugin"
