@@ -1,6 +1,6 @@
 dependencies{
     api project(":bjoern-base-generator")   
-    api 'com.squareup:javapoet:1.2.0'
+    api 'com.squareup:javapoet:1.11.1'
     api 'junit:junit:4.12'
 }
 
