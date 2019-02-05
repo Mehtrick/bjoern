@@ -1,7 +1,8 @@
 # Bjoern [![Build Status](https://travis-ci.org/Mehtrick/bjoern.svg?branch=master)](https://travis-ci.org/Mehtrick/bjoern)
 
-### **B**ehaviordriven **J**avabased **O**nehundret and ten percent **E**fficient **R**eadable **N**otation
+ **B**ehaviordriven **J**avabased **O**nehundret and ten percent **E**fficient **R**eadable **N**otation
 
+-----
 
 
 Bjoern is a universal bdd test generater.
