@@ -1,7 +1,6 @@
 package de.mehtrick.bjoern.generator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -17,40 +16,45 @@ import de.mehtrick.bjoern.parser.modell.Bjoern;
 
 public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 
-	public static void main(String[] args) throws BjoernMissingPropertyException, IOException {
-		BjoernGeneratorConfig.init(args);
-		generateBjoernClasses();
+
+	public BjoernCodeGeneratorApplication(BjoernGeneratorConfig bjoernGeneratorConfig) {
+		super(bjoernGeneratorConfig);
 	}
 
-	public static void generateBjoernClasses() throws BjoernMissingPropertyException, IOException {
-		BjoernGeneratorConfig.validate();
-		if (StringUtils.isAllBlank(BjoernGeneratorConfig.getPckg())) {
+	public static void main(String[] args) throws BjoernMissingPropertyException, IOException {
+		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(args);
+		new BjoernCodeGeneratorApplication(bjoernGeneratorConfig).generateBjoernClasses();
+	}
+
+	public void generateBjoernClasses() throws BjoernMissingPropertyException, IOException {
+		bjoernGeneratorConfig.validate();
+		if (StringUtils.isAllBlank(bjoernGeneratorConfig.getPckg())) {
 			throw new BjoernMissingPropertyException(
 					"Please configure the package name by setting the \"pckg\" property");
 		}
-		if (StringUtils.isAllBlank(BjoernGeneratorConfig.getGendir())) {
+		if (StringUtils.isAllBlank(bjoernGeneratorConfig.getGendir())) {
 			throw new BjoernMissingPropertyException("Please configure the gendir where the classes will be generated");
 		}
-		File file = new File(BjoernGeneratorConfig.getGendir());
+		File file = new File(bjoernGeneratorConfig.getGendir());
 		cleanGenDir(file);
-		if (BjoernGeneratorConfig.isFoldersSet()) {
-			File[] files = getFilesFromFolder(BjoernGeneratorConfig.getFolder());
+		if (bjoernGeneratorConfig.isFoldersSet()) {
+			File[] files = getFilesFromFolder(bjoernGeneratorConfig.getFolder());
 			Arrays.asList(files).forEach(f -> generateSingleBjoern(f.getPath()));
 		} else {
-			generateSingleBjoern(BjoernGeneratorConfig.getPath());
+			generateSingleBjoern(bjoernGeneratorConfig.getPath());
 		}
 	}
 
-	private static void cleanGenDir(File file) throws IOException {
+	private void cleanGenDir(File file) throws IOException {
 		if(file.exists()) {
 			FileUtils.forceDelete(file);
 		}
 	}
 
-	private static void generateSingleBjoern(String path) {
+	private void generateSingleBjoern(String path) {
 		try {
 			Bjoern bjoern = BjoernParser.parseSpec(path);
-			new BjoernCodeGenerator().generate(bjoern);
+			new BjoernCodeGenerator(bjoernGeneratorConfig).generate(bjoern);
 		} catch (Throwable e) {
 			throw new BjoernGeneratorException(path, e);
 		}

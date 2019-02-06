@@ -1,7 +1,7 @@
 
 dependencies{
-    compile project(":bjoern-generator")
-    compile project(":bjoern-doc")
+    implementation project(":bjoern-generator")
+    implementation project(":bjoern-doc")
 }
 
 apply plugin: 'java-gradle-plugin'

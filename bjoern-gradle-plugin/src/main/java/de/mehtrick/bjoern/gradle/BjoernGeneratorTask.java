@@ -5,24 +5,20 @@ import org.gradle.api.tasks.TaskAction;
 
 import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
 import de.mehtrick.bjoern.generator.BjoernCodeGeneratorApplication;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ToString
 public class BjoernGeneratorTask extends DefaultTask {
 
 	@TaskAction
 	public void genBjoernCode() throws Exception {
 		BjoernGeneratorExtension extension = getProject().getExtensions().getByType(BjoernGeneratorExtension.class);
-		BjoernGeneratorConfig.setPath(extension.getPath());
-		BjoernGeneratorConfig.setFolder(extension.getFolder());
-		BjoernGeneratorConfig.setGendir(extension.getGendir());
-		BjoernGeneratorConfig.setPckg(extension.getPckg());
-		BjoernGeneratorConfig.setExtendedTestclass(extension.getExtendedTestClass());
-		BjoernCodeGeneratorApplication.generateBjoernClasses();
+		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig();
+		
+		bjoernGeneratorConfig.setPath(extension.getPath());
+		bjoernGeneratorConfig.setFolder(extension.getFolder());
+		bjoernGeneratorConfig.setGendir(extension.getGendir());
+		bjoernGeneratorConfig.setPckg(extension.getPckg());
+		bjoernGeneratorConfig.setExtendedTestclass(extension.getExtendedTestClass());
+		new BjoernCodeGeneratorApplication(bjoernGeneratorConfig).generateBjoernClasses();
 
 	}
 }

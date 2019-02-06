@@ -4,27 +4,31 @@ import org.apache.commons.lang3.StringUtils;
 
 public class BjoernGeneratorConfig {
 
-	private static final String PROPERTY_PACKAGE = "package";
-	private static final String PROPERTY_FOLDER = "folder";
-	private static final String PROPERTY_PATH = "path";
-	private static final String PROPERTY_GENDIR = "gendir";
-	private static final String PROPERTY_EXTENDED_TESTCLASS = "extendedTestclass";
-	private static final String PROPERTY_DOCDIR = "docdir";
-	private static final String PROPERTY_TEMPLATE = "template";
-	private static final String PROPERTY_TEMPLATE_FOLDER = "templateFolder";
-	private static final String PROPERTY_DOC_EXTENSION = "docExtension";
-	private static String path;
-	private static String folder;
+	private  final String PROPERTY_PACKAGE = "package";
+	private  final String PROPERTY_FOLDER = "folder";
+	private  final String PROPERTY_PATH = "path";
+	private  final String PROPERTY_GENDIR = "gendir";
+	private  final String PROPERTY_EXTENDED_TESTCLASS = "extendedTestclass";
+	private  final String PROPERTY_DOCDIR = "docdir";
+	private  final String PROPERTY_TEMPLATE = "template";
+	private  final String PROPERTY_TEMPLATE_FOLDER = "templateFolder";
+	private  final String PROPERTY_DOC_EXTENSION = "docExtension";
+	private  String path;
+	private  String folder;
 
-	private static String pckg;
-	private static String gendir;
-	private static String extendedTestclass;
-	private static String docdir;
-	private static String template = "/asciidoc.ftlh";
-	private static String templateFolder;
-	private static String docExtension = "adoc";
+	private  String pckg;
+	private  String gendir;
+	private  String extendedTestclass;
+	private  String docdir;
+	private  String template = "/asciidoc.ftlh";
+	private  String templateFolder;
+	private  String docExtension = "adoc";
 
-	public static void init(String[] args) {
+	public BjoernGeneratorConfig() {
+		
+	}
+	
+	public BjoernGeneratorConfig(String[] args) {
 		setPath(findPropertyInArgs(PROPERTY_PATH, args));
 		setFolder(findPropertyInArgs(PROPERTY_FOLDER, args));
 		setPckg(findPropertyInArgs(PROPERTY_PACKAGE, args));
@@ -36,14 +40,14 @@ public class BjoernGeneratorConfig {
 		setDocExtension(findPropertyInArgs(PROPERTY_DOC_EXTENSION, args));
 	}
 
-	public static void validate() throws BjoernMissingPropertyException {
+	public  void validate() throws BjoernMissingPropertyException {
 		if (StringUtils.isAllBlank(path, folder)) {
 			throw new BjoernMissingPropertyException("Please configure a path or folder");
 		}
 
 	}
 
-	private static String findPropertyInArgs(String propertyname, String[] args) {
+	private  String findPropertyInArgs(String propertyname, String[] args) {
 		for (String arg : args) {
 			if (arg.startsWith(propertyname + "=")) {
 				return StringUtils.substringAfter(arg, "=");
@@ -52,86 +56,86 @@ public class BjoernGeneratorConfig {
 		return null;
 	}
 
-	public static boolean isFoldersSet() {
+	public  boolean isFoldersSet() {
 		return folder != null;
 	}
 
-	public static String getPath() {
+	public  String getPath() {
 		return path;
 	}
 
-	public static void setPath(String path) {
-		BjoernGeneratorConfig.path = path;
+	public  void setPath(String path) {
+		this.path = path;
 	}
 
-	public static String getPckg() {
+	public  String getPckg() {
 		return pckg;
 	}
 
-	public static void setPckg(String pckg) {
-		BjoernGeneratorConfig.pckg = pckg;
+	public  void setPckg(String pckg) {
+		this.pckg = pckg;
 	}
 
-	public static String getGendir() {
+	public  String getGendir() {
 		return gendir;
 	}
 
-	public static void setGendir(String gendir) {
-		BjoernGeneratorConfig.gendir = gendir;
+	public  void setGendir(String gendir) {
+		this.gendir = gendir;
 	}
 
-	public static String getExtendedTestclass() {
+	public  String getExtendedTestclass() {
 		return extendedTestclass;
 	}
 
-	public static void setExtendedTestclass(String extendedTestclass) {
-		BjoernGeneratorConfig.extendedTestclass = extendedTestclass;
+	public  void setExtendedTestclass(String extendedTestclass) {
+		this.extendedTestclass = extendedTestclass;
 	}
 
-	public static String getFolder() {
+	public  String getFolder() {
 		return folder;
 	}
 
-	public static void setFolder(String folder) {
+	public  void setFolder(String folder) {
 		if (!folder.isEmpty()) {
-			BjoernGeneratorConfig.folder = folder;
+			this.folder = folder;
 		}
 	}
 
-	public static String getDocdir() {
+	public  String getDocdir() {
 		return docdir;
 	}
 
-	public static void setDocdir(String docdir) {
-		BjoernGeneratorConfig.docdir = docdir;
+	public  void setDocdir(String docdir) {
+		this.docdir = docdir;
 	}
 
-	public static String getTemplate() {
+	public  String getTemplate() {
 		return template;
 	}
 
-	public static void setTemplate(String template) {
+	public  void setTemplate(String template) {
 		if (StringUtils.isNotBlank(template)) {
-			BjoernGeneratorConfig.template = template;
+			this.template = template;
 		}
 	}
 
-	public static String getDocExtension() {
+	public  String getDocExtension() {
 		return docExtension;
 	}
 
-	public static void setDocExtension(String docExtension) {
+	public  void setDocExtension(String docExtension) {
 		if (StringUtils.isNotBlank(docExtension)) {
-			BjoernGeneratorConfig.docExtension = docExtension;
+			this.docExtension = docExtension;
 		}
 	}
 
-	public static String getTemplateFolder() {
+	public  String getTemplateFolder() {
 		return templateFolder;
 	}
 
-	public static void setTemplateFolder(String templateFolder) {
-			BjoernGeneratorConfig.templateFolder = templateFolder;
+	public  void setTemplateFolder(String templateFolder) {
+			this.templateFolder = templateFolder;
 	}
 
 }

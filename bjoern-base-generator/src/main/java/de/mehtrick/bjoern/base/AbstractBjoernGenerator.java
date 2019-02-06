@@ -3,7 +3,14 @@ package de.mehtrick.bjoern.base;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public abstract class AbstractBjoernGenerator {
+public abstract class AbstractBjoernGenerator extends BjoernGeneratorConfigProvided{
+	
+	
+	
+	public AbstractBjoernGenerator(BjoernGeneratorConfig bjoernGeneratorConfig) {
+		super(bjoernGeneratorConfig);
+	}
+
 	protected static File[] getFilesFromFolder(String folder) throws FileNotFoundException {
 		
 		File file = new File(folder);

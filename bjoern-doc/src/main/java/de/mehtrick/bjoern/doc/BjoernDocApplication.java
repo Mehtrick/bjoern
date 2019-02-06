@@ -15,28 +15,32 @@ import de.mehtrick.bjoern.parser.modell.Bjoern;
 
 public class BjoernDocApplication extends AbstractBjoernGenerator {
 
-	public static void main(String[] args) throws BjoernMissingPropertyException, FileNotFoundException {
-		BjoernGeneratorConfig.init(args);
-		generateBjoernDocs();
+	public BjoernDocApplication(BjoernGeneratorConfig bjoernGeneratorConfig) {
+		super(bjoernGeneratorConfig);
 	}
 
-	public static void generateBjoernDocs() throws BjoernMissingPropertyException, FileNotFoundException {
-		BjoernGeneratorConfig.validate();
-		if (StringUtils.isAllBlank(BjoernGeneratorConfig.getDocdir())) {
+	public static void main(String[] args) throws BjoernMissingPropertyException, FileNotFoundException {
+		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(args);
+		new BjoernDocApplication(bjoernGeneratorConfig).generateBjoernDocs();
+	}
+
+	public void generateBjoernDocs() throws BjoernMissingPropertyException, FileNotFoundException {
+		bjoernGeneratorConfig.validate();
+		if (StringUtils.isAllBlank(bjoernGeneratorConfig.getDocdir())) {
 			throw new BjoernMissingPropertyException("Please configure the docDir where the documentation will be generated");
 		}
-		if (BjoernGeneratorConfig.isFoldersSet()) {
-			File[] files = getFilesFromFolder(BjoernGeneratorConfig.getFolder());
-			Arrays.asList(files).forEach(f -> generateSingleBjoernDocs(f.getPath()));
+		if (bjoernGeneratorConfig.isFoldersSet()) {
+			File[] files = getFilesFromFolder(bjoernGeneratorConfig.getFolder());
+			Arrays.asList(files).forEach(f -> generateSingleBjoernDocs(f.getPath(),bjoernGeneratorConfig));
 		} else {
-			generateSingleBjoernDocs(BjoernGeneratorConfig.getPath());
+			generateSingleBjoernDocs(bjoernGeneratorConfig.getPath(),bjoernGeneratorConfig);
 		}
 	}
 
-	private static void generateSingleBjoernDocs(String path) {
+	private void generateSingleBjoernDocs(String path, BjoernGeneratorConfig bjoernGeneratorConfig) {
 		try {
 			Bjoern bjoern = BjoernParser.parseSpec(path);
-			new BjoernDocGenerator().generate(bjoern);
+			new BjoernDocGenerator(bjoernGeneratorConfig).generate(bjoern);
 		} catch (Throwable e) {
 			throw new BjoernGeneratorException(path, e);
 		}

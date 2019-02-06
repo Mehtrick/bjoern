@@ -5,25 +5,20 @@ import org.gradle.api.tasks.TaskAction;
 
 import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
 import de.mehtrick.bjoern.doc.BjoernDocApplication;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
-@ToString
 public class BjoernDocGeneratorTask extends DefaultTask {
 
 	@TaskAction
 	public void genDoc() throws Exception {
 		BjoernGeneratorExtension extension = getProject().getExtensions().getByType(BjoernGeneratorExtension.class);
-		BjoernGeneratorConfig.setPath(extension.getPath());
-		BjoernGeneratorConfig.setFolder(extension.getFolder());
-		BjoernGeneratorConfig.setDocdir(extension.getDocdir());
-		BjoernGeneratorConfig.setTemplate(extension.getTemplate());
-		BjoernGeneratorConfig.setTemplateFolder(extension.getTemplateFolder());
-		BjoernGeneratorConfig.setDocExtension(extension.getDocExtension());
-		BjoernDocApplication.generateBjoernDocs();
+		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig();
+		bjoernGeneratorConfig.setPath(extension.getPath());
+		bjoernGeneratorConfig.setFolder(extension.getFolder());
+		bjoernGeneratorConfig.setDocdir(extension.getDocdir());
+		bjoernGeneratorConfig.setTemplate(extension.getTemplate());
+		bjoernGeneratorConfig.setTemplateFolder(extension.getTemplateFolder());
+		bjoernGeneratorConfig.setDocExtension(extension.getDocExtension());
+		new BjoernDocApplication(bjoernGeneratorConfig).generateBjoernDocs();
 
 	}
 }

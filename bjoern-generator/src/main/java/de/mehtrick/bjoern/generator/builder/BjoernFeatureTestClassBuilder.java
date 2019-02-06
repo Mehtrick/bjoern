@@ -13,13 +13,18 @@ import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeSpec.Builder;
 
 import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
+import de.mehtrick.bjoern.base.BjoernGeneratorConfigProvided;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 
-public class BjoernFeatureTestClassBuilder {
+public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided{
 
-	private static final String ABSTRACT_CLASS_PREFIX = "Abstract";
+	private final String ABSTRACT_CLASS_PREFIX = "Abstract";
 
-	public static TypeSpec build(Bjoern bjoern, List<MethodSpec> scenarios, Set<MethodSpec> abstractMethods) {
+	public BjoernFeatureTestClassBuilder(BjoernGeneratorConfig bjoernGeneratorConfig) {
+		super(bjoernGeneratorConfig);
+	}
+
+	public TypeSpec build(Bjoern bjoern, List<MethodSpec> scenarios, Set<MethodSpec> abstractMethods) {
 
 		Builder featureClassBuilder = TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + bjoern.getFeatureNameFormatted())
 				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
@@ -30,9 +35,9 @@ public class BjoernFeatureTestClassBuilder {
 
 		featureClassBuilder.addMethods(scenarios).addMethods(abstractMethods).addJavadoc(bjoern.getFeature());
 
-		if (StringUtils.isNotBlank(BjoernGeneratorConfig.getExtendedTestclass())) {
-			String className = StringUtils.substringAfterLast(BjoernGeneratorConfig.getExtendedTestclass(), ".");
-			String packageName = StringUtils.substringBeforeLast(BjoernGeneratorConfig.getExtendedTestclass(), ".");
+		if (StringUtils.isNotBlank(bjoernGeneratorConfig.getExtendedTestclass())) {
+			String className = StringUtils.substringAfterLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
+			String packageName = StringUtils.substringBeforeLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
 
 			ClassName superClass = ClassName.get(packageName, className);
 
