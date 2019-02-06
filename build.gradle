@@ -1,7 +1,7 @@
 buildscript {
  	ext{
-        nexusUsername = "admin"
-        nexusPassword = "#mNisukngw4111"
+        nexusUsername = ""
+        nexusPassword = ""
         publishRepo = "release"
         nexusBasePath = "https://nexus.ppvoting.de"
     }
