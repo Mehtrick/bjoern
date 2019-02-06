@@ -1,5 +1,11 @@
 buildscript {
  	ext{
+        if (!project.hasProperty("nexusUser")) {
+            nexusUser = ""
+        }
+        if (!project.hasProperty("nexusPW")) {
+            nexusPW = ""
+        }
         nexusUsername = "${nexusUser}"
         nexusPassword = "${nexusPW}"
         publishRepo = "release"
