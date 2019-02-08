@@ -46,8 +46,13 @@ public class BjoernStatement {
 	}
 
 	private String removeParametersFromStatement(String statement) {
-		return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(BjoernTextParser::parseText)
-				.collect(Collectors.joining(BjoernTextParser.BLANK_REPLACEMENT));
+		try {
+			return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(BjoernTextParser::parseText)
+					.collect(Collectors.joining(BjoernTextParser.BLANK_REPLACEMENT));
+		} catch (NullPointerException e) {
+			System.out.println(statement);
+			throw e;
+		}
 	}
 
 	@Override

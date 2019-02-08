@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import de.mehtrick.bjoern.parser.BjoernValidator;
 import de.mehtrick.bjoern.parser.modell.BjoernZGRModell;
 import de.mehtrick.umloud.UmloudReplacer;
 
@@ -28,6 +29,7 @@ public class BjoernZGRReader {
 			File zgr = getFileFromPath(path);
 			String zgrAsString = FileUtils.readFileToString(zgr, Charset.defaultCharset());
 			zgrAsString = UmloudReplacer.replaceUmlaute(zgrAsString);
+			new BjoernValidator().validate(zgrAsString);
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			return mapper.readValue(zgrAsString, BjoernZGRModell.class);
 		} catch (IOException e) {

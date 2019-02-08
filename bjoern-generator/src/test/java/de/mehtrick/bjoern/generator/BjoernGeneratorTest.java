@@ -13,7 +13,7 @@ import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
 public class BjoernGeneratorTest {
 	@Test
 	public void testSomeLibraryMethod() throws BjoernMissingPropertyException, IOException {
-		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/specification/bjoern.yaml",
+		BjoernCodeGeneratorApplication.main(new String[] { "path=src/test/resources/specification/bjoern.zgr",
 				"folder=src/test/resources/", "package=de.mehtrick.bjoern", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.bjoern.AbstractTestclass" });
 	}
