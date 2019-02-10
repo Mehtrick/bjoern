@@ -5,7 +5,7 @@
 -----
 
 
-Bjoern is a universal bdd test generater.
+Bjoern is a universal bdd test generater (and a person).
 The main focus is to generate java-classes from bdd-style text files to ensure **synchronisation** between the specification and the code. 
 
 The generated classes are **simple** and are designed to be generated **each time**. You **should not** edit the generated files because they will be deleted on every run of the generator.
