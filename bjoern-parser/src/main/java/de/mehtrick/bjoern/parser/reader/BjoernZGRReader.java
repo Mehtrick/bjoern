@@ -18,7 +18,7 @@ import de.mehtrick.umloud.UmloudReplacer;
 /**
  * Reads the bjoern spec file and parses it into a simple modell which represents
  * the structure of the spec.
- * 
+ *
  * @author mehtrick
  *
  */
@@ -37,7 +37,7 @@ public class BjoernZGRReader {
 		}
 	}
 
-	private static File getFileFromPath(String path) throws IOException {
+	private static File getFileFromPath(String path) throws FileNotFoundException {
 		checkFileExtension(path);
 		File yaml = new File(path);
 		checkFileExists(path, yaml);
@@ -50,7 +50,7 @@ public class BjoernZGRReader {
 		}
 	}
 
-	private static void checkFileExtension(String path) throws IOException {
+	private static void checkFileExtension(String path) {
 		if (!StringUtils.endsWithAny(path, BjoernFileExtensions.getValuesAsString())) {
 			throw new BjoernFileExtensionInvalidException();
 		}

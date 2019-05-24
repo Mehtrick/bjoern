@@ -44,7 +44,6 @@ subprojects {
         implementation 'commons-io:commons-io:2.6'
         implementation 'org.apache.commons:commons-text:1.4'
         implementation 'de.mehtrick:umloud:1.0.0'
-
         compileOnly 'org.projectlombok:lombok:1.18.0'
 
         testImplementation 'junit:junit:4.12'
