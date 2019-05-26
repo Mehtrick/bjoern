@@ -1,19 +1,17 @@
 package de.mehtrick.bjoern.parser.reader;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import de.mehtrick.bjoern.parser.modell.BjoernZGRModell;
+import de.mehtrick.bjoern.parser.validator.BjoernValidator;
+import de.mehtrick.umloud.UmloudReplacer;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
-import de.mehtrick.bjoern.parser.BjoernValidator;
-import de.mehtrick.bjoern.parser.modell.BjoernZGRModell;
-import de.mehtrick.umloud.UmloudReplacer;
 
 /**
  * Reads the bjoern spec file and parses it into a simple modell which represents
@@ -29,7 +27,7 @@ public class BjoernZGRReader {
 			File zgr = getFileFromPath(path);
 			String zgrAsString = FileUtils.readFileToString(zgr, Charset.defaultCharset());
 			zgrAsString = UmloudReplacer.replaceUmlaute(zgrAsString);
-			new BjoernValidator().validate(zgrAsString);
+			new BjoernValidator().validate(zgrAsString,path);
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			return mapper.readValue(zgrAsString, BjoernZGRModell.class);
 		} catch (IOException e) {

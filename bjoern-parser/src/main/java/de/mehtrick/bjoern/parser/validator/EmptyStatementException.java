@@ -1,4 +1,4 @@
-package de.mehtrick.bjoern.parser;
+package de.mehtrick.bjoern.parser.validator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +11,7 @@ public class EmptyStatementException extends RuntimeException {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
