@@ -5,54 +5,57 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+/**
+ * @author mehtrick
+ *
+ * This class contains all validations for a bjoern file.
+ */
 public enum BjoernValidations {
-
-
     INVALID_KEYWORD("The line starts with an invalid Keyword. Found \"%s\". Allowed Keywords are: %s. This check is case-sensitive!") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
+        protected BjoernValidationError validate(String[] lines, int index) {
             String trimmedLine = getTrimmedLine(lines, index);
             boolean lineStartsWithKnownKeyword = BjoernKeywords.getKeywordValues().stream().anyMatch(trimmedLine::startsWith);
-            if (trimmedLine.length()>0 && !lineStartsWithKnownKeyword) {
-                errors.add(createNewBjoernValidationError(lines, index, errorText,lines[index], BjoernKeywords.getKeywordsAsSingleString()));
+            if (!lineStartsWithKnownKeyword) {
+                return createNewBjoernValidationError(index, errorText,lines[index], BjoernKeywords.getKeywordsAsSingleString());
             }
-            return errors;
+            return null;
         }
     },
     EMPTYLINES("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     }, WRONSTARTINGKEYWORD("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     }, WRONG_INDENTATION_BACKGROUND("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     }, WRONG_INDENTATION_SCENARIOS("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     }, WRONG_INDENTATION_SINGLE_SCENARIO("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     }, WRONG_INDENATION_IN_SCENARIO("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     }, MISSING_SCENARIO_NAME("") {
         @Override
-        List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors) {
-            return errors;
+        protected BjoernValidationError validate(String[] lines, int index) {
+            return null;
         }
     };
 
@@ -64,15 +67,38 @@ public enum BjoernValidations {
         this.errorText = errorText;
     }
 
-    private static BjoernValidationError createNewBjoernValidationError(String[] lines, int index, String errorText, String... stringforformat) {
+    private static BjoernValidationError createNewBjoernValidationError(int index, String errorText, String... stringforformat) {
         String formattedErrorText = String.format(errorText, stringforformat);
         return new BjoernValidationError(index + 1, formattedErrorText);
+    }
+
+    /**
+     * Validates a line of a bjoernspec. This method needs both the index and all of the lines, because validation can depend on previous lines
+     *
+     * @author mehtrick
+     * @param lines
+     * @param index
+     * @param errors - containing the previous errors
+     * @return a list of Error for that specific line
+     */
+    public List<BjoernValidationError> validateLine(String[] lines, int index, List<BjoernValidationError> errors){
+        if(lineIsNotEmpty(lines[index])){
+            BjoernValidationError bjoernValidationError = this.validate(lines, index);
+            if(bjoernValidationError!=null){
+                errors.add(bjoernValidationError);
+            }
+        }
+        return errors;
+    }
+
+    private boolean lineIsNotEmpty(String line) {
+        return line.trim().length()>0;
     }
 
     private static String getTrimmedLine(String[] lines, int index) {
         return lines[index].trim();
     }
 
-    abstract List<BjoernValidationError> validate(String[] lines, int index, List<BjoernValidationError> errors);
+    protected abstract BjoernValidationError validate(String[] lines, int index);
 
 }

@@ -26,7 +26,7 @@ public class BjoernValidator {
     private List<BjoernValidationError> validateLines(String[] lines, List<BjoernValidationError> validationErrors) {
         for (int i = 0; i < lines.length; i++) {
             for (BjoernValidations bjoernValidation : BjoernValidations.values()){
-                validationErrors = bjoernValidation.validate(lines,i,validationErrors);
+                validationErrors = bjoernValidation.validateLine(lines,i,validationErrors);
             }
         }
         return validationErrors;
