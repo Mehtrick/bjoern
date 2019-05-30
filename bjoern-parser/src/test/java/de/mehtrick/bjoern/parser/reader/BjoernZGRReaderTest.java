@@ -1,10 +1,10 @@
 package de.mehtrick.bjoern.parser.reader;
 
+import de.mehtrick.bjoern.parser.validator.BjoernValidatorException;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.assertThat;
-import java.io.FileNotFoundException;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 public class BjoernZGRReaderTest {
 
@@ -30,7 +30,7 @@ public class BjoernZGRReaderTest {
         }
     }
 
-    @Test
+    @Test(expected = BjoernValidatorException.class)
     public void notValidBjoernFormat(){
         BjoernZGRReader.readSpec("src/test/resources/broken.zgr");
     }
