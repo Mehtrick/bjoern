@@ -22,8 +22,8 @@ public class BjoernValidatorTest {
     public void testInvalidKeyword() {
         //GIVEN THEN
         exception.expect(BjoernValidatorException.class);
-        exception.expectMessage("\r\n\tValidationError at line 1: The line starts with an invalid Keyword. Found \"  WrongKeyword     \". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
-        exception.expectMessage("\r\n\tValidationError at line 3: The line starts with an invalid Keyword. Found \" anotherWrongOne\". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
+        exception.expectMessage("ValidationError at line 1: The line starts with an invalid Keyword. Found \"  WrongKeyword     \". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
+        exception.expectMessage("ValidationError at line 3: The line starts with an invalid Keyword. Found \" anotherWrongOne\". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
         //WHEN
         bjoernValidator.validate("  WrongKeyword     \r\n      \r\n anotherWrongOne", "defaultpath");
     }
@@ -40,7 +40,7 @@ public class BjoernValidatorTest {
     public void testWrongStartingKeyword() {
         //GIVEN THEN
         exception.expect(BjoernValidatorException.class);
-        exception.expectMessage("\r\n\tValidationError at line 1: A bjoern file must start with the Keyword \"Feature:\", but starts with \"  FeATure     \". Please remove any indentation. This check is case-sensitive!");
+        exception.expectMessage("ValidationError at line 1: A bjoern file must start with the Keyword \"Feature:\", but starts with \"  FeATure     \". Please remove any indentation. This check is case-sensitive!");
 
         //WHEN
         bjoernValidator.validate("  FeATure     \r\n      \r\nScenarios:", "default");
