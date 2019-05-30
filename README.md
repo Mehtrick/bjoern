@@ -186,6 +186,7 @@ The Developer now has to implement the missing methods. In one feature class the
 ### Bjoern Parser
 
 The parser project reads the bjoern file and parses it to java-classes using mainly jackson. It does not just convert it to pojos but reads things like parameters from the statements.
+The Parse also contains a ```validator``` which helps you with the correct syntax. Keep in mind, that this might catch not all the exceptions, so you might get some jackson-mapping-exceptions as well.
 
 ### Bjoern Generator
 
