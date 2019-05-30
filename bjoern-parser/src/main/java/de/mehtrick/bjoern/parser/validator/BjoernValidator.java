@@ -1,5 +1,6 @@
 package de.mehtrick.bjoern.parser.validator;
 
+import de.mehtrick.bjoern.parser.validator.validations.BjoernValidations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

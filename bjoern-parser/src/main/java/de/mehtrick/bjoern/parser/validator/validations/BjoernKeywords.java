@@ -1,4 +1,4 @@
-package de.mehtrick.bjoern.parser.validator;
+package de.mehtrick.bjoern.parser.validator.validations;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +8,7 @@ public enum BjoernKeywords {
 
     GIVEN("Given:"), WHEN("When:"), THEN("Then:"), BACKGROUND("Background:"), FEATURE("Feature:"), SCENARIO("- Scenario:"), SCENARIOS("Scenarios:"), STATEMENT("-");
 
-    protected String keyword;
+    public String keyword;
 
     BjoernKeywords(String keyword) {
         this.keyword = keyword;
