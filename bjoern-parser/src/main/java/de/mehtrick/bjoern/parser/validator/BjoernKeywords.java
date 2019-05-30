@@ -21,4 +21,9 @@ public enum BjoernKeywords {
     public static String getKeywordsAsSingleString() {
         return BjoernKeywords.getKeywordValues().stream().collect(Collectors.joining(","));
     }
+
+    @Override
+    public String toString() {
+        return keyword;
+    }
 }
