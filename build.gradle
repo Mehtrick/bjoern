@@ -1,4 +1,12 @@
 buildscript {
+    ext{
+        if (!project.hasProperty("ossrhUsername")) {
+            ossrhUsername = ""
+        }
+        if (!project.hasProperty("ossrhPassword")) {
+            ossrhPassword = ""
+        }
+    }
     repositories {
         jcenter()
     }
