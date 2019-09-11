@@ -1,22 +1,9 @@
 buildscript {
- 	ext{
-        if (!project.hasProperty("nexusUser")) {
-            nexusUser = ""
-        }
-        if (!project.hasProperty("nexusPW")) {
-            nexusPW = ""
-        }
-        nexusUsername = "${nexusUser}"
-        nexusPassword = "${nexusPW}"
-        publishRepo = "release"
-        nexusBasePath = "https://nexus.ppvoting.de"
-    }
     repositories {
         jcenter()
     }
     dependencies {
         classpath "com.kageiit:url-cache-plugin:1.0.0"
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
     }
 }
 
@@ -27,7 +14,7 @@ allprojects{
     apply plugin: 'eclipse'
     apply plugin: 'com.kageiit.url-cache'
     apply plugin: 'maven'
-    //apply plugin: 'signing'
+    apply plugin: 'signing'
     repositories {
         jcenter()
         maven{
@@ -39,7 +26,7 @@ allprojects{
 
 
 subprojects {
-    version = '1.0.4'
+
     dependencies {
         implementation 'org.apache.commons:commons-lang3:3.7'
         implementation 'commons-io:commons-io:2.6'
@@ -68,9 +55,13 @@ subprojects {
         archives javadocJar, sourcesJar
     }
 
-    /*signing {
+    signing {
         sign configurations.archives
     }
+
+    version = '1.0.4'
+    group = "de.mehtrick"
+    archivesBaseName = "bjoern"
 
     uploadArchives {
         repositories {
@@ -78,11 +69,11 @@ subprojects {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
-                    authentication(userName: nexusUsername, password: nexusPassword)
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
 
                 snapshotRepository(url: " https://oss.sonatype.org/content/repositories/snapshots") {
-                    authentication(userName: nexusUsername, password: nexusPassword)
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
 
                 pom.project {
@@ -113,7 +104,7 @@ subprojects {
                 }
             }
         }
-    }*/
+    }
 
 }
 
