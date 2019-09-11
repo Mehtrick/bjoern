@@ -1,12 +1,10 @@
 buildscript {
     repositories {
         jcenter()
-        maven{
-    	    url = "https://nexus.ppvoting.de/content/repositories/release/"
-        }
+    mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.0.4'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.0.5'
     }
 }
 

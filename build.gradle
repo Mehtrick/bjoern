@@ -17,7 +17,7 @@ buildscript {
 
 
 allprojects{
-    group = 'de.mehtrick.bjoern'
+    group = 'de.mehtrick'
     apply plugin: 'java-library'
     apply plugin: 'eclipse'
     apply plugin: 'com.kageiit.url-cache'
@@ -25,9 +25,6 @@ allprojects{
     apply plugin: 'signing'
     repositories {
         jcenter()
-        maven{
-    	    url = "https://nexus.ppvoting.de/content/repositories/release/"
-        }
     }
     compileJava.options.encoding = 'UTF-8'
 }
@@ -39,15 +36,13 @@ subprojects {
         implementation 'org.apache.commons:commons-lang3:3.7'
         implementation 'commons-io:commons-io:2.6'
         implementation 'org.apache.commons:commons-text:1.4'
-        implementation 'de.mehtrick:umloud:1.0.0'
         implementation 'org.slf4j:slf4j-simple:1.7.26'
-        compileOnly 'org.projectlombok:lombok:1.18.0'
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+        compileOnly 'org.projectlombok:lombok:1.18.8'
 
         testImplementation 'junit:junit:4.12'
         testImplementation 'org.assertj:assertj-core:3.10.0'
     }
-
-    //apply from: "https://bitbucket.org/Mehtrick/gradle-module/raw/0c379000383ebb1578691925f2a9be39698aef9a/backend/publish%2Brelease.gradle"
 
     task javadocJar(type: Jar) {
         classifier = 'javadoc'
@@ -67,7 +62,7 @@ subprojects {
         sign configurations.archives
     }
 
-    version = '1.0.4'
+    version = '1.0.5'
     group = "de.mehtrick"
     archivesBaseName = "bjoern"
 
