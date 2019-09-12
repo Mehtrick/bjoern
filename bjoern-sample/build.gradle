@@ -4,7 +4,7 @@ buildscript {
     mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.0.5'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.0.7'
     }
 }
 
@@ -22,7 +22,8 @@ bjoern{
 dependencies {
         testImplementation 'junit:junit:4.12'
         testImplementation 'org.assertj:assertj-core:3.10.0'
-        compileOnly 'org.projectlombok:lombok:1.18.0'
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+        compileOnly 'org.projectlombok:lombok:1.18.8'
 }
 
 repositories {

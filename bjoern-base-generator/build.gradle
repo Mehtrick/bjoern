@@ -3,6 +3,6 @@ dependencies{
 }
 
 jar {
-	baseName = "bjoern-base-generator"
+	archivesBaseName = "bjoern-base-generator"
 	version = project.version
 }

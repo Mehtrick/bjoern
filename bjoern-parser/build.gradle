@@ -7,6 +7,6 @@ dependencies{
 }
 
 jar {
-	baseName = "bjoern-parser"
+    archivesBaseName = "bjoern-parser"
 	version = project.version
 }

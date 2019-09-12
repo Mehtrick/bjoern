@@ -16,6 +16,6 @@ gradlePlugin {
 }
 
 jar {
-	baseName = "bjoern-gradle-plugin"
+    archivesBaseName = "bjoern-gradle-plugin"
 	version = project.version
 }

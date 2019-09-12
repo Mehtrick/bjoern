@@ -1,11 +1,11 @@
 dependencies{
-    api project(":bjoern-base-generator") 
+    api project(":bjoern-base-generator")
     compile 'org.freemarker:freemarker:2.3.23'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.1'
     testCompile 'junit:junit:4.12'
 }
 
 jar {
-	baseName = "bjoern-doc"
+    archivesBaseName = "bjoern-doc"
 	version = project.version
 }
