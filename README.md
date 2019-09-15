@@ -1,4 +1,4 @@
-# Bjoern [![Build Status](https://travis-ci.org/Mehtrick/bjoern.svg?branch=master)](https://travis-ci.org/Mehtrick/bjoern)
+# Bjoern [![Build Status](https://travis-ci.org/Mehtrick/bjoern.svg?branch=master)](https://travis-ci.org/Mehtrick/bjoern) ![Maven Central](https://img.shields.io/maven-central/v/de.mehtrick/bjoern-gradle-plugin)
 
  **B**ehaviordriven **J**avabased **O**nehundret and ten percent **E**fficient **R**eadable **N**otation
 
