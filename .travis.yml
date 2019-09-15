@@ -1,6 +1,7 @@
 language: java
+install: true
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -12,4 +13,4 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-  - ./gradlew build
+  - ./gradlew build --parallel
