@@ -51,8 +51,8 @@ public enum BjoernValidations {
     /**
      * Validates a line of a bjoernspec. This method needs both the index and all of the lines, because validation can depend on previous lines
      *
-     * @param lines
-     * @param index
+     * @param lines All lines of the spec
+     * @param index to run over every line of the spec
      * @param errors - containing the previous errors
      * @return a list of Error for that specific line
      * @author mehtrick

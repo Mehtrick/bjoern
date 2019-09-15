@@ -1,34 +1,37 @@
 buildscript {
     repositories {
+        mavenCentral()
         jcenter()
-    mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.0.7'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.1.0'
     }
 }
 
-apply plugin: "de.mehtrick.bjoern.gradle-plugin"
+apply plugin: 'de.mehtrick.bjoern.gradle-plugin'
+apply plugin: 'java'
 apply plugin: 'java-library'
-apply plugin: 'eclipse'
 
 bjoern{
-	folder = "${projectDir}/src/test/resources/specification"
+	folder = "${projectDir}/src/test/resources/"
 	pckg ="de.mehtrick.bjoern.sample"
 	gendir = "${projectDir}/src/gen/bjoern/"
-    	docdir = "${projectDir}/src/gen/bjoern/docs"
+   	docdir = "${projectDir}/src/gen/bjoern/docs"
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
 }
 
 dependencies {
         testImplementation 'junit:junit:4.12'
         testImplementation 'org.assertj:assertj-core:3.10.0'
-        annotationProcessor 'org.projectlombok:lombok:1.18.8'
-        compileOnly 'org.projectlombok:lombok:1.18.8'
+        compileOnly 'org.projectlombok:lombok:1.18.10'
+        annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }
 
-repositories {
-	jcenter()
-}
+
 // Added generated classes to classpath
 sourceSets {
     test {

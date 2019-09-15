@@ -19,13 +19,10 @@ As a gradle plugin
 ```gradle
 buildscript {
     repositories {
-        jcenter()
-        maven{
-    	    url = "https://nexus.ppvoting.de/content/repositories/release/"
-        }
+        mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.0.4'
+        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.1.0'
     }
 }
 apply plugin: "de.mehtrick.bjoern.gradle-plugin"
@@ -205,12 +202,6 @@ Project to share base functionality like configuration or file-filter for every 
 Generates documentations based on the bjoern files. It uses apache freemarker as template engine. As default the generator will create asciidoc files. Other formats aren't supported yet. However you can create your own freemarker templates and configure them via gradle
 
 ## How to build
-
-### Eclipse
-
-```gradle
-gradlew cleanEclipse eclipse
-```
 
 ### Build
 
