@@ -1,0 +1,67 @@
+apply plugin: 'signing'
+apply plugin: 'maven'
+
+
+signing {
+    sign configurations.archives
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+version = '1.1.0'
+group = "de.mehtrick"
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: " https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Bjoern Testing Framework'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Simple bdd-java-framework for universal unit testing'
+                url 'https://github.com/Mehtrick/bjoern'
+
+                scm {
+                    connection 'scm:git:https://github.com/Mehtrick/bjoern.git'
+                    url 'https://github.com/Mehtrick/bjoern'
+                }
+
+                licenses {
+                    license {
+                        name 'MIT License'
+                        url 'https://github.com/Mehtrick/bjoern/blob/master/LICENSE'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'mehtrick'
+                        email 'p.lauhof@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
