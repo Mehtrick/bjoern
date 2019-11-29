@@ -25,7 +25,7 @@ buildscript {
         classpath 'de.mehtrick:bjoern-gradle-plugin:1.1.0'
     }
 }
-apply plugin: "de.mehtrick.gradle-plugin"
+apply plugin: "de.mehtrick.bjoern.gradle-plugin"
 ```
 
 you then have to configure the generator in gradle
