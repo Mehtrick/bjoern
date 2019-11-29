@@ -61,8 +61,10 @@ bjoern{
 
 ## Specification
 
-The specification is yaml based. You will find the typical BDD keywords in it
+The specification is yaml based. Bjoern uses the .zgr file extension to determine the specification files. 
+You will find the typical BDD keywords in it
 
+`example.zgr`
 ```yaml
 Feature: Test Foo
 Background:
