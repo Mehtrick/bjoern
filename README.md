@@ -10,7 +10,7 @@ The main focus is to generate java-classes from bdd-style text files to ensure *
 
 The generated classes are **simple** and are designed to be generated **each time**. You **should not** edit the generated files because they will be deleted on every run of the generator.
 
-The generated classes are plain Junit. You cann extend them to define your own runners wich makes it compatible with **spring** or **mockito**.
+The generated classes are plain Junit. You can extend them to define your own runners which makes it compatible with **spring** or **mockito**.
 
 ## How to use
 
@@ -22,10 +22,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick.bjoern:bjoern-gradle-plugin:1.1.0'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.1.0'
     }
 }
-apply plugin: "de.mehtrick.bjoern.gradle-plugin"
+apply plugin: "de.mehtrick.gradle-plugin"
 ```
 
 you then have to configure the generator in gradle
