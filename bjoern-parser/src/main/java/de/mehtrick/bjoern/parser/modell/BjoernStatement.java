@@ -1,5 +1,7 @@
 package de.mehtrick.bjoern.parser.modell;
 
+import de.mehtrick.bjoern.parser.BjoernTextParser;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,22 +10,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import de.mehtrick.bjoern.parser.BjoernTextParser;
-import lombok.Data;
-import lombok.ToString;
-
 /**
  * A more complex extraction of the bjoern-spec statement A statement is part of
  * a given, when or then This class contains the original statement as
  * {@link #primitiveStatement} Also it contains a camelCased
  * {@link #statementWithoutParameters}. The parameters are extracted in a list
  * found in {@link #parameters}
- * 
+ *
  * @author mehtrick
  *
  */
-@Data
-@ToString
 public class BjoernStatement {
 
 	private static final String PARAMETERPATTERN = "\"(.*?)\"";
@@ -47,7 +43,7 @@ public class BjoernStatement {
 
 	private String removeParametersFromStatement(String statement) {
 		try {
-			return Arrays.asList(statement.split(PARAMETERPATTERN)).stream().map(BjoernTextParser::parseText)
+			return Arrays.stream(statement.split(PARAMETERPATTERN)).map(BjoernTextParser::parseText)
 					.collect(Collectors.joining(BjoernTextParser.BLANK_REPLACEMENT));
 		} catch (NullPointerException e) {
 			System.out.println(statement);
@@ -71,4 +67,31 @@ public class BjoernStatement {
 		return statementWithoutParameters.hashCode();
 	}
 
+	public String getPrimitiveStatement() {
+		return this.primitiveStatement;
+	}
+
+	public void setPrimitiveStatement(String primitiveStatement) {
+		this.primitiveStatement = primitiveStatement;
+	}
+
+	public String getStatementWithoutParameters() {
+		return this.statementWithoutParameters;
+	}
+
+	public void setStatementWithoutParameters(String statementWithoutParameters) {
+		this.statementWithoutParameters = statementWithoutParameters;
+	}
+
+	public List<String> getParameters() {
+		return this.parameters;
+	}
+
+	public void setParameters(List<String> parameters) {
+		this.parameters = parameters;
+	}
+
+	public String toString() {
+		return "BjoernStatement(primitiveStatement=" + this.getPrimitiveStatement() + ", statementWithoutParameters=" + this.getStatementWithoutParameters() + ", parameters=" + this.getParameters() + ")";
+	}
 }
