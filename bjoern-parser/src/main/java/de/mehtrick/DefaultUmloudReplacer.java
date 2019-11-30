@@ -7,13 +7,13 @@ class DefaultUmloudReplacer {
 
 	protected static String replace(String string) {
 		Map<String, String> umlaute = new HashMap<>();
-		umlaute.put("�", "ae");
-		umlaute.put("�", "oe");
-		umlaute.put("�", "ue");
-		umlaute.put("�", "ss");
-		umlaute.put("�", "Ae");
-		umlaute.put("�", "Oe");
-		umlaute.put("�", "Ue");
+		umlaute.put("ä", "ae");
+		umlaute.put("ö", "oe");
+		umlaute.put("ü", "ue");
+		umlaute.put("ß", "ss");
+		umlaute.put("Ä", "Ae");
+		umlaute.put("Ö", "Oe");
+		umlaute.put("Ü", "Ue");
 		return StringReplacer.replaceWithValues(string, umlaute);
 	}
 
