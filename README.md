@@ -49,7 +49,7 @@ bjoern{
 
 | Parameter name |required| Description | example |
 |----------------|--------|-------------|---------|
-|path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/bjoern.yml"|
+|path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/bjoern.zgr"|
 |folder|yes (if the path is not set. If both are set folder wins)|The absoulte path to the folder where all specifications are placed|"${projectDir}/src/test/resources"|
 |pckg|yes|The package declaration of the generated classes|"de.mehtrick.bjoern-sample"|
 |gendir|yes|The folder where all of the files will be generated|"${projectDir}/src/test/gen"|
