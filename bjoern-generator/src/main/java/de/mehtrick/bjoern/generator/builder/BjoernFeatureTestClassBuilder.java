@@ -1,20 +1,17 @@
 package de.mehtrick.bjoern.generator.builder;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.lang.model.element.Modifier;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeSpec.Builder;
-
 import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
 import de.mehtrick.bjoern.base.BjoernGeneratorConfigProvided;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.lang.model.element.Modifier;
+import java.util.List;
+import java.util.Set;
 
 public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided{
 
@@ -29,7 +26,7 @@ public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided
 		Builder featureClassBuilder = TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + bjoern.getFeatureNameFormatted())
 				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
 		if (bjoern.getBackground() != null) {
-			MethodSpec background = BjoernBackgroundTestBuilder.build(bjoern.getBackground());
+			MethodSpec background = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), bjoernGeneratorConfig.getJunitVersion());
 			featureClassBuilder.addMethod(background);
 		}
 

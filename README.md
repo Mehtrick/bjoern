@@ -47,17 +47,18 @@ bjoern{
 
 ### List of Parameters
 
-| Parameter name |required| Description | example |
-|----------------|--------|-------------|---------|
-|path|yes (if the folder is not set)|The absoulte path to your specification|"${projectDir}/src/test/resources/bjoern.zgr"|
-|folder|yes (if the path is not set. If both are set folder wins)|The absoulte path to the folder where all specifications are placed|"${projectDir}/src/test/resources"|
-|pckg|yes|The package declaration of the generated classes|"de.mehtrick.bjoern-sample"|
-|gendir|yes|The folder where all of the files will be generated|"${projectDir}/src/test/gen"|
-|extendedTestClass|no|Fully qualified Name of class which all of the generated files will extend|"de.mehtrick.AbstractTestClass"|
-|docdir|no(only when generating Docs)|The folder where all the documentations will be generated|"${projectDir}/src/test/resources"|
-|template|no|Name of the freemarker Templatefile that will be loaded during generation. Default is an asciidoc template, which is part of the classpath|"/asciidoc.ftlh"|
-|templatefolder|no|The folder where selfwritten freemarker templates for documentationgeneration can be placed|"${projectDir}/src/main/resources/templates"|
-|docExtension|no|The extension of the generated Doc Files. Default is adoc|"adoc"|
+| Parameter name |required| Description |Default value| example |
+|----------------|--------|-------------|---------|---------|
+|path|yes (if the folder is not set)|The absoulte path to your specification||"${projectDir}/src/test/resources/bjoern.zgr"|
+|folder|yes (if the path is not set. If both are set folder wins)|The absoulte path to the folder where all specifications are placed||"${projectDir}/src/test/resources"|
+|pckg|yes|The package declaration of the generated classes||"de.mehtrick.bjoern-sample"|
+|gendir|yes|The folder where all of the files will be generated||"${projectDir}/src/test/gen"|
+|extendedTestClass|no|Fully qualified Name of class which all of the generated files will extend||"de.mehtrick.AbstractTestClass"|
+|docdir|no(only when generating Docs)|The folder where all the documentations will be generated||"${projectDir}/src/test/resources"|
+|template|no|Name of the freemarker Templatefile that will be loaded during generation. Default is an asciidoc template, which is part of the classpath|"/asciidoc.ftlh"|"/asciidoc.ftlh"|
+|templatefolder|no|The folder where selfwritten freemarker templates for documentationgeneration can be placed|By default the internal bjoern templates will be used|"${projectDir}/src/main/resources/templates"|
+|docExtension|no|The extension of the generated Doc Files.|"adoc"|"adoc"|
+|junitVerion|no|The used junit-version. Possible values are 4 or 5. The value changes the used junit annotations, to secure the correct test functionality|"4"|"5"|
 
 ## Specification
 
