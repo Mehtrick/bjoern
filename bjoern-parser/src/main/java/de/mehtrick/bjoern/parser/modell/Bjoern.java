@@ -1,14 +1,10 @@
 package de.mehtrick.bjoern.parser.modell;
 
+import de.mehtrick.bjoern.parser.BjoernTextParser;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.mehtrick.bjoern.parser.BjoernTextParser;
-import lombok.Data;
-import lombok.ToString;
-
-@Data
-@ToString
 public class Bjoern {
 	private String feature;
 	private BjoernBackground background;
@@ -28,4 +24,40 @@ public class Bjoern {
 		return BjoernTextParser.parseText(getFeature());
 	}
 
+	public String getFeature() {
+		return this.feature;
+	}
+
+	public void setFeature(String feature) {
+		this.feature = feature;
+	}
+
+	public BjoernBackground getBackground() {
+		return this.background;
+	}
+
+	public void setBackground(BjoernBackground background) {
+		this.background = background;
+	}
+
+	public List<BjoernScenario> getScenarios() {
+		return this.scenarios;
+	}
+
+	public void setScenarios(List<BjoernScenario> scenarios) {
+		this.scenarios = scenarios;
+	}
+
+	public String getFilePath() {
+		return this.filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+
+	public String toString() {
+		return "Bjoern(feature=" + this.getFeature() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
+	}
 }

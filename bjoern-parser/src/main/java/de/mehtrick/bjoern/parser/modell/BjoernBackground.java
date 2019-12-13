@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
 public class BjoernBackground {
 
 	private List<BjoernStatement> given = new ArrayList<>();
@@ -19,6 +14,9 @@ public class BjoernBackground {
 		// then = parseStatements(bjoernZGRScenario.getThen(), BDDKeyword.THEN);
 	}
 
+	public BjoernBackground() {
+	}
+
 	protected List<BjoernStatement> parseStatements(List<String> zgrStatementList, BDDKeyword keyword) {
 		if (zgrStatementList != null) {
 			return zgrStatementList.stream().map(s -> new BjoernStatement(s, keyword)).collect(Collectors.toList());
@@ -27,4 +25,23 @@ public class BjoernBackground {
 		}
 	}
 
+	public List<BjoernStatement> getGiven() {
+		return this.given;
+	}
+
+	public void setGiven(List<BjoernStatement> given) {
+		this.given = given;
+	}
+
+	public List<BjoernStatement> getThen() {
+		return this.then;
+	}
+
+	public void setThen(List<BjoernStatement> then) {
+		this.then = then;
+	}
+
+	public String toString() {
+		return "BjoernBackground(given=" + this.getGiven() + ", then=" + this.getThen() + ")";
+	}
 }

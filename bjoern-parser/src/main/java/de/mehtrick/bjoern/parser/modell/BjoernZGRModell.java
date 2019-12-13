@@ -1,22 +1,19 @@
 
 package de.mehtrick.bjoern.parser.modell;
 
-import java.io.Serializable;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import lombok.ToString;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Representation of the bjoern spec file as a pojo
- * 
+ *
  * @author mehtrick
  *
  */
-@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "Feature", "Scenarios" })
 public class BjoernZGRModell implements Serializable {
@@ -61,4 +58,7 @@ public class BjoernZGRModell implements Serializable {
 		this.background = background;
 	}
 
+	public String toString() {
+		return "BjoernZGRModell(feature=" + this.getFeature() + ", background=" + this.getBackground() + ", bjoernZGRScenarios=" + this.bjoernZGRScenarios + ")";
+	}
 }

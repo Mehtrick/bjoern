@@ -1,20 +1,20 @@
 package de.mehtrick.bjoern.parser.modell;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import lombok.Data;
+import java.util.List;
 
-@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Given" })
+@JsonPropertyOrder({"Given"})
 public class BjoernZGRBackground {
 
 	@JsonProperty("Given")
 	private List<String> given = null;
+
+	public BjoernZGRBackground() {
+	}
 
 	@JsonProperty("Given")
 	public List<String> getGiven() {
@@ -26,4 +26,8 @@ public class BjoernZGRBackground {
 		this.given = given;
 	}
 
+
+	public String toString() {
+		return "BjoernZGRBackground(given=" + this.getGiven() + ")";
+	}
 }
