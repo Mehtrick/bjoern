@@ -11,6 +11,7 @@ public class BjoernGeneratorExtension {
 	private String template;
 	private String templateFolder;
 	private String docExtension;
+	private String junitVersion;
 
 	public BjoernGeneratorExtension() {
 	}
@@ -87,7 +88,27 @@ public class BjoernGeneratorExtension {
 		this.docExtension = docExtension;
 	}
 
+	public String getJunitVersion() {
+		return junitVersion;
+	}
+
+	public void setJunitVersion(String junitVersion) {
+		this.junitVersion = junitVersion;
+	}
+
+	@Override
 	public String toString() {
-		return "BjoernGeneratorExtension(path=" + this.getPath() + ", folder=" + this.getFolder() + ", pckg=" + this.getPckg() + ", gendir=" + this.getGendir() + ", extendedTestClass=" + this.getExtendedTestClass() + ", docdir=" + this.getDocdir() + ", template=" + this.getTemplate() + ", templateFolder=" + this.getTemplateFolder() + ", docExtension=" + this.getDocExtension() + ")";
+		return "BjoernGeneratorExtension{" +
+				"path='" + path + '\'' +
+				", folder='" + folder + '\'' +
+				", pckg='" + pckg + '\'' +
+				", gendir='" + gendir + '\'' +
+				", extendedTestClass='" + extendedTestClass + '\'' +
+				", docdir='" + docdir + '\'' +
+				", template='" + template + '\'' +
+				", templateFolder='" + templateFolder + '\'' +
+				", docExtension='" + docExtension + '\'' +
+				", junitVersion='" + junitVersion + '\'' +
+				'}';
 	}
 }

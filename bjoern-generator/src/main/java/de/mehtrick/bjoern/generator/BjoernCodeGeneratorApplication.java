@@ -1,18 +1,14 @@
 package de.mehtrick.bjoern.generator;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-
+import de.mehtrick.bjoern.base.*;
+import de.mehtrick.bjoern.parser.BjoernParser;
+import de.mehtrick.bjoern.parser.modell.Bjoern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import de.mehtrick.bjoern.base.AbstractBjoernGenerator;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
-import de.mehtrick.bjoern.base.BjoernGeneratorException;
-import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
-import de.mehtrick.bjoern.parser.BjoernParser;
-import de.mehtrick.bjoern.parser.modell.Bjoern;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 
@@ -21,7 +17,7 @@ public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 		super(bjoernGeneratorConfig);
 	}
 
-	public static void main(String[] args) throws BjoernMissingPropertyException, IOException {
+	public static void main(String[] args) throws BjoernMissingPropertyException, IOException, NotSupportedJunitVersionException {
 		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(args);
 		new BjoernCodeGeneratorApplication(bjoernGeneratorConfig).generateBjoernClasses();
 	}
