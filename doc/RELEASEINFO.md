@@ -12,14 +12,17 @@ ossrhPassword=
 
 ```
 
-
 * to create signing key
 ```bash
 gpg --gen-key
-gpg --list-keys --keyid-format short  <--- the 8char long id is needed in gradle.properties
+gpg --list-keys --keyid-format short  <--- the 8char long id is needed in gradle.properties. pub rsa3072/<id>
 gpg --export-secret-keys -o secring.gpg   <--- path to this file is needed in gradle.properties
 ```
 
+set publishing property
+```
+publishing=true
+``
 
 * upload to maven
 

@@ -22,7 +22,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.1.0'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.0'
     }
 }
 apply plugin: "de.mehtrick.bjoern.gradle-plugin"
