@@ -49,7 +49,7 @@ public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 
 	private void generateSingleBjoern(String path) {
 		try {
-			Bjoern bjoern = BjoernParser.parseSpec(path);
+			Bjoern bjoern = new BjoernParser().parseSpec(path, bjoernGeneratorConfig.getEncoding());
 			new BjoernCodeGenerator(bjoernGeneratorConfig).generate(bjoern);
 		} catch (Throwable e) {
 			throw new BjoernGeneratorException(path, e);

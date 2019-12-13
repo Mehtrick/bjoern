@@ -59,6 +59,7 @@ bjoern{
 |templatefolder|no|The folder where selfwritten freemarker templates for documentationgeneration can be placed|By default the internal bjoern templates will be used|"${projectDir}/src/main/resources/templates"|
 |docExtension|no|The extension of the generated Doc Files.|"adoc"|"adoc"|
 |junitVerion|no|The used junit-version. Possible values are 4 or 5. The value changes the used junit annotations, to secure the correct test functionality|"4"|"5"|
+|encoding|no|The encoding used for the spec files. **This Encoding ist not used for the generated java files**. Bjoern uses [java poet](https://github.com/square/javapoet) which only generates UTF-8 files.|"UTF-8"|"UTF-16"|
 
 ## Specification
 

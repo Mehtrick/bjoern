@@ -17,6 +17,7 @@ public class BjoernGeneratorTask extends DefaultTask {
 		bjoernGeneratorConfig.setPckg(extension.getPckg());
 		bjoernGeneratorConfig.setExtendedTestclass(extension.getExtendedTestClass());
 		bjoernGeneratorConfig.setJunitVersion(extension.getJunitVersion());
+		bjoernGeneratorConfig.setEncoding(extension.getEncoding());
 		new BjoernCodeGeneratorApplication(bjoernGeneratorConfig).generateBjoernClasses();
 
 	}

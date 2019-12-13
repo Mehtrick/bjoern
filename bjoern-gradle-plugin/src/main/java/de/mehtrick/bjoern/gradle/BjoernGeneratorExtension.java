@@ -12,6 +12,7 @@ public class BjoernGeneratorExtension {
 	private String templateFolder;
 	private String docExtension;
 	private String junitVersion;
+	private String encoding;
 
 	public BjoernGeneratorExtension() {
 	}
@@ -109,6 +110,15 @@ public class BjoernGeneratorExtension {
 				", templateFolder='" + templateFolder + '\'' +
 				", docExtension='" + docExtension + '\'' +
 				", junitVersion='" + junitVersion + '\'' +
+				", encoding='" + encoding + '\'' +
 				'}';
+	}
+
+	public String getEncoding() {
+		return encoding;
+	}
+
+	public void setEncoding(String encoding) {
+		this.encoding = encoding;
 	}
 }
