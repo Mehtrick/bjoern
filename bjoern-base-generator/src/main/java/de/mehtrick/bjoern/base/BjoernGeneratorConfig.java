@@ -4,9 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class BjoernGeneratorConfig {
 
@@ -20,6 +23,7 @@ public class BjoernGeneratorConfig {
 	private final String PROPERTY_TEMPLATE_FOLDER = "templateFolder";
 	private final String PROPERTY_DOC_EXTENSION = "docExtension";
 	private final String PROPERTY_JUNIT_VERSION = "junitVersion";
+	private final String PROPERTY_ENCODING = "encoding";
 	private String path;
 	private String folder;
 
@@ -31,6 +35,7 @@ public class BjoernGeneratorConfig {
 	private String templateFolder;
 	private String docExtension = "adoc";
 	private SupportedJunitVersion junitVersion = SupportedJunitVersion.junit4;
+	private Charset encoding = UTF_8;
 
 	public BjoernGeneratorConfig() {
 
@@ -47,6 +52,7 @@ public class BjoernGeneratorConfig {
 		setTemplateFolder(findPropertyInArgs(PROPERTY_TEMPLATE_FOLDER, args));
 		setDocExtension(findPropertyInArgs(PROPERTY_DOC_EXTENSION, args));
 		setJunitVersion(findPropertyInArgs(PROPERTY_JUNIT_VERSION, args));
+		setEncoding(findPropertyInArgs(PROPERTY_ENCODING, args));
 	}
 
 	public void validate() throws BjoernMissingPropertyException {
@@ -70,7 +76,9 @@ public class BjoernGeneratorConfig {
 	}
 
 	public void setJunitVersion(String junitVersion) throws NotSupportedJunitVersionException {
-		this.junitVersion = SupportedJunitVersion.getByVersionnumber(junitVersion);
+		if (StringUtils.isNotBlank(junitVersion)) {
+			this.junitVersion = SupportedJunitVersion.getByVersionnumber(junitVersion);
+		}
 	}
 
 	public boolean isFoldersSet() {
@@ -154,6 +162,17 @@ public class BjoernGeneratorConfig {
 	public void setTemplateFolder(String templateFolder) {
 		this.templateFolder = templateFolder;
 	}
+
+	public Charset getEncoding() {
+		return encoding;
+	}
+
+	public void setEncoding(String encoding) {
+		if (StringUtils.isNotBlank(encoding)) {
+			this.encoding = Charset.forName(encoding);
+		}
+	}
+
 
 	/**
 	 * Currently Junit 4 and 5 in the latest Versions are supported

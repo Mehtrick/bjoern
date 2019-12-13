@@ -1,17 +1,13 @@
 package de.mehtrick.bjoern.doc;
 
+import de.mehtrick.bjoern.base.*;
+import de.mehtrick.bjoern.parser.BjoernParser;
+import de.mehtrick.bjoern.parser.modell.Bjoern;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-
-import org.apache.commons.lang3.StringUtils;
-
-import de.mehtrick.bjoern.base.AbstractBjoernGenerator;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
-import de.mehtrick.bjoern.base.BjoernGeneratorException;
-import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
-import de.mehtrick.bjoern.parser.BjoernParser;
-import de.mehtrick.bjoern.parser.modell.Bjoern;
 
 public class BjoernDocApplication extends AbstractBjoernGenerator {
 
@@ -19,7 +15,7 @@ public class BjoernDocApplication extends AbstractBjoernGenerator {
 		super(bjoernGeneratorConfig);
 	}
 
-	public static void main(String[] args) throws BjoernMissingPropertyException, FileNotFoundException {
+	public static void main(String[] args) throws BjoernMissingPropertyException, FileNotFoundException, NotSupportedJunitVersionException {
 		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(args);
 		new BjoernDocApplication(bjoernGeneratorConfig).generateBjoernDocs();
 	}
@@ -39,7 +35,7 @@ public class BjoernDocApplication extends AbstractBjoernGenerator {
 
 	private void generateSingleBjoernDocs(String path, BjoernGeneratorConfig bjoernGeneratorConfig) {
 		try {
-			Bjoern bjoern = BjoernParser.parseSpec(path);
+			Bjoern bjoern = new BjoernParser().parseSpec(path, bjoernGeneratorConfig.getEncoding());
 			new BjoernDocGenerator(bjoernGeneratorConfig).generate(bjoern);
 		} catch (Throwable e) {
 			throw new BjoernGeneratorException(path, e);
