@@ -35,7 +35,7 @@ public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 		cleanGenDir(file);
 		if (bjoernGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(bjoernGeneratorConfig.getFolder());
-			Arrays.asList(files).forEach(f -> generateSingleBjoern(f.getPath()));
+			Arrays.asList(files).parallelStream().forEach(f -> generateSingleBjoern(f.getPath()));
 		} else {
 			generateSingleBjoern(bjoernGeneratorConfig.getPath());
 		}
