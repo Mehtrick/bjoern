@@ -5,11 +5,10 @@
 ```groovy
 signing.keyId=id
 signing.password=password
-signing.secretKeyRingFile=path to secring file
-
+signing.secretKeyRingFile=
 ossrhUsername=
 ossrhPassword=
-
+publishing=true
 ```
 
 * to create signing key
@@ -19,10 +18,11 @@ gpg --list-keys --keyid-format short  <--- the 8char long id is needed in gradle
 gpg --export-secret-keys -o secring.gpg   <--- path to this file is needed in gradle.properties
 ```
 
-set publishing property
+* publish gpg key
+```bash
+gpg --keyserver hkp://pool.sks-keyservers.net --send-keys s 1D28A718
+
 ```
-publishing=true
-``
 
 * upload to maven
 

@@ -27,7 +27,7 @@ public class BjoernDocApplication extends AbstractBjoernGenerator {
 		}
 		if (bjoernGeneratorConfig.isFoldersSet()) {
 			File[] files = getFilesFromFolder(bjoernGeneratorConfig.getFolder());
-			Arrays.asList(files).forEach(f -> generateSingleBjoernDocs(f.getPath(),bjoernGeneratorConfig));
+			Arrays.asList(files).parallelStream().forEach(f -> generateSingleBjoernDocs(f.getPath(),bjoernGeneratorConfig));
 		} else {
 			generateSingleBjoernDocs(bjoernGeneratorConfig.getPath(),bjoernGeneratorConfig);
 		}
