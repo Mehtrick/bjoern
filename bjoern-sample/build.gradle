@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.0'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.1'
     }
 }
 
@@ -40,3 +40,5 @@ sourceSets {
         }
     }
  }
+
+compileTestJava.dependsOn bjoernGen
