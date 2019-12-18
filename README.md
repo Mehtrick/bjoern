@@ -64,7 +64,7 @@ bjoern{
 ## Specification
 
 The specification is yaml based. Bjoern uses the .zgr file extension to determine the specification files. 
-You will find the typical BDD keywords in it
+You will find the typical BDD keywords in it. For more convenience there is a [VS-Code plugin](https://marketplace.visualstudio.com/items?itemName=mehtrick.bjoern#review-details) which greatly improves the usability of the specs. 
 
 `example.zgr`
 ```yaml
