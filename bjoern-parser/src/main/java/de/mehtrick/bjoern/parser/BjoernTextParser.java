@@ -1,10 +1,10 @@
 package de.mehtrick.bjoern.parser;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.WordUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class BjoernTextParser {
 
@@ -14,6 +14,12 @@ public class BjoernTextParser {
 		return WordUtils.capitalizeFully(text).trim().replaceAll(" ", BLANK_REPLACEMENT);
 	}
 
+	/**
+	 * Some characters are invalid in java class or method names, so they need to be assimilated
+	 *
+	 * @param formattedName
+	 * @return
+	 */
 	private static String removeInvalidChars(String formattedName) {
 		List<String> removeChars = Arrays.asList("(", ")", ".", ",", "-", "_", ":", "=", "+");
 		for (String removeChar : removeChars) {

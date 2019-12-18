@@ -1,4 +1,4 @@
-package de.mehtrick;
+package de.mehtrick.bjoern.parser.replacer;
 
 import java.util.HashMap;
 import java.util.Map;

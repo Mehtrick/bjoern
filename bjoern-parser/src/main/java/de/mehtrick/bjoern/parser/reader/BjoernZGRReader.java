@@ -2,8 +2,8 @@ package de.mehtrick.bjoern.parser.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import de.mehtrick.UmloudReplacer;
 import de.mehtrick.bjoern.parser.modell.BjoernZGRModell;
+import de.mehtrick.bjoern.parser.replacer.UmloudReplacer;
 import de.mehtrick.bjoern.parser.validator.BjoernValidator;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;

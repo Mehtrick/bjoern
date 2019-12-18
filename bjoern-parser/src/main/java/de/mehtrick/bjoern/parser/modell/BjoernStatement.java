@@ -12,18 +12,20 @@ import java.util.stream.Collectors;
 
 /**
  * A more complex extraction of the bjoern-spec statement A statement is part of
- * a given, when or then This class contains the original statement as
+ * a given, when or then. This class contains the original statement as
  * {@link #primitiveStatement} Also it contains a camelCased
  * {@link #statementWithoutParameters}. The parameters are extracted in a list
  * found in {@link #parameters}
  *
  * @author mehtrick
- *
  */
 public class BjoernStatement {
 
 	private static final String PARAMETERPATTERN = "\"(.*?)\"";
 	private String primitiveStatement;
+	/**
+	 * camelCased statement without the parameter in the double qoutes
+	 */
 	private String statementWithoutParameters;
 	private List<String> parameters = new ArrayList<>();
 

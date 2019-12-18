@@ -1,36 +1,38 @@
 package de.mehtrick.bjoern.generator;
 
-import de.mehtrick.bjoern.base.*;
+import de.mehtrick.bjoern.base.AbstractBjoernGenerator;
+import de.mehtrick.bjoern.base.BjoernGeneratorException;
+import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
+import de.mehtrick.bjoern.base.NotSupportedJunitVersionException;
 import de.mehtrick.bjoern.parser.BjoernParser;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Main class to generate java-test based on bjoern files
+ */
 public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 
-
-	public BjoernCodeGeneratorApplication(BjoernGeneratorConfig bjoernGeneratorConfig) {
+	/**
+	 * Creates a new CodeGenerator Instance and validates the configuration.
+	 *
+	 * @param bjoernGeneratorConfig
+	 * @throws BjoernMissingPropertyException
+	 */
+	public BjoernCodeGeneratorApplication(BjoernCodeGeneratorConfig bjoernGeneratorConfig) throws BjoernMissingPropertyException {
 		super(bjoernGeneratorConfig);
 	}
 
 	public static void main(String[] args) throws BjoernMissingPropertyException, IOException, NotSupportedJunitVersionException {
-		BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(args);
+		BjoernCodeGeneratorConfig bjoernGeneratorConfig = new BjoernCodeGeneratorConfig(args);
 		new BjoernCodeGeneratorApplication(bjoernGeneratorConfig).generateBjoernClasses();
 	}
 
-	public void generateBjoernClasses() throws BjoernMissingPropertyException, IOException {
-		bjoernGeneratorConfig.validate();
-		if (StringUtils.isAllBlank(bjoernGeneratorConfig.getPckg())) {
-			throw new BjoernMissingPropertyException(
-					"Please configure the package name by setting the \"pckg\" property");
-		}
-		if (StringUtils.isAllBlank(bjoernGeneratorConfig.getGendir())) {
-			throw new BjoernMissingPropertyException("Please configure the gendir where the classes will be generated");
-		}
+	public void generateBjoernClasses() throws IOException {
 		File file = new File(bjoernGeneratorConfig.getGendir());
 		cleanGenDir(file);
 		if (bjoernGeneratorConfig.isFoldersSet()) {
@@ -50,7 +52,7 @@ public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 	private void generateSingleBjoern(String path) {
 		try {
 			Bjoern bjoern = new BjoernParser().parseSpec(path, bjoernGeneratorConfig.getEncoding());
-			new BjoernCodeGenerator(bjoernGeneratorConfig).generate(bjoern);
+			new BjoernCodeGenerator(bjoernGeneratorConfig).generateAndWriteToSystem(bjoern);
 		} catch (Throwable e) {
 			throw new BjoernGeneratorException(path, e);
 		}

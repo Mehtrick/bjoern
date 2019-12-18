@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+/**
+ * Config class for all bjoern generators.
+ */
 public class BjoernGeneratorConfig {
 
 	private final String PROPERTY_PACKAGE = "package";
@@ -38,9 +41,15 @@ public class BjoernGeneratorConfig {
 	private Charset encoding = UTF_8;
 
 	public BjoernGeneratorConfig() {
-
 	}
 
+	/**
+	 * This methods accepts the cli arguments and parses the values to the correct property
+	 *
+	 * @param args
+	 * @throws NotSupportedJunitVersionException
+	 * @throws BjoernMissingPropertyException
+	 */
 	public BjoernGeneratorConfig(String[] args) throws NotSupportedJunitVersionException {
 		setPath(findPropertyInArgs(PROPERTY_PATH, args));
 		setFolder(findPropertyInArgs(PROPERTY_FOLDER, args));
@@ -175,7 +184,8 @@ public class BjoernGeneratorConfig {
 
 
 	/**
-	 * Currently Junit 4 and 5 in the latest Versions are supported
+	 * Enum to check the supported junitVersions
+	 * Currently version 4 and 5 are supported
 	 */
 	public enum SupportedJunitVersion {
 		junit4(4, org.junit.Test.class, Before.class), junit5(5, org.junit.jupiter.api.Test.class, BeforeEach.class);

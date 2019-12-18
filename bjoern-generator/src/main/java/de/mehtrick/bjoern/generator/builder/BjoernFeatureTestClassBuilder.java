@@ -13,34 +13,43 @@ import javax.lang.model.element.Modifier;
 import java.util.List;
 import java.util.Set;
 
-public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided{
+/**
+ * The feature contains the tests as well the abstract test methods used in the test
+ */
+public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided {
 
-	private final String ABSTRACT_CLASS_PREFIX = "Abstract";
 
-	public BjoernFeatureTestClassBuilder(BjoernGeneratorConfig bjoernGeneratorConfig) {
-		super(bjoernGeneratorConfig);
-	}
+    public BjoernFeatureTestClassBuilder(BjoernGeneratorConfig bjoernGeneratorConfig) {
+        super(bjoernGeneratorConfig);
+    }
 
-	public TypeSpec build(Bjoern bjoern, List<MethodSpec> scenarios, Set<MethodSpec> abstractMethods) {
+    /**
+     * Creates the test class containing the test methods, backgrounds and the abstract test methods, which need to be implemented by the developer
+     *
+     * @param bjoern
+     * @param scenarios
+     * @param abstractMethods
+     * @return
+     */
+    public TypeSpec build(Bjoern bjoern, List<MethodSpec> scenarios, Set<MethodSpec> abstractMethods) {
+        Builder featureClassBuilder = TypeSpec.classBuilder(Modifier.ABSTRACT + bjoern.getFeatureNameFormatted())
+                .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
+        if (bjoern.getBackground() != null) {
+            MethodSpec background = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), bjoernGeneratorConfig.getJunitVersion());
+            featureClassBuilder.addMethod(background);
+        }
 
-		Builder featureClassBuilder = TypeSpec.classBuilder(ABSTRACT_CLASS_PREFIX + bjoern.getFeatureNameFormatted())
-				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
-		if (bjoern.getBackground() != null) {
-			MethodSpec background = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), bjoernGeneratorConfig.getJunitVersion());
-			featureClassBuilder.addMethod(background);
-		}
+        featureClassBuilder.addMethods(scenarios).addMethods(abstractMethods).addJavadoc(bjoern.getFeature());
 
-		featureClassBuilder.addMethods(scenarios).addMethods(abstractMethods).addJavadoc(bjoern.getFeature());
+        if (StringUtils.isNotBlank(bjoernGeneratorConfig.getExtendedTestclass())) {
+            String className = StringUtils.substringAfterLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
+            String packageName = StringUtils.substringBeforeLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
 
-		if (StringUtils.isNotBlank(bjoernGeneratorConfig.getExtendedTestclass())) {
-			String className = StringUtils.substringAfterLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
-			String packageName = StringUtils.substringBeforeLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
+            ClassName superClass = ClassName.get(packageName, className);
 
-			ClassName superClass = ClassName.get(packageName, className);
-
-			featureClassBuilder.superclass(superClass);
-		}
-		return featureClassBuilder.build();
-	}
+            featureClassBuilder.superclass(superClass);
+        }
+        return featureClassBuilder.build();
+    }
 
 }

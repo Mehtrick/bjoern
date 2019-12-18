@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A Scenario contains of - a name which describes it - and a list of BjoernStatement
+ * A Scenario contains of - a name which describes it - and a list of BjoernStatements
  *
  * @author mehtrick
+ * @see de.mehtrick.bjoern.parser.modell.BjoernStatement
  */
 public class BjoernScenario extends BjoernBackground {
     private String name;

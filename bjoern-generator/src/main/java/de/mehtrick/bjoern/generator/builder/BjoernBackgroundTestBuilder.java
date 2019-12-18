@@ -9,13 +9,24 @@ import javax.lang.model.element.Modifier;
 
 public class BjoernBackgroundTestBuilder {
 
+	/**
+	 * creates the background part of a test. In junit this is comparable to {@link org.junit.Before} or {@link org.junit.jupiter.api.BeforeEach}
+	 *
+	 * @param background
+	 * @param junitVersion
+	 * @return e.g.
+	 * /@Before public void background() {
+	 * given_AFoo();
+	 * given_ABar();
+	 * }
+	 */
 	public static MethodSpec build(BjoernBackground background, BjoernGeneratorConfig.SupportedJunitVersion junitVersion) {
 
 		Builder backgroundMethodBuilder = MethodSpec.methodBuilder("background").addAnnotation(junitVersion.getBeforeAnnotationClass())
 				.addModifiers(Modifier.PUBLIC).addException(Exception.class);
 
-		background.getGiven().stream()
-				.forEach(given -> backgroundMethodBuilder.addStatement(BjoernStatementParser.parseStatement(given)));
+		background.getGiven()
+				.forEach(given -> backgroundMethodBuilder.addStatement(BjoernStatementParser.createMethodCallOutOfStatemet(given)));
 		return backgroundMethodBuilder.build();
 	}
 }

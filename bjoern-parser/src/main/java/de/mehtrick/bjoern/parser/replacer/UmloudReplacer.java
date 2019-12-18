@@ -1,4 +1,4 @@
-package de.mehtrick;
+package de.mehtrick.bjoern.parser.replacer;
 
 public class UmloudReplacer {
 
