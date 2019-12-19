@@ -23,7 +23,7 @@ public abstract class AbstractBjoernGenerator extends BjoernGeneratorConfigProvi
 	 * @param folder the folder to search (non recursive)
 	 * @return the found bjoern files
 	 */
-	protected static File[] getFilesFromFolder(String folder) {
+	public static File[] getFilesFromFolder(String folder) {
 
 		File file = new File(folder);
 		if (!file.exists()) {

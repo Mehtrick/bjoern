@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -127,10 +128,10 @@ public class BjoernGeneratorConfig {
 	}
 
 	public  void setFolder(String folder) {
-		if (!folder.isEmpty()) {
-			this.folder = folder;
-		}
-	}
+        if (folder != null && !folder.isEmpty()) {
+            this.folder = folder;
+        }
+    }
 
 	public  String getDocdir() {
 		return docdir;
@@ -203,8 +204,8 @@ public class BjoernGeneratorConfig {
 		}
 
 		public static SupportedJunitVersion getByVersionnumber(String versionNumber) throws NotSupportedJunitVersionException {
-			return Arrays.stream(SupportedJunitVersion.values()).filter(js -> Integer.parseInt(versionNumber) == js.junitVersion).findFirst().orElseThrow(NotSupportedJunitVersionException::new);
-		}
+            return Arrays.stream(SupportedJunitVersion.values()).filter(js -> Objects.equals(versionNumber, String.valueOf(js.junitVersion))).findFirst().orElseThrow(NotSupportedJunitVersionException::new);
+        }
 
 		public static Set<String> getSupportedVersionNumbers() {
 			return Arrays.stream(SupportedJunitVersion.values()).map(js -> String.valueOf(js.junitVersion)).collect(Collectors.toSet());
