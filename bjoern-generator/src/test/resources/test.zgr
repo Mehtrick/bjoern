@@ -1,7 +1,10 @@
 Feature: Test eines KassenAutomaten
-Scenarios: 
+Background:
+  Given:
+    - Ein typ der was trinken will
+Scenarios:
   - Scenario: Getränk nicht vorhanden
-    Given: 
+    Given:
       - Ein Automat
       - Mit "2" Flaschen Cola
       - Mit "0" Flaschen Sprite
@@ -9,9 +12,9 @@ Scenarios:
       - Kaufe "1" Sprite
     Then:
       - Automat sagt "alle"
-      - Es existieren "2" Cola im Automaten   
+      - Es existieren "2" Cola im Automaten
   - Scenario: Getraenk vorhanden
-    Given: 
+    Given:
       - Ein Automat
       - Mit "2" Flaschen Cola
       - Mit "0" Flaschen Sprite
@@ -19,4 +22,4 @@ Scenarios:
       - Kaufe "1" Cola
     Then:
       - Automat sagt "ok"
-      - Es existieren "1" Cola im Automaten  
+      - Es existieren "1" Cola im Automaten

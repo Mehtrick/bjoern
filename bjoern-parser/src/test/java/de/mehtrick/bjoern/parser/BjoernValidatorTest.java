@@ -116,9 +116,6 @@ public class BjoernValidatorTest {
                 "  - Scenario: A Scenario\r\n" +
                 "    Given: \r\n" +
                 "      -";
-
-
-        //WHEN
         //when
         Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
                     bjoernValidator.validate(zgr, "default");

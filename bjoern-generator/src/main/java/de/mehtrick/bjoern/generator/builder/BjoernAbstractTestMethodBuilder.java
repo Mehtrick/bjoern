@@ -24,17 +24,14 @@ public class BjoernAbstractTestMethodBuilder {
      * @param list
      * @return e.g.
      * <p>
+     * <code>
      * public abstract void given_ThereAreBottlesOfBeer(String param1);
-     * <p>
      * public abstract void given_ABar();
-     * <p>
      * public abstract void when_FooWantsToDrinkBottleOfBeer(String param1);
-     * <p>
      * public abstract void given_ThereAreBottlesOfWine(String param1);
-     * <p>
      * public abstract void given_AFoo();
-     * <p>
      * public abstract void then_FooSays(String param1);
+     * </code>
      */
     public static Set<MethodSpec> build(BjoernBackground bjoernBackground, List<BjoernScenario> list) {
         Set<BjoernStatement> statements = new HashSet<>();
@@ -60,18 +57,18 @@ public class BjoernAbstractTestMethodBuilder {
         return statements.stream().map(BjoernAbstractTestMethodBuilder::parseToMethodSpec).collect(Collectors.toSet());
     }
 
-	private static MethodSpec parseToMethodSpec(BjoernStatement statement) {
+    private static MethodSpec parseToMethodSpec(BjoernStatement statement) {
 
-		List<ParameterSpec> parameterSpecs = new ArrayList<>();
+        List<ParameterSpec> parameterSpecs = new ArrayList<>();
 
-		for (int i = 0; i < statement.getParameters().size(); i++) {
-			ParameterSpec parameter = ParameterSpec.builder(String.class, PARAM_NAME + (i + 1)).build();
-			parameterSpecs.add(parameter);
-		}
+        for (int i = 0; i < statement.getParameters().size(); i++) {
+            ParameterSpec parameter = ParameterSpec.builder(String.class, PARAM_NAME + (i + 1)).build();
+            parameterSpecs.add(parameter);
+        }
 
-		return MethodSpec.methodBuilder(statement.getStatementWithoutParameters())
-				.addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT).addParameters(parameterSpecs).addException(Exception.class).build();
+        return MethodSpec.methodBuilder(statement.getStatementWithoutParameters())
+                .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT).addParameters(parameterSpecs).addException(Exception.class).build();
 
-	}
+    }
 
 }

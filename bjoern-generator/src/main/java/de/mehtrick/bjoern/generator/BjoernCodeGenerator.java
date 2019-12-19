@@ -1,19 +1,14 @@
 package de.mehtrick.bjoern.generator;
 
 import com.squareup.javapoet.JavaFile;
-import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
 import de.mehtrick.bjoern.base.BjoernGeneratorConfigProvided;
-import de.mehtrick.bjoern.generator.builder.BjoernAbstractTestMethodBuilder;
 import de.mehtrick.bjoern.generator.builder.BjoernFeatureTestClassBuilder;
-import de.mehtrick.bjoern.generator.builder.BjoernScenarioTestMethodBuilder;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 
 class BjoernCodeGenerator extends BjoernGeneratorConfigProvided {
 
@@ -30,10 +25,7 @@ class BjoernCodeGenerator extends BjoernGeneratorConfigProvided {
      */
     public JavaFile generateTransient(Bjoern bjoern) {
         System.out.println("Generate Feature: " + bjoern.getFeatureNameFormatted());
-        Set<MethodSpec> abstractMethods = BjoernAbstractTestMethodBuilder.build(bjoern.getBackground(),
-                bjoern.getScenarios());
-        List<MethodSpec> scenarios = BjoernScenarioTestMethodBuilder.build(bjoern, bjoernGeneratorConfig.getJunitVersion());
-        TypeSpec typeSpec = new BjoernFeatureTestClassBuilder(bjoernGeneratorConfig).build(bjoern, scenarios, abstractMethods);
+        TypeSpec typeSpec = new BjoernFeatureTestClassBuilder(bjoernGeneratorConfig).build(bjoern);
         return JavaFile.builder(bjoernGeneratorConfig.getPckg(), typeSpec).build();
     }
 

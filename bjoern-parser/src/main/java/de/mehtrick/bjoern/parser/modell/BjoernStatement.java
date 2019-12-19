@@ -29,6 +29,12 @@ public class BjoernStatement {
 	private String statementWithoutParameters;
 	private List<String> parameters = new ArrayList<>();
 
+	/**
+	 * Creates a bjoernstatement which will be the base for future generation processes
+	 *
+	 * @param statement The statement from the zgr file
+	 * @param keyword   the keyword under which the statement is found in the zgr file
+	 */
 	public BjoernStatement(String statement, BDDKeyword keyword) {
 		setPrimitiveStatement(statement);
 		setStatementWithoutParameters(keyword.name().toLowerCase() + "_" + removeParametersFromStatement(statement));
