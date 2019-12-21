@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BjoernValidator {
@@ -12,10 +13,15 @@ public class BjoernValidator {
 
     public void validate(String bjoernSpec, String path) {
         String[] lines = splitBjoernSpecIntoLines(bjoernSpec);
-        checkIfDocumentIsEmpty(lines,path);
+        checkIfDocumentIsEmpty(lines, path);
         List<BjoernValidationError> validationErrors = new ArrayList<>();
+        lines = filterComments(lines);
         validationErrors = validateLines(lines, validationErrors);
         checkIfValidationErrorsHaveBeenDetected(validationErrors);
+    }
+
+    private String[] filterComments(String[] lines) {
+        return Arrays.stream(lines).filter(line -> !line.trim().startsWith("#")).toArray(size -> new String[size]);
     }
 
     private void checkIfValidationErrorsHaveBeenDetected(List<BjoernValidationError> validationErrors) {
@@ -26,25 +32,22 @@ public class BjoernValidator {
 
     private List<BjoernValidationError> validateLines(String[] lines, List<BjoernValidationError> validationErrors) {
         for (int i = 0; i < lines.length; i++) {
-            for (BjoernValidations bjoernValidation : BjoernValidations.values()){
-                validationErrors = bjoernValidation.validateLine(lines,i,validationErrors);
+            for (BjoernValidations bjoernValidation : BjoernValidations.values()) {
+                validationErrors = bjoernValidation.validateLine(lines, i, validationErrors);
             }
         }
         return validationErrors;
     }
 
     private void checkIfDocumentIsEmpty(String[] lines, String path) {
-        if (lines== null || lines.length == 0){
-            log.warn(String.format("The file at %s is empty, so nothing will be generated!",path));
+        if (lines == null || lines.length == 0) {
+            log.warn(String.format("The file at %s is empty, so nothing will be generated!", path));
         }
     }
 
     private String[] splitBjoernSpecIntoLines(String bjoernSpec) {
         return bjoernSpec.split("\\r?\\n");
     }
-
-
-
 
 
 }
