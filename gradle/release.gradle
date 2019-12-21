@@ -20,7 +20,7 @@ artifacts {
     archives javadocJar, sourcesJar
 }
 
-version = '1.2.1'
+version = "${bjoernversion}"
 group = "de.mehtrick"
 
 uploadArchives {
