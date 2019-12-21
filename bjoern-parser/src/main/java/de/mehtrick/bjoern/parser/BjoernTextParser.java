@@ -21,7 +21,7 @@ public class BjoernTextParser {
 	 * @return
 	 */
 	private static String removeInvalidChars(String formattedName) {
-		List<String> removeChars = Arrays.asList("(", ")", ".", ",", "-", "_", ":", "=", "+");
+		List<String> removeChars = Arrays.asList("(", ")", ".", ",", "-", "_", ":", "=", "+", "'");
 		for (String removeChar : removeChars) {
 			formattedName = StringUtils.remove(formattedName, removeChar);
 		}
