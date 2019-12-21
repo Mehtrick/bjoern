@@ -76,4 +76,13 @@ public class BjoernParserTest {
 		assertThat(statement.getParameters()).hasSize(2).contains("geht \\\"es\\\" dir", "1");
 	}
 
+	@Test
+	public void testWithTabsAndOtherStrangeChars() {
+		String string = "Hallo \t ^><wie \"geht es dir\" du \"1\" stricher";
+		BjoernStatement statement = new BjoernStatement(string, BDDKeyword.GIVEN);
+		assertThat(statement.getPrimitiveStatement()).isEqualTo(string);
+		assertThat(statement.getStatementWithoutParameters()).isEqualTo("given_HalloWieDuStricher");
+		assertThat(statement.getParameters()).hasSize(2).contains("geht es dir", "1");
+	}
+
 }

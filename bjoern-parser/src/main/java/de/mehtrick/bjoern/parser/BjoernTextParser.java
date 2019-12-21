@@ -21,7 +21,7 @@ public class BjoernTextParser {
 	 * @return
 	 */
 	private static String removeInvalidChars(String formattedName) {
-		List<String> removeChars = Arrays.asList("(", ")", ".", ",", "-", "_", ":", "=", "+", "'");
+		List<String> removeChars = Arrays.asList("(", ")", ".", ",", "-", "_", ":", "=", "+", "'", "<", ">", "^");
 		for (String removeChar : removeChars) {
 			formattedName = StringUtils.remove(formattedName, removeChar);
 		}
@@ -32,6 +32,7 @@ public class BjoernTextParser {
 	public static String parseText(String name) {
 		String formattedText = removeInvalidChars(name);
 		formattedText = parseTextToCamelCase(formattedText);
+		formattedText = StringUtils.deleteWhitespace(formattedText);
 		return formattedText;
 	}
 
