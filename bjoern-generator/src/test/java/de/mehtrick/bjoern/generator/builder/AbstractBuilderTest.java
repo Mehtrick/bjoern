@@ -14,8 +14,11 @@ public abstract class AbstractBuilderTest {
 
     @BeforeEach
     public void setup() {
-        bjoern = new BjoernParser().parseSpec("src/test/resources/test.zgr", UTF_8);
+        bjoern = getBjoern("src/test/resources/test.zgr");
         bjoernCodeGeneratorConfig = new BjoernCodeGeneratorConfig();
+    }
 
+    protected Bjoern getBjoern(String path) {
+        return new BjoernParser().parseSpec(path, UTF_8);
     }
 }

@@ -67,7 +67,7 @@ public class BjoernStatement {
 
     @Override
     public int hashCode() {
-        return statementWithoutParameters.hashCode();
+        return statementWithoutParameters.hashCode() + getParameters().size();
     }
 
     public String getPrimitiveStatement() {
