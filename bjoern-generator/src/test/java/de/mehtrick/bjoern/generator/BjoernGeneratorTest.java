@@ -2,7 +2,7 @@ package de.mehtrick.bjoern.generator;
 
 import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
 import de.mehtrick.bjoern.base.NotSupportedJunitVersionException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 

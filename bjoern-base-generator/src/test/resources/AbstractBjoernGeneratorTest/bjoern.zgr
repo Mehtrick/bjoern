@@ -1,18 +1,17 @@
-Feature: Test eines KassenAutomaten
+Feature: Hallo
 Scenarios: 
-  - Scenario: Getränk nicht vorhanden
+  - Scenario: Ein Getraenk
     Given: 
-      - Ein Automat
-      - Mit "2" Flaschen Cola
-      - Mit "0" Flaschen Sprite
+      - Mit "2" Flaschen Cola und "3" Flaschen Fanta
+      - Mit "1" Flaschen Sprite
     When:
       - Kaufe "1" Sprite
+      - Hallo
     Then:
       - Automat sagt "alle"
       - Es existieren "2" Cola im Automaten   
   - Scenario: Getraenk vorhanden
     Given: 
-      - Ein Automat
       - Mit "2" Flaschen Cola
       - Mit "0" Flaschen Sprite
     When:

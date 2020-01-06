@@ -15,10 +15,13 @@ public class BjoernBackgroundTestBuilder {
 	 * @param background
 	 * @param junitVersion
 	 * @return e.g.
-	 * /@Before public void background() {
+	 * /
+	 * <code>
+	 * @Before public void background() {
 	 * given_AFoo();
 	 * given_ABar();
 	 * }
+	 * </code>
 	 */
 	public static MethodSpec build(BjoernBackground background, BjoernGeneratorConfig.SupportedJunitVersion junitVersion) {
 

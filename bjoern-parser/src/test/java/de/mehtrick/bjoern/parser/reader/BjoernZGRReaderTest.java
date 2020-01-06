@@ -1,25 +1,28 @@
 package de.mehtrick.bjoern.parser.reader;
 
 import de.mehtrick.bjoern.parser.validator.BjoernValidatorException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.Charset;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.*;
 
 public class BjoernZGRReaderTest {
 
-    @Test(expected = BjoernFileExtensionInvalidException.class)
+    @Test
     public void testFileExtensionInvalid() {
         //when
-        new BjoernZGRReader().readSpec("notfoundpath.yml", Charset.defaultCharset());
+        assertThatExceptionOfType(BjoernFileExtensionInvalidException.class).isThrownBy(() -> {
+            new BjoernZGRReader().readSpec("notfoundpath.yml", Charset.defaultCharset());
+        });
     }
 
-    @Test(expected = BjoernFileExtensionInvalidException.class)
+    @Test
     public void testFileExtensionInvalid2() {
         //when
-        new BjoernZGRReader().readSpec("notfoundpath.zegr", Charset.defaultCharset());
+        assertThatExceptionOfType(BjoernFileExtensionInvalidException.class).isThrownBy(() -> {
+            new BjoernZGRReader().readSpec("notfoundpath.zegr", Charset.defaultCharset());
+        });
     }
 
     @Test
@@ -32,9 +35,12 @@ public class BjoernZGRReaderTest {
         }
     }
 
-    @Test(expected = BjoernValidatorException.class)
-    public void notValidBjoernFormat(){
-        new BjoernZGRReader().readSpec("src/test/resources/broken.zgr", Charset.defaultCharset());
+    @Test
+    public void notValidBjoernFormat() {
+        //when
+        assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+            new BjoernZGRReader().readSpec("src/test/resources/broken.zgr", Charset.defaultCharset());
+        });
     }
 
 }

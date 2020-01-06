@@ -18,7 +18,7 @@ buildscript {
     }
 }
 
-
+apply from: "${rootDir}/version.config"
 allprojects{
     apply plugin: 'java-library'
     apply plugin: 'eclipse'
@@ -44,8 +44,14 @@ subprojects {
         implementation 'org.apache.commons:commons-text:1.4'
         implementation 'org.slf4j:slf4j-simple:1.7.26'
 
-        testImplementation 'junit:junit:4.12'
         testImplementation 'org.assertj:assertj-core:3.10.0'
+        testImplementation('org.junit.jupiter:junit-jupiter-api:5.4.2')
+        testRuntime('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+
+    }
+
+    test {
+        useJUnitPlatform()
     }
 
 
