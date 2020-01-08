@@ -30,7 +30,7 @@ public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided
      * @return
      */
     public TypeSpec build(Bjoern bjoern) {
-        Builder featureClassBuilder = TypeSpec.classBuilder(Modifier.ABSTRACT + bjoern.getFeatureNameFormatted())
+        Builder featureClassBuilder = TypeSpec.classBuilder(StringUtils.capitalize(Modifier.ABSTRACT + bjoern.getFeatureNameFormatted()))
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
         addAbstractMethods(bjoern, featureClassBuilder);
         addScenarios(bjoern, featureClassBuilder);

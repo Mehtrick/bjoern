@@ -16,7 +16,7 @@ class BjoernFeatureTestClassBuilderTest extends AbstractBuilderTest {
         TypeSpec mappedFeature = new BjoernFeatureTestClassBuilder(bjoernCodeGeneratorConfig).build(bjoern);
         //then
         Assertions.assertThat(mappedFeature).isNotNull();
-        Assertions.assertThat(mappedFeature.name).isEqualTo("abstractTestEinesKassenautomaten");
+        Assertions.assertThat(mappedFeature.name).isEqualTo("AbstractTestEinesKassenautomaten");
         Assertions.assertThat(mappedFeature.modifiers).hasSize(2);
         Iterator<Modifier> modifierIterator = mappedFeature.modifiers.iterator();
         Assertions.assertThat(modifierIterator.next()).isEqualTo(Modifier.PUBLIC);
