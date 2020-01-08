@@ -21,85 +21,80 @@ import java.util.stream.Collectors;
  */
 public class BjoernStatement {
 
-	private static final String PARAMETERPATTERN = "\"(.*?)\"";
-	private String primitiveStatement;
-	/**
-	 * camelCased statement without the parameter in the double qoutes
-	 */
-	private String statementWithoutParameters;
-	private List<String> parameters = new ArrayList<>();
+    private static final String PARAMETERPATTERN = "\"(\\\\.|[^\\\"])*\"";
+    private String primitiveStatement;
+    /**
+     * camelCased statement without the parameter in the double qoutes
+     */
+    private String statementWithoutParameters;
+    private List<String> parameters = new ArrayList<>();
 
-	/**
-	 * Creates a bjoernstatement which will be the base for future generation processes
-	 *
-	 * @param statement The statement from the zgr file
-	 * @param keyword   the keyword under which the statement is found in the zgr file
-	 */
-	public BjoernStatement(String statement, BDDKeyword keyword) {
-		setPrimitiveStatement(statement);
-		setStatementWithoutParameters(keyword.name().toLowerCase() + "_" + removeParametersFromStatement(statement));
-		parseParameters(statement);
-	}
+    /**
+     * Creates a bjoernstatement which will be the base for future generation processes
+     *
+     * @param statement The statement from the zgr file
+     * @param keyword   the keyword under which the statement is found in the zgr file
+     */
+    public BjoernStatement(String statement, BDDKeyword keyword) {
+        setPrimitiveStatement(statement);
+        setStatementWithoutParameters(keyword.name().toLowerCase() + "_" + normalizeStatement(statement));
+        parseParameters(statement);
+    }
 
-	private void parseParameters(String statement) {
-		Pattern MY_PATTERN = Pattern.compile(PARAMETERPATTERN);
-		Matcher matcher = MY_PATTERN.matcher(statement);
-		while (matcher.find()) {
-			parameters.add(matcher.group().replaceAll("\"", ""));
-		}
-	}
+    private void parseParameters(String statement) {
+        Pattern MY_PATTERN = Pattern.compile(PARAMETERPATTERN);
+        Matcher matcher = MY_PATTERN.matcher(statement);
+        while (matcher.find()) {
+            parameters.add(matcher.group().replaceAll("(?<!\\\\)\"", ""));
+        }
+    }
 
-	private String removeParametersFromStatement(String statement) {
-		try {
-			return Arrays.stream(statement.split(PARAMETERPATTERN)).map(BjoernTextParser::parseText)
-					.collect(Collectors.joining(BjoernTextParser.BLANK_REPLACEMENT));
-		} catch (NullPointerException e) {
-			System.out.println(statement);
-			throw e;
-		}
-	}
+    private String normalizeStatement(String statement) {
+        return Arrays.stream(statement.split(PARAMETERPATTERN)).map(BjoernTextParser::parseText)
+                .collect(Collectors.joining(BjoernTextParser.BLANK_REPLACEMENT));
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof BjoernStatement) {
-			BjoernStatement compareableStatement = (BjoernStatement) obj;
-			return Objects.equals(compareableStatement.getStatementWithoutParameters(),
-					this.getStatementWithoutParameters());
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BjoernStatement) {
+            BjoernStatement compareableStatement = (BjoernStatement) obj;
+            return Objects.equals(compareableStatement.getStatementWithoutParameters(),
+                    this.getStatementWithoutParameters());
 
-		}
-		return super.equals(obj);
-	}
+        }
+        return super.equals(obj);
+    }
 
-	@Override
-	public int hashCode() {
-		return statementWithoutParameters.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return statementWithoutParameters.hashCode() + getParameters().size();
+    }
 
-	public String getPrimitiveStatement() {
-		return this.primitiveStatement;
-	}
+    public String getPrimitiveStatement() {
+        return this.primitiveStatement;
+    }
 
-	public void setPrimitiveStatement(String primitiveStatement) {
-		this.primitiveStatement = primitiveStatement;
-	}
+    public void setPrimitiveStatement(String primitiveStatement) {
+        this.primitiveStatement = primitiveStatement;
+    }
 
-	public String getStatementWithoutParameters() {
-		return this.statementWithoutParameters;
-	}
+    public String getStatementWithoutParameters() {
+        return this.statementWithoutParameters;
+    }
 
-	public void setStatementWithoutParameters(String statementWithoutParameters) {
-		this.statementWithoutParameters = statementWithoutParameters;
-	}
+    public void setStatementWithoutParameters(String statementWithoutParameters) {
+        this.statementWithoutParameters = statementWithoutParameters;
+    }
 
-	public List<String> getParameters() {
-		return this.parameters;
-	}
+    public List<String> getParameters() {
+        return this.parameters;
+    }
 
-	public void setParameters(List<String> parameters) {
-		this.parameters = parameters;
-	}
+    public void setParameters(List<String> parameters) {
+        this.parameters = parameters;
+    }
 
-	public String toString() {
-		return "BjoernStatement(primitiveStatement=" + this.getPrimitiveStatement() + ", statementWithoutParameters=" + this.getStatementWithoutParameters() + ", parameters=" + this.getParameters() + ")";
-	}
+    public String toString() {
+        return "BjoernStatement(primitiveStatement=" + this.getPrimitiveStatement() + ", statementWithoutParameters=" + this.getStatementWithoutParameters() + ", parameters=" + this.getParameters() + ")";
+    }
 }

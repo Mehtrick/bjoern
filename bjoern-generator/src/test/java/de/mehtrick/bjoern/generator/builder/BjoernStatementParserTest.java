@@ -24,4 +24,5 @@ class BjoernStatementParserTest {
         String methodCallOutOfStatemet = BjoernStatementParser.createMethodCallOutOfStatemet(bjoernStatement);
         Assertions.assertThat(methodCallOutOfStatemet).isEqualToIgnoringWhitespace("then_EinHausMitKatze()");
     }
+
 }
