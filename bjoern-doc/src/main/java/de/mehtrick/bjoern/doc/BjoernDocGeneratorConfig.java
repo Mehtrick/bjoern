@@ -2,7 +2,6 @@ package de.mehtrick.bjoern.doc;
 
 import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
 import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
-import de.mehtrick.bjoern.base.NotSupportedJunitVersionException;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -11,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class BjoernDocGeneratorConfig extends BjoernGeneratorConfig {
 
-    public BjoernDocGeneratorConfig(String[] args) throws NotSupportedJunitVersionException, BjoernMissingPropertyException {
+    public BjoernDocGeneratorConfig(String[] args) {
         super(args);
     }
 

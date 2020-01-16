@@ -1,8 +1,6 @@
 package de.mehtrick.bjoern.base;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static java.nio.charset.StandardCharsets.UTF_16;
@@ -20,7 +18,7 @@ class BjoernGeneratorConfigTest {
     }
 
     @Test
-    void fullConfigMapperTest() throws NotSupportedJunitVersionException, BjoernMissingPropertyException {
+    void fullConfigMapperTest() throws BjoernMissingPropertyException {
         //given
         BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(new String[]{"path=src/test/resources/specification/bjoern.zgr",
                 "folder=src/test/resources/", "package=de.mehtrick.bjoern", "gendir=src/gen/java", "docdir=src/doc/resources", "docExtension=txt",
@@ -34,7 +32,6 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.getExtendedTestclass()).isEqualTo("de.mehtrick.bjoern.AbstractTestclass");
         Assertions.assertThat(bjoernGeneratorConfig.getFolder()).isEqualTo("src/test/resources/");
         Assertions.assertThat(bjoernGeneratorConfig.getGendir()).isEqualTo("src/gen/java");
-        Assertions.assertThat(bjoernGeneratorConfig.getJunitVersion()).isEqualByComparingTo(BjoernGeneratorConfig.SupportedJunitVersion.junit4);
         Assertions.assertThat(bjoernGeneratorConfig.getPath()).isEqualTo("src/test/resources/specification/bjoern.zgr");
         Assertions.assertThat(bjoernGeneratorConfig.getPckg()).isEqualTo("de.mehtrick.bjoern");
         Assertions.assertThat(bjoernGeneratorConfig.getTemplate()).isEqualTo("bla.html");
@@ -43,7 +40,7 @@ class BjoernGeneratorConfigTest {
     }
 
     @Test
-    void minConfigMapperTest() throws NotSupportedJunitVersionException, BjoernMissingPropertyException {
+    void minConfigMapperTest() throws BjoernMissingPropertyException {
         //given
         BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(new String[]{"path=src/test/resources/specification/bjoern.zgr"});
         //when
@@ -55,7 +52,6 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.getExtendedTestclass()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getFolder()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getGendir()).isNullOrEmpty();
-        Assertions.assertThat(bjoernGeneratorConfig.getJunitVersion()).isEqualByComparingTo(BjoernGeneratorConfig.SupportedJunitVersion.junit4);
         Assertions.assertThat(bjoernGeneratorConfig.getPath()).isEqualTo("src/test/resources/specification/bjoern.zgr");
         Assertions.assertThat(bjoernGeneratorConfig.getPckg()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getTemplate()).isEqualTo("/asciidoc.ftlh");
@@ -63,24 +59,5 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.isFoldersSet()).isFalse();
     }
 
-    @Test
-    void unsupportedJunitVersion() {
-        //given
-        assertThrows(NotSupportedJunitVersionException.class, () -> {
-            new BjoernGeneratorConfig(new String[]{"path=src/test/resources/specification/bjoern.zgr", "junitVersion=a"});
-        });
-    }
 
-    @Test
-    void correctJunitClasses() {
-        //given
-        BjoernGeneratorConfig.SupportedJunitVersion[] supportedJunitVersions = BjoernGeneratorConfig.SupportedJunitVersion.values();
-        //then
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit4.getBeforeAnnotationClass()).isAnnotation().isEqualTo(Before.class);
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit4.getTestAnnotationClass()).isAnnotation().isEqualTo(org.junit.Test.class);
-
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit5.getBeforeAnnotationClass()).isAnnotation().isEqualTo(BeforeEach.class);
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit5.getTestAnnotationClass()).isAnnotation().isEqualTo(Test.class);
-
-    }
 }
