@@ -1,7 +1,6 @@
 dependencies{
     api project(":bjoern-parser")
-	api 'junit:junit:4.12'
-	api 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
+
 }
 
 jar {

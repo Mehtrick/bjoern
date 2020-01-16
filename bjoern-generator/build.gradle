@@ -1,6 +1,8 @@
 dependencies{
     api project(":bjoern-base-generator")
     api 'com.squareup:javapoet:1.11.1'
+    implementation 'junit:junit:4.12'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.4.0'
 }
 
 jar {
