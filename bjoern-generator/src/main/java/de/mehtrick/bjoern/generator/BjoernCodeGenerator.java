@@ -2,20 +2,17 @@ package de.mehtrick.bjoern.generator;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfigProvided;
 import de.mehtrick.bjoern.generator.builder.BjoernFeatureTestClassBuilder;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 
 import java.io.File;
 import java.io.IOException;
 
-class BjoernCodeGenerator extends BjoernGeneratorConfigProvided {
+class BjoernCodeGenerator extends BjoernCodeGeneratorConfigProvided {
 
-    public BjoernCodeGenerator(BjoernGeneratorConfig bjoernGeneratorConfig) {
+    public BjoernCodeGenerator(BjoernCodeGeneratorConfig bjoernGeneratorConfig) {
         super(bjoernGeneratorConfig);
     }
-
 
     /**
      * Generates the junit bjoern class but does not write it to the system

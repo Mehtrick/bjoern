@@ -3,7 +3,7 @@ package de.mehtrick.bjoern.generator;
 import de.mehtrick.bjoern.base.AbstractBjoernGenerator;
 import de.mehtrick.bjoern.base.BjoernGeneratorException;
 import de.mehtrick.bjoern.base.BjoernMissingPropertyException;
-import de.mehtrick.bjoern.base.NotSupportedJunitVersionException;
+import de.mehtrick.bjoern.generator.junitsupport.NotSupportedJunitVersionException;
 import de.mehtrick.bjoern.parser.BjoernParser;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 import org.apache.commons.io.FileUtils;
@@ -52,7 +52,7 @@ public class BjoernCodeGeneratorApplication extends AbstractBjoernGenerator {
 	private void generateSingleBjoern(String path) {
 		try {
 			Bjoern bjoern = new BjoernParser().parseSpec(path, bjoernGeneratorConfig.getEncoding());
-			new BjoernCodeGenerator(bjoernGeneratorConfig).generateAndWriteToSystem(bjoern);
+			new BjoernCodeGenerator((BjoernCodeGeneratorConfig) bjoernGeneratorConfig).generateAndWriteToSystem(bjoern);
 		} catch (Throwable e) {
 			throw new BjoernGeneratorException(path, e);
 		}

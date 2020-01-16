@@ -1,14 +1,8 @@
 package de.mehtrick.bjoern.base;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -26,7 +20,6 @@ public class BjoernGeneratorConfig {
 	private final String PROPERTY_TEMPLATE = "template";
 	private final String PROPERTY_TEMPLATE_FOLDER = "templateFolder";
 	private final String PROPERTY_DOC_EXTENSION = "docExtension";
-	private final String PROPERTY_JUNIT_VERSION = "junitVersion";
 	private final String PROPERTY_ENCODING = "encoding";
 	private String path;
 	private String folder;
@@ -38,7 +31,7 @@ public class BjoernGeneratorConfig {
 	private String template = "/asciidoc.ftlh";
 	private String templateFolder;
 	private String docExtension = "adoc";
-	private SupportedJunitVersion junitVersion = SupportedJunitVersion.junit4;
+
 	private Charset encoding = UTF_8;
 
 	public BjoernGeneratorConfig() {
@@ -48,10 +41,9 @@ public class BjoernGeneratorConfig {
 	 * This methods accepts the cli arguments and parses the values to the correct property
 	 *
 	 * @param args
-	 * @throws NotSupportedJunitVersionException
 	 * @throws BjoernMissingPropertyException
 	 */
-	public BjoernGeneratorConfig(String[] args) throws NotSupportedJunitVersionException {
+	public BjoernGeneratorConfig(String[] args) {
 		setPath(findPropertyInArgs(PROPERTY_PATH, args));
 		setFolder(findPropertyInArgs(PROPERTY_FOLDER, args));
 		setPckg(findPropertyInArgs(PROPERTY_PACKAGE, args));
@@ -61,7 +53,6 @@ public class BjoernGeneratorConfig {
 		setTemplate(findPropertyInArgs(PROPERTY_TEMPLATE, args));
 		setTemplateFolder(findPropertyInArgs(PROPERTY_TEMPLATE_FOLDER, args));
 		setDocExtension(findPropertyInArgs(PROPERTY_DOC_EXTENSION, args));
-		setJunitVersion(findPropertyInArgs(PROPERTY_JUNIT_VERSION, args));
 		setEncoding(findPropertyInArgs(PROPERTY_ENCODING, args));
 	}
 
@@ -72,7 +63,7 @@ public class BjoernGeneratorConfig {
 
 	}
 
-	private String findPropertyInArgs(String propertyname, String[] args) {
+	protected String findPropertyInArgs(String propertyname, String[] args) {
 		for (String arg : args) {
 			if (arg.startsWith(propertyname + "=")) {
 				return StringUtils.substringAfter(arg, "=");
@@ -81,15 +72,6 @@ public class BjoernGeneratorConfig {
 		return null;
 	}
 
-	public SupportedJunitVersion getJunitVersion() {
-		return junitVersion;
-	}
-
-	public void setJunitVersion(String junitVersion) throws NotSupportedJunitVersionException {
-		if (StringUtils.isNotBlank(junitVersion)) {
-			this.junitVersion = SupportedJunitVersion.getByVersionnumber(junitVersion);
-		}
-	}
 
 	public boolean isFoldersSet() {
 		return folder != null;
@@ -183,41 +165,5 @@ public class BjoernGeneratorConfig {
 		}
 	}
 
-
-	/**
-	 * Enum to check the supported junitVersions
-	 * Currently version 4 and 5 are supported
-	 */
-	public enum SupportedJunitVersion {
-		junit4(4, org.junit.Test.class, Before.class), junit5(5, org.junit.jupiter.api.Test.class, BeforeEach.class);
-
-		private final int junitVersion;
-		private final Class<?> testAnnotationClass;
-
-
-		private final Class<?> beforeAnnotationClass;
-
-		SupportedJunitVersion(int versionnumber, Class<?> testAnnotationClass, Class<?> beforeAnnotationClass) {
-			this.junitVersion = versionnumber;
-			this.testAnnotationClass = testAnnotationClass;
-			this.beforeAnnotationClass = beforeAnnotationClass;
-		}
-
-		public static SupportedJunitVersion getByVersionnumber(String versionNumber) throws NotSupportedJunitVersionException {
-            return Arrays.stream(SupportedJunitVersion.values()).filter(js -> Objects.equals(versionNumber, String.valueOf(js.junitVersion))).findFirst().orElseThrow(NotSupportedJunitVersionException::new);
-        }
-
-		public static Set<String> getSupportedVersionNumbers() {
-			return Arrays.stream(SupportedJunitVersion.values()).map(js -> String.valueOf(js.junitVersion)).collect(Collectors.toSet());
-		}
-
-		public Class<?> getTestAnnotationClass() {
-			return testAnnotationClass;
-		}
-
-		public Class<?> getBeforeAnnotationClass() {
-			return beforeAnnotationClass;
-		}
-	}
 
 }

@@ -4,23 +4,23 @@ import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeSpec.Builder;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfigProvided;
+import de.mehtrick.bjoern.generator.BjoernCodeGeneratorConfig;
+import de.mehtrick.bjoern.generator.junitsupport.JunitGenerationStrategy;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Modifier;
-import java.util.List;
 import java.util.Set;
 
 /**
  * The feature contains the tests as well the abstract test methods used in the test
  */
-public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided {
+public class BjoernFeatureTestClassBuilder {
 
+    BjoernCodeGeneratorConfig bjoernCodeGeneratorConfig;
 
-    public BjoernFeatureTestClassBuilder(BjoernGeneratorConfig bjoernGeneratorConfig) {
-        super(bjoernGeneratorConfig);
+    public BjoernFeatureTestClassBuilder(BjoernCodeGeneratorConfig bjoernGeneratorConfig) {
+        bjoernCodeGeneratorConfig = bjoernGeneratorConfig;
     }
 
     /**
@@ -51,21 +51,21 @@ public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided
     }
 
     private void addScenarios(Bjoern bjoern, Builder featureClassBuilder) {
-        List<MethodSpec> scenarios = BjoernScenarioTestMethodBuilder.build(bjoern, bjoernGeneratorConfig.getJunitVersion());
-        featureClassBuilder.addMethods(scenarios);
+        JunitGenerationStrategy junitStrategy = bjoernCodeGeneratorConfig.getJunitVersion().getJunitStrategy();
+        junitStrategy.generateScenarios(bjoern, featureClassBuilder);
     }
 
     private void addBackground(Bjoern bjoern, Builder featureClassBuilder) {
         if (bjoern.getBackground() != null) {
-            MethodSpec background = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), bjoernGeneratorConfig.getJunitVersion());
+            MethodSpec background = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), bjoernCodeGeneratorConfig.getJunitVersion());
             featureClassBuilder.addMethod(background);
         }
     }
 
     private void addExtendedClass(Builder featureClassBuilder) {
-        if (StringUtils.isNotBlank(bjoernGeneratorConfig.getExtendedTestclass())) {
-            String className = StringUtils.substringAfterLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
-            String packageName = StringUtils.substringBeforeLast(bjoernGeneratorConfig.getExtendedTestclass(), ".");
+        if (StringUtils.isNotBlank(bjoernCodeGeneratorConfig.getExtendedTestclass())) {
+            String className = StringUtils.substringAfterLast(bjoernCodeGeneratorConfig.getExtendedTestclass(), ".");
+            String packageName = StringUtils.substringBeforeLast(bjoernCodeGeneratorConfig.getExtendedTestclass(), ".");
 
             ClassName superClass = ClassName.get(packageName, className);
 

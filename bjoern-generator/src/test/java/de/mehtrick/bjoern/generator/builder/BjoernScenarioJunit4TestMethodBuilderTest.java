@@ -1,7 +1,7 @@
 package de.mehtrick.bjoern.generator.builder;
 
 import com.squareup.javapoet.MethodSpec;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
+import de.mehtrick.bjoern.generator.junitsupport.Junit4GenerationStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import javax.lang.model.element.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-class BjoernScenarioTestMethodBuilderTest extends AbstractBuilderTest {
+class BjoernScenarioJunit4TestMethodBuilderTest extends AbstractBuilderTest {
 
 
     @Test
@@ -18,7 +18,7 @@ class BjoernScenarioTestMethodBuilderTest extends AbstractBuilderTest {
         bjoern.setScenarios(new ArrayList<>());
 
         //when
-        List<MethodSpec> buildBjoernScenarios = BjoernScenarioTestMethodBuilder.build(bjoern, BjoernGeneratorConfig.SupportedJunitVersion.junit4);
+        List<MethodSpec> buildBjoernScenarios = Junit4GenerationStrategy.build(bjoern);
 
         //then
         Assertions.assertThat(buildBjoernScenarios).hasSize(0);
@@ -27,7 +27,7 @@ class BjoernScenarioTestMethodBuilderTest extends AbstractBuilderTest {
     @Test
     void testScenariosMappedJUnit4() {
         //when
-        List<MethodSpec> buildBjoernScenarios = BjoernScenarioTestMethodBuilder.build(bjoern, BjoernGeneratorConfig.SupportedJunitVersion.junit4);
+        List<MethodSpec> buildBjoernScenarios = Junit4GenerationStrategy.build(bjoern);
 
         //then
         Assertions.assertThat(buildBjoernScenarios).hasSize(2);
@@ -48,15 +48,4 @@ class BjoernScenarioTestMethodBuilderTest extends AbstractBuilderTest {
                 "then_EsExistierenColaImAutomaten(\"2\");");
     }
 
-    @Test
-    void testScenariosMappedJUnit5() {
-        //when
-        List<MethodSpec> buildBjoernScenarios = BjoernScenarioTestMethodBuilder.build(bjoern, BjoernGeneratorConfig.SupportedJunitVersion.junit5);
-
-        //then
-        MethodSpec mappedScenario = buildBjoernScenarios.get(0);
-
-        Assertions.assertThat(mappedScenario.annotations).hasSize(1);
-        Assertions.assertThat(mappedScenario.annotations.get(0).type.toString()).isEqualTo(Test.class.getCanonicalName());
-    }
 }
