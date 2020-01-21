@@ -25,7 +25,6 @@ public class BjoernZGRReader {
 		try {
 			File zgr = getFileFromPath(path);
 			String zgrAsString = FileUtils.readFileToString(zgr, encoding);
-			zgrAsString = UmloudReplacer.replaceUmlaute(zgrAsString);
 			new BjoernValidator().validate(zgrAsString, path);
 			ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 			return mapper.readValue(zgrAsString, BjoernZGRModell.class);

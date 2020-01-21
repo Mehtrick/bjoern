@@ -1,5 +1,6 @@
 package de.mehtrick.bjoern.parser;
 
+import de.mehtrick.bjoern.parser.replacer.UmloudReplacer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.WordUtils;
 
@@ -33,6 +34,7 @@ public class BjoernTextParser {
 		String formattedText = removeInvalidChars(name);
 		formattedText = parseTextToCamelCase(formattedText);
 		formattedText = StringUtils.deleteWhitespace(formattedText);
+		formattedText = UmloudReplacer.replaceUmlaute(formattedText);
 		return formattedText;
 	}
 

@@ -85,4 +85,13 @@ public class BjoernParserTest {
 		assertThat(statement.getParameters()).hasSize(2).contains("geht es dir", "1");
 	}
 
+	@Test
+	public void testWithUmlauteinParameter() {
+		String string = "Hüllü wü \"gäht es dir\" du \"1\" stricher";
+		BjoernStatement statement = new BjoernStatement(string, BDDKeyword.GIVEN);
+		assertThat(statement.getPrimitiveStatement()).isEqualTo(string);
+		assertThat(statement.getStatementWithoutParameters()).isEqualTo("given_HuellueWueDuStricher");
+		assertThat(statement.getParameters()).hasSize(2).contains("gäht es dir", "1");
+	}
+
 }
