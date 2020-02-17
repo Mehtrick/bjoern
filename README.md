@@ -6,7 +6,7 @@
 
 
 Bjoern is a universal bdd test generater (and a person).
-The main focus is to generate java-classes from bdd-style text files to ensure **synchronisation** between the specification and the code. 
+The main focus is to generate java-classes from bdd-style text files to ensure **synchronisation** between the specification and the code.
 
 The generated classes are **simple** and are designed to be generated **each time**. You **should not** edit the generated files because they will be deleted on every run of the generator.
 
@@ -22,7 +22,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.1'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.6'
     }
 }
 apply plugin: "de.mehtrick.bjoern.gradle-plugin"
@@ -42,7 +42,7 @@ bjoern{
 
 | Taskname      | Description|
 |-------|-------------------------|
-|`bjoerngen`|Generates the abstract test classes| 
+|`bjoerngen`|Generates the abstract test classes|
 |`bjoerndoc`|Generates documentation of the bjoern files. (Default is asciidoc)|
 
 ### List of Parameters
@@ -63,86 +63,112 @@ bjoern{
 
 ## Specification
 
-The specification is yaml based. Bjoern uses the .zgr file extension to determine the specification files. 
-You will find the typical BDD keywords in it. For more convenience there is a [VS-Code plugin](https://marketplace.visualstudio.com/items?itemName=mehtrick.bjoern#review-details) which greatly improves the usability of the specs. 
+The specification is yaml based. Bjoern uses the .zgr file extension to determine the specification files.
+You will find the typical BDD keywords in it. For more convenience there is a [VS-Code plugin](https://marketplace.visualstudio.com/items?itemName=mehtrick.bjoern#review-details) which greatly improves the usability of the specs.
 
 `example.zgr`
 ```yaml
-Feature: Test Foo
+Feature: Test eines KassenAutomaten
 Background:
-  Given: 
-    - A Foo
-    - A Bar
-Scenarios: 
-  - Scenario: Foo is not happy
-    Given: 
-      - there are "2" bottles of wine
-      - there are "0" bottles of beer
+  Given:
+    - Ein typ der was trinken will
+Scenarios:
+  - Scenario: Getränk nicht vorhanden
+    Given:
+      - Ein Automat
+      - Mit "2" Flaschen Cola
+      - Mit "0" Flaschen Sprite
     When:
-      - Foo wants to drink "1" bottle of beer
+      - Kaufe "1" Sprite
     Then:
-      - Foo says "why is my beer empty"  
-  - Scenario: Foo is happy
-    Given: 
-      - there are "2" bottles of wine
-      - there are "1" bottles of beer
+      - Automat sagt "alle"
+      - Es existieren "2" Cola im Automaten
+  - Scenario: Getraenk vorhanden
+    Given:
+      - Ein Automat
+      - Mit "2" Flaschen Cola
+      - Mit "0" Flaschen Sprite
     When:
-      - Foo wants to drink "1" bottle of beer
+      - Kaufe "1" Cola
     Then:
-      - Foo says "yeah beer"  
+      - Automat sagt "ok"
+      - Es existieren "1" Cola im Automaten
+
 ```
 
 ## Code generation
 
 Bjoern will then generate the TestClasses based on the spec
 
+First it will generate an abstract class which contains the test structure in form of the scenarios
 ```java
-import java.lang.String;
+package de.mehtrick.bjoern;
+
+import java.lang.Exception;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test Foo */
-public abstract class AbstractTestFoo {
+ * Test eines KassenAutomaten */
+public abstract class AbstractTestEinesKassenautomaten extends AbstractTestclass implements TestEinesKassenautomatenInterface {
+  /**
+   * Getränk nicht vorhanden */
+  @Test
+  public void getraenkNichtVorhanden() throws Exception {
+    given_EinAutomat();
+    given_MitFlaschenCola("2");
+    given_MitFlaschenSprite("0");
+    when_KaufeSprite("1");
+    then_AutomatSagt("alle");
+    then_EsExistierenColaImAutomaten("2");
+  }
+
+  /**
+   * Getraenk vorhanden */
+  @Test
+  public void getraenkVorhanden() throws Exception {
+    given_EinAutomat();
+    given_MitFlaschenCola("2");
+    given_MitFlaschenSprite("0");
+    when_KaufeCola("1");
+    then_AutomatSagt("ok");
+    then_EsExistierenColaImAutomaten("1");
+  }
+
   @Before
-  public void background() {
-    given_AFoo();
-    given_ABar();
+  public void background() throws Exception {
+    given_EinTypDerWasTrinkenWill();
   }
-
-  /**
-   * Foo is not happy */
-  @Test
-  public void FooIsNotHappy() {
-    given_ThereAreBottlesOfWine("2");
-    given_ThereAreBottlesOfBeer("0");
-    when_FooWantsToDrinkBottleOfBeer("1");
-    then_FooSays("why is my beer empty");
-  }
-
-  /**
-   * Foo is happy */
-  @Test
-  public void GetraenkVorhanden() {
-    given_ThereAreBottlesOfWine("2");
-    given_ThereAreBottlesOfBeer("1");
-    when_FooWantsToDrinkBottleOfBeer("1");
-    then_FooSays("yeah beer");
-  }
-
-  public abstract void given_ThereAreBottlesOfBeer(String param1);
-
-  public abstract void given_ABar();
-
-  public abstract void when_FooWantsToDrinkBottleOfBeer(String param1);
-
-  public abstract void given_ThereAreBottlesOfWine(String param1);
-
-  public abstract void given_AFoo();
-
-  public abstract void then_FooSays(String param1);
 }
 
+
+```
+
+Then bjoern will also generate Interfaces defining the test method signatures
+
+``` java
+package de.mehtrick.bjoern;
+
+import java.lang.Exception;
+import java.lang.String;
+
+public interface TestEinesKassenautomatenInterface {
+  void given_EinAutomat() throws Exception;
+
+  void when_KaufeSprite(String param1) throws Exception;
+
+  void then_EsExistierenColaImAutomaten(String param1) throws Exception;
+
+  void given_EinTypDerWasTrinkenWill() throws Exception;
+
+  void given_MitFlaschenSprite(String param1) throws Exception;
+
+  void then_AutomatSagt(String param1) throws Exception;
+
+  void given_MitFlaschenCola(String param1) throws Exception;
+
+  void when_KaufeCola(String param1) throws Exception;
+}
 ```
 
 ## Doc Generation

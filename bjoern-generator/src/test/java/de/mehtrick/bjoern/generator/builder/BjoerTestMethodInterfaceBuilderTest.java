@@ -1,21 +1,22 @@
 package de.mehtrick.bjoern.generator.builder;
 
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.TypeSpec;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-class BjoernAbstractTestMethodBuilderTest extends AbstractBuilderTest {
+class BjoerTestMethodInterfaceBuilderTest extends AbstractBuilderTest {
 
     @Test
     void testAbstractMethodsGenerated() {
         //given
         bjoern = getBjoern("src/test/resources/abstract-methods.zgr");
         //when
-        Set<MethodSpec> generatedAbstractMethods = BjoernAbstractTestMethodBuilder.build(bjoern.getBackground(), bjoern.getScenarios());
+        TypeSpec bjoernMethodInterface = BjoerTestMethodInterfaceBuilder.build(bjoern);
+        List<MethodSpec> generatedAbstractMethods = bjoernMethodInterface.methodSpecs;
         //then
         List<String> abstractMethodsString = generatedAbstractMethods.stream().map(method -> method.toString().trim()).collect(Collectors.toList());
         Assertions.assertThat(abstractMethodsString).hasSize(8);

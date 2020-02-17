@@ -13,7 +13,7 @@ import java.io.IOException;
 public class BjoernGeneratorTest {
 	@Test
 	public void testSomeLibraryMethod() throws BjoernMissingPropertyException, IOException, NotSupportedJunitVersionException {
-		BjoernCodeGeneratorApplication.main(new String[]{"path=src/test/resources/specification/bjoern.zgr",
+		BjoernCodeGeneratorApplication.main(new String[]{"path=src/test/resources/test.zgr",
 				"folder=src/test/resources/", "package=de.mehtrick.bjoern", "gendir=src/gen/java",
 				"extendedTestclass=de.mehtrick.bjoern.AbstractTestclass", "junitVersion=4"});
 	}

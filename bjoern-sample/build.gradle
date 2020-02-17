@@ -1,10 +1,9 @@
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.1'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.6'
     }
 }
 
@@ -20,7 +19,6 @@ bjoern{
 }
 
 repositories {
-    mavenCentral()
     jcenter()
 }
 
@@ -36,6 +34,7 @@ dependencies {
 sourceSets {
     test {
         java {
+            srcDirs 'src/test/java'
             srcDirs 'src/gen/bjoern'
         }
     }
