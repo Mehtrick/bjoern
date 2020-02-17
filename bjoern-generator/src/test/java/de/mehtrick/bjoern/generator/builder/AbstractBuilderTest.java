@@ -16,6 +16,7 @@ public abstract class AbstractBuilderTest {
     public void setup() {
         bjoern = getBjoern("src/test/resources/test.zgr");
         bjoernCodeGeneratorConfig = new BjoernCodeGeneratorConfig();
+        bjoernCodeGeneratorConfig.setPckg("de.test");
     }
 
     protected Bjoern getBjoern(String path) {

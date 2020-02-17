@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Modifier;
 import java.util.List;
-import java.util.Set;
 
 /**
  * The feature contains the tests as well the abstract test methods used in the test
@@ -24,30 +23,31 @@ public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided
     }
 
     /**
-     * Creates the test class containing the test methods, backgrounds and the abstract test methods, which need to be implemented by the developer
+     * Creates the test classes containing the test methods and the background. Also it generates an Interface containing the test methods, which need to be implemented by the developer
      *
      * @param bjoern
      * @return
      */
-    public TypeSpec build(Bjoern bjoern) {
+    public BjoernClassesToBuild build(Bjoern bjoern) {
         Builder featureClassBuilder = TypeSpec.classBuilder(StringUtils.capitalize(Modifier.ABSTRACT + bjoern.getFeatureNameFormatted()))
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
-        addAbstractMethods(bjoern, featureClassBuilder);
+        TypeSpec bjoernMehtodInterface = createMethodInterface(bjoern, featureClassBuilder);
         addScenarios(bjoern, featureClassBuilder);
         addBackground(bjoern, featureClassBuilder);
         addJavaDoc(bjoern, featureClassBuilder);
         addExtendedClass(featureClassBuilder);
-        return featureClassBuilder.build();
+        return new BjoernClassesToBuild(featureClassBuilder.build(), bjoernMehtodInterface);
     }
 
     private void addJavaDoc(Bjoern bjoern, Builder featureClassBuilder) {
         featureClassBuilder.addJavadoc(bjoern.getFeature());
     }
 
-    private void addAbstractMethods(Bjoern bjoern, Builder featureClassBuilder) {
-        Set<MethodSpec> abstractMethods = BjoernAbstractTestMethodBuilder.build(bjoern.getBackground(),
-                bjoern.getScenarios());
-        featureClassBuilder.addMethods(abstractMethods);
+    private TypeSpec createMethodInterface(Bjoern bjoern, Builder featureClassBuilder) {
+        TypeSpec methodInterface = BjoerTestMethodInterfaceBuilder.build(bjoern);
+        ClassName methodInterfaceClass = ClassName.get(bjoernGeneratorConfig.getPckg(), methodInterface.name);
+        featureClassBuilder.addSuperinterface(methodInterfaceClass);
+        return methodInterface;
     }
 
     private void addScenarios(Bjoern bjoern, Builder featureClassBuilder) {

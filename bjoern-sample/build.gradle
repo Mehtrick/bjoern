@@ -4,7 +4,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.1'
+        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.6'
     }
 }
 
