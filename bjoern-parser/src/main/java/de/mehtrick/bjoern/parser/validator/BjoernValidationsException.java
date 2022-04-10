@@ -13,7 +13,7 @@ public class BjoernValidationsException extends Exception{
     }
 
     private BjoernValidationError createNewBjoernValidationError(int index, String errorText, String... stringforformat) {
-        String formattedErrorText = String.format(errorText, stringforformat);
+        String formattedErrorText = String.format(errorText, (Object[]) stringforformat);
         return new BjoernValidationError(index + 1, formattedErrorText);
     }
 }

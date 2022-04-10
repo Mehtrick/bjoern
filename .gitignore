@@ -4,6 +4,8 @@ src/main/java/com/ppvoting/server/api/
 
 /config
 
+**/out
+
 *.DS_Store
 Thumbs.db
 *.sw?

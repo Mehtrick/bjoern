@@ -12,7 +12,7 @@ class AbstractBjoernGeneratorTest {
         //when
         File[] bjoernFiles = AbstractBjoernGenerator.getFilesFromFolder("src/test/resources/AbstractBjoernGeneratorTest");
         //then
-        Assertions.assertThat(bjoernFiles).hasSize(2);
+        Assertions.assertThat(bjoernFiles).hasSize(1);
     }
 
     @Test
