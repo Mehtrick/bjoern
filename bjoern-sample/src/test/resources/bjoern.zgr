@@ -11,7 +11,7 @@ Scenarios:
     When:
       - Foo wants to drink "1" bottle of beer
     Then:
-      - Foo says "why is my beer empty"  
+      - Foo says "why is my beer empty"
   - Scenario: Getraenk vorhanden
     Given: 
       - there are "2" bottles of wine

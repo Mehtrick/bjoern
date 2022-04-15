@@ -5,15 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-class AbstractBjoernGeneratorTest {
+class BjoernBaseGeneratorTest {
 
-    @Test
-    void correctListFiles() {
-        //when
-        File[] bjoernFiles = AbstractBjoernGenerator.getFilesFromFolder("src/test/resources/AbstractBjoernGeneratorTest");
-        //then
-        Assertions.assertThat(bjoernFiles).hasSize(2);
-    }
 
     @Test
     void folderNotFound() {
