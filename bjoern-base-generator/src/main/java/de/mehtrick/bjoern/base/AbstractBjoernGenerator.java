@@ -1,6 +1,7 @@
 package de.mehtrick.bjoern.base;
 
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * This class is the Base for all the generators, and provides functionality to load the correct files
@@ -30,6 +31,6 @@ public abstract class AbstractBjoernGenerator extends BjoernGeneratorConfigProvi
 			System.out.println("WARNING: The folder " + folder + " could not be found. Nothing has been generated.");
 			return new File[0];
 		}
-		return file.listFiles(new BjoernFileNameFilter());
+		return Arrays.stream(file.listFiles(new BjoernFileNameFilter())).distinct().toArray(File[]::new);
 	}
 }
