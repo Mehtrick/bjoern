@@ -1,8 +1,7 @@
 package de.mehtrick.bjoern.base;
 
 import de.mehtrick.bjoern.parser.reader.BjoernFileExtensions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -13,15 +12,13 @@ import java.io.FilenameFilter;
  * {@link de.mehtrick.bjoern.parser.reader.BjoernFileExtensions}
  */
 public class BjoernFileNameFilter implements FilenameFilter {
-	private static final Logger log = LoggerFactory.getLogger(BjoernFileNameFilter.class);
 
 
-	private static final String FILENAMEEXTENSION = "."+BjoernFileExtensions.zgr;
+    private static final String FILENAMEEXTENSION = "." + BjoernFileExtensions.zgr;
 
-	@Override
-	public boolean accept(File dir, String name) {
-		log.info(name);
-		String lowercaseName = name.toLowerCase();
-		return (lowercaseName.endsWith(FILENAMEEXTENSION));
-	}
+    @Override
+    public boolean accept(File dir, String name) {
+        String lowercaseName = name.toLowerCase();
+        return (StringUtils.endsWith(lowercaseName, FILENAMEEXTENSION));
+    }
 }
