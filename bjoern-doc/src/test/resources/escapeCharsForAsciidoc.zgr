@@ -1,0 +1,12 @@
+Feature: Special characters for asciidoc should be escaped
+
+Scenarios: 
+  - Scenario: A pipe sign should be escaped
+    Given: 
+      - a regexp like "(/|\\\\)"
+      - a regexp like "(/||||)"
+    When:
+      - the asciidoc file is generated
+    Then:
+      - it should contain the text "a regexp like (/|\\\\)" with a backslash before each pipe
+      - it should contain the text "a regexp like (/||||)" with a backslash before each pipe
