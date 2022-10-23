@@ -1,21 +1,34 @@
+plugins {
+    id 'maven-publish'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.18.0'
+}
 
-dependencies{
+dependencies {
     implementation project(":bjoern-generator")
     implementation project(":bjoern-doc")
 }
 
-apply plugin: 'java-gradle-plugin'
+
+pluginBundle {
+    website = 'https://github.com/Mehtrick/bjoern'
+    vcsUrl = 'https://github.com/Mehtrick/bjoern'
+    tags = ['java', 'test', 'junit5', 'bjoern', 'bdd']
+}
+
 
 gradlePlugin {
-  plugins {
-    bjoern {
-      id = 'de.mehtrick.bjoern.gradle-plugin'
-      implementationClass = 'de.mehtrick.bjoern.gradle.BjoernPlugin'
+    plugins {
+        bjoern {
+            id = 'de.mehtrick.bjoern.gradle-plugin'
+            displayName = 'Bjoern Gradle Plugin'
+            implementationClass = 'de.mehtrick.bjoern.gradle.BjoernPlugin'
+            description = 'Bjoern is a universal bdd test generater (and a person). The main focus is to generate java-classes from bdd-style text files to ensure synchronisation between the specification and the code.'
+        }
     }
-  }
 }
 
 jar {
     archivesBaseName = "bjoern-gradle-plugin"
-	version = project.version
+    version = System.getenv("RELEASE_VERSION")
 }
