@@ -1,11 +1,11 @@
-name: Bjoern CI
+name: Publish Release
 
 on:
   release:
     types: [published]
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
 
     steps:

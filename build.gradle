@@ -11,7 +11,7 @@ allprojects{
 
 subprojects {
     apply from: "${rootDir}/version.config"
-    version = "${bjoernversion}"
+    version = System.getenv("RELEASE_VERSION")
     group = "de.mehtrick"
 
     dependencies {
