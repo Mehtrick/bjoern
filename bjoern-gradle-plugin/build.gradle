@@ -30,5 +30,5 @@ gradlePlugin {
 
 jar {
     archivesBaseName = "bjoern-gradle-plugin"
-    version = project.version
+    version = System.getenv("RELEASE_VERSION")
 }
