@@ -1,6 +1,7 @@
 package de.mehtrick.bjoern.parser.modell;
 
 import de.mehtrick.bjoern.parser.BjoernTextParser;
+import de.mehtrick.bjoern.parser.replacer.AsciidocReplacer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,5 +97,10 @@ public class BjoernStatement {
 
     public String toString() {
         return "BjoernStatement(primitiveStatement=" + this.getPrimitiveStatement() + ", statementWithoutParameters=" + this.getStatementWithoutParameters() + ", parameters=" + this.getParameters() + ")";
+    }
+
+    // This Method is used in the Freemarker Template
+    public String getAsciidocEscapedPrimitveStatement() {
+        return AsciidocReplacer.replace(getPrimitiveStatement());
     }
 }
