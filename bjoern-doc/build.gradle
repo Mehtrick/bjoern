@@ -1,7 +1,7 @@
 dependencies{
     api project(":bjoern-base-generator")
     implementation 'org.freemarker:freemarker:2.3.31'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
     testImplementation 'junit:junit:4.13.2'
 }
 
