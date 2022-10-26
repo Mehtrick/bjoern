@@ -1,36 +1,65 @@
-allprojects{
-    repositories {
-        mavenCentral()
-    }
-    apply plugin: 'java-library'
-    compileJava.options.encoding = 'UTF-8'
-    compileTestJava.options.encoding = 'UTF-8'
+plugins {
+    id 'maven-publish'
+    id 'java-library'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.18.0'
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+
+version = System.getenv("RELEASE_VERSION")
+group = "de.mehtrick"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+
+
+    testImplementation 'org.assertj:assertj-core:3.22.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'com.squareup:javapoet:1.13.0'
+    implementation 'org.freemarker:freemarker:2.3.31'
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 
+pluginBundle {
+    website = 'https://github.com/Mehtrick/bjoern'
+    vcsUrl = 'https://github.com/Mehtrick/bjoern'
+    tags = ['java', 'test', 'junit5', 'bjoern', 'bdd']
+}
 
-subprojects {
-    apply from: "${rootDir}/version.config"
+
+gradlePlugin {
+    plugins {
+        bjoern {
+            id = 'de.mehtrick.bjoern.gradle-plugin'
+            displayName = 'Bjoern Gradle Plugin'
+            implementationClass = 'de.mehtrick.bjoern.gradle.BjoernPlugin'
+            description = 'Bjoern is a universal bdd test generater (and a person). The main focus is to generate java-classes from bdd-style text files to ensure synchronisation between the specification and the code.'
+        }
+    }
+}
+
+jar {
+    archivesBaseName = "bjoern-gradle-plugin"
     version = System.getenv("RELEASE_VERSION")
-    group = "de.mehtrick"
-
-    dependencies {
-        implementation 'org.apache.commons:commons-lang3:3.12.0'
-        implementation 'commons-io:commons-io:2.11.0'
-        implementation 'org.apache.commons:commons-text:1.9'
-        implementation 'org.slf4j:slf4j-simple:1.7.36'
-
-
-        testImplementation 'org.assertj:assertj-core:3.22.0'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    }
-
-    test {
-        useJUnitPlatform()
-    }
-
 }
-
-
 
