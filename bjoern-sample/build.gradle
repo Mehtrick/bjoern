@@ -1,10 +1,5 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.6'
-    }
+plugins {
+    id "de.mehtrick.bjoern.gradle-plugin" version "1.3.1"
 }
 
 apply plugin: 'de.mehtrick.bjoern.gradle-plugin'
@@ -19,7 +14,7 @@ bjoern{
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {

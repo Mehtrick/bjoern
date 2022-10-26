@@ -16,17 +16,7 @@ The generated classes are plain Junit. You can extend them to define your own ru
 
 As a gradle plugin
 
-```gradle
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'de.mehtrick:bjoern-gradle-plugin:1.2.6'
-    }
-}
-apply plugin: "de.mehtrick.bjoern.gradle-plugin"
-```
+[![Download](https://img.shields.io/gradle-plugin-portal/v/de.mehtrick.bjoern.gradle-plugin)](https://plugins.gradle.org/plugin/de.mehtrick.bjoern.gradle-plugin)
 
 you then have to configure the generator in gradle
 
