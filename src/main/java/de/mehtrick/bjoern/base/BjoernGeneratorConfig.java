@@ -49,7 +49,6 @@ public class BjoernGeneratorConfig {
 	 *
 	 * @param args
 	 * @throws NotSupportedJunitVersionException
-	 * @throws BjoernMissingPropertyException
 	 */
 	public BjoernGeneratorConfig(String[] args) throws NotSupportedJunitVersionException {
 		setPath(findPropertyInArgs(PROPERTY_PATH, args));

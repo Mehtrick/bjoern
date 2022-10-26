@@ -17,7 +17,7 @@ public class BjoernBackgroundTestBuilder {
 	 * @return e.g.
 	 * /
 	 * <code>
-	 * @Before public void background() {
+	 * &#64;Before public void background() {
 	 * given_AFoo();
 	 * given_ABar();
 	 * }

@@ -9,7 +9,7 @@ public class BjoernStatementParser {
     /**
      * Creates the java call of the {@link BjoernStatement} inside a test scenario by extracting the parameters of the statement.
      * e.g.
-     * Given a cat with name "meow" => given_ACatWithName("meow");
+     * Given a cat with name "meow" = given_ACatWithName("meow");
      *
      * @param statement
      * @return
