@@ -207,4 +207,4 @@ WEB-INF/web.xml
 gradle.properties
 
 
-*/src/gen/*
+**/src/gen/**
