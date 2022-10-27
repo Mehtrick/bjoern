@@ -1,14 +1,8 @@
 package de.mehtrick.bjoern.base;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -38,7 +32,7 @@ public class BjoernGeneratorConfig {
 	private String template = "/asciidoc.ftlh";
 	private String templateFolder;
 	private String docExtension = "adoc";
-	private SupportedJunitVersion junitVersion = SupportedJunitVersion.junit4;
+	private SupportedJunitVersion junitVersion = SupportedJunitVersion.junit5;
 	private Charset encoding = UTF_8;
 
 	public BjoernGeneratorConfig() {
@@ -182,41 +176,5 @@ public class BjoernGeneratorConfig {
 		}
 	}
 
-
-	/**
-	 * Enum to check the supported junitVersions
-	 * Currently version 4 and 5 are supported
-	 */
-	public enum SupportedJunitVersion {
-		junit4(4, org.junit.Test.class, Before.class), junit5(5, org.junit.jupiter.api.Test.class, BeforeEach.class);
-
-		private final int junitVersion;
-		private final Class<?> testAnnotationClass;
-
-
-		private final Class<?> beforeAnnotationClass;
-
-		SupportedJunitVersion(int versionnumber, Class<?> testAnnotationClass, Class<?> beforeAnnotationClass) {
-			this.junitVersion = versionnumber;
-			this.testAnnotationClass = testAnnotationClass;
-			this.beforeAnnotationClass = beforeAnnotationClass;
-		}
-
-		public static SupportedJunitVersion getByVersionnumber(String versionNumber) throws NotSupportedJunitVersionException {
-            return Arrays.stream(SupportedJunitVersion.values()).filter(js -> Objects.equals(versionNumber, String.valueOf(js.junitVersion))).findFirst().orElseThrow(NotSupportedJunitVersionException::new);
-        }
-
-		public static Set<String> getSupportedVersionNumbers() {
-			return Arrays.stream(SupportedJunitVersion.values()).map(js -> String.valueOf(js.junitVersion)).collect(Collectors.toSet());
-		}
-
-		public Class<?> getTestAnnotationClass() {
-			return testAnnotationClass;
-		}
-
-		public Class<?> getBeforeAnnotationClass() {
-			return beforeAnnotationClass;
-		}
-	}
 
 }

@@ -1,7 +1,7 @@
 package de.mehtrick.bjoern.generator.builder;
 
 import com.squareup.javapoet.MethodSpec;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
+import de.mehtrick.bjoern.base.SupportedJunitVersion;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +15,7 @@ class BjoernBackgroundTestBuilderTest extends AbstractBuilderTest {
     @Test
     public void successJunit4() {
         //when
-        MethodSpec mappedBackground = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), BjoernGeneratorConfig.SupportedJunitVersion.junit4);
+        MethodSpec mappedBackground = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), SupportedJunitVersion.junit4);
 
         //then
         Assertions.assertThat(mappedBackground).isNotNull();
@@ -31,7 +31,7 @@ class BjoernBackgroundTestBuilderTest extends AbstractBuilderTest {
     @Test
     public void successJunit5() {
         //when
-        MethodSpec mappedBackground = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), BjoernGeneratorConfig.SupportedJunitVersion.junit5);
+        MethodSpec mappedBackground = BjoernBackgroundTestBuilder.build(bjoern.getBackground(), SupportedJunitVersion.junit5);
 
         //then
         Assertions.assertThat(mappedBackground).isNotNull();

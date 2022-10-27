@@ -34,7 +34,7 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.getExtendedTestclass()).isEqualTo("de.mehtrick.bjoern.AbstractTestclass");
         Assertions.assertThat(bjoernGeneratorConfig.getFolder()).isEqualTo("src/test/resources/");
         Assertions.assertThat(bjoernGeneratorConfig.getGendir()).isEqualTo("src/gen/java");
-        Assertions.assertThat(bjoernGeneratorConfig.getJunitVersion()).isEqualByComparingTo(BjoernGeneratorConfig.SupportedJunitVersion.junit4);
+        Assertions.assertThat(bjoernGeneratorConfig.getJunitVersion()).isEqualByComparingTo(SupportedJunitVersion.junit4);
         Assertions.assertThat(bjoernGeneratorConfig.getPath()).isEqualTo("src/test/resources/specification/bjoern.zgr");
         Assertions.assertThat(bjoernGeneratorConfig.getPckg()).isEqualTo("de.mehtrick.bjoern");
         Assertions.assertThat(bjoernGeneratorConfig.getTemplate()).isEqualTo("bla.html");
@@ -55,7 +55,7 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.getExtendedTestclass()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getFolder()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getGendir()).isNullOrEmpty();
-        Assertions.assertThat(bjoernGeneratorConfig.getJunitVersion()).isEqualByComparingTo(BjoernGeneratorConfig.SupportedJunitVersion.junit4);
+        Assertions.assertThat(bjoernGeneratorConfig.getJunitVersion()).isEqualByComparingTo(SupportedJunitVersion.junit5);
         Assertions.assertThat(bjoernGeneratorConfig.getPath()).isEqualTo("src/test/resources/specification/bjoern.zgr");
         Assertions.assertThat(bjoernGeneratorConfig.getPckg()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getTemplate()).isEqualTo("/asciidoc.ftlh");
@@ -74,13 +74,13 @@ class BjoernGeneratorConfigTest {
     @Test
     void correctJunitClasses() {
         //given
-        BjoernGeneratorConfig.SupportedJunitVersion[] supportedJunitVersions = BjoernGeneratorConfig.SupportedJunitVersion.values();
+        SupportedJunitVersion[] supportedJunitVersions = SupportedJunitVersion.values();
         //then
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit4.getBeforeAnnotationClass()).isAnnotation().isEqualTo(Before.class);
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit4.getTestAnnotationClass()).isAnnotation().isEqualTo(org.junit.Test.class);
+        Assertions.assertThat(SupportedJunitVersion.junit4.getBeforeAnnotationClass()).isAnnotation().isEqualTo(Before.class);
+        Assertions.assertThat(SupportedJunitVersion.junit4.getTestAnnotationClass()).isAnnotation().isEqualTo(org.junit.Test.class);
 
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit5.getBeforeAnnotationClass()).isAnnotation().isEqualTo(BeforeEach.class);
-        Assertions.assertThat(BjoernGeneratorConfig.SupportedJunitVersion.junit5.getTestAnnotationClass()).isAnnotation().isEqualTo(Test.class);
+        Assertions.assertThat(SupportedJunitVersion.junit5.getBeforeAnnotationClass()).isAnnotation().isEqualTo(BeforeEach.class);
+        Assertions.assertThat(SupportedJunitVersion.junit5.getTestAnnotationClass()).isAnnotation().isEqualTo(Test.class);
 
     }
 }
