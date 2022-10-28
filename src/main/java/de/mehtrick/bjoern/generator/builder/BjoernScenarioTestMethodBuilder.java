@@ -2,7 +2,7 @@ package de.mehtrick.bjoern.generator.builder;
 
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.MethodSpec.Builder;
-import de.mehtrick.bjoern.base.BjoernGeneratorConfig;
+import de.mehtrick.bjoern.base.SupportedJunitVersion;
 import de.mehtrick.bjoern.parser.modell.Bjoern;
 import de.mehtrick.bjoern.parser.modell.BjoernScenario;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class BjoernScenarioTestMethodBuilder {
 
-    public static List<MethodSpec> build(Bjoern bjoern, BjoernGeneratorConfig.SupportedJunitVersion junitVersion) {
+    public static List<MethodSpec> build(Bjoern bjoern, SupportedJunitVersion junitVersion) {
         return bjoern.getScenarios().stream().map(scenario -> parseBjoernScenario(scenario, junitVersion))
                 .collect(Collectors.toList());
     }
@@ -33,10 +33,11 @@ public class BjoernScenarioTestMethodBuilder {
      * then_FooSays("why is my beer empty");
      * }
      */
-    private static MethodSpec parseBjoernScenario(BjoernScenario scenario, BjoernGeneratorConfig.SupportedJunitVersion junitVersion) {
+    private static MethodSpec parseBjoernScenario(BjoernScenario scenario, SupportedJunitVersion junitVersion) {
         Builder main = MethodSpec.methodBuilder(StringUtils.uncapitalize(scenario.getNameFormatted()))
                 .addModifiers(Modifier.PUBLIC).addException(Exception.class).addJavadoc(scenario.getName());
         main.addAnnotation(junitVersion.getTestAnnotationClass());
+        junitVersion.addExtraAnnotations(main,scenario);
         if (scenario.getGiven() != null) {
             scenario.getGiven()
                     .forEach(given -> main.addStatement(BjoernStatementParser.createMethodCallOutOfStatemet(given)));
