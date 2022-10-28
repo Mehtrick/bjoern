@@ -4,7 +4,7 @@ Background:
     - Ein Automat
     - Ein KassenSystem
 Scenarios: 
-  - Scenario: Getraenk nicht vorhanden
+  - Scenario: Getränk nicht vorhanden
     Given: 
       - Mit "2" Flaschen Cola
       - Mit "0" Flaschen Sprite
