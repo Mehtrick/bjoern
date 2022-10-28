@@ -4,7 +4,7 @@ Background:
     - A Foo
     - A Bar
 Scenarios: 
-  - Scenario: Foo is not happy
+  - Scenario: Foo is not häppy
     Given: 
       - there are "2" bottles of wine
       - there are "0" bottles of beer
