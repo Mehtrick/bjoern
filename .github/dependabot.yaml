@@ -11,11 +11,16 @@ updates:
       interval: "weekly"
     target-branch: "main"
     commit-message:
-      prefix: "chore"
+      prefix: "dependency-update:"
       include: "scope"
     labels:
       - "dependencies"
       - "gradle"
     reviewers:
       - "Mehtrick"
-    open-pull-requests-limit: 10
+    groups:
+      # This is the name of your group, it will be used in PR titles and branch names
+      dependencies:
+        # A pattern can be...
+        patterns:
+          - "*" # a single dependency name
