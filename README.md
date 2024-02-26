@@ -27,6 +27,9 @@ bjoern{
 	gendir = "${projectDir}/src/gen/bjoern"
 }
 ```
+**Info:** You need a gradle version > 7.6.2 because there is a bug with jackson dependencies, which are needed to use this project. https://github.com/gradle/gradle/issues/24390
+
+Gradle 8 is currently not supported.
 
 ### Available Tasks
 

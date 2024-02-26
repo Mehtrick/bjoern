@@ -1,5 +1,5 @@
 plugins {
-    id "de.mehtrick.bjoern.gradle-plugin" version "1.3.2"
+    id "de.mehtrick.bjoern.gradle-plugin" version "1.3.3"
 }
 
 apply plugin: 'de.mehtrick.bjoern.gradle-plugin'
@@ -12,6 +12,13 @@ bjoern{
 	gendir = "${projectDir}/src/gen/bjoern/"
    	docdir = "${projectDir}/src/gen/bjoern/docs"
     junitVersion = 4
+}
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
 }
 
 repositories {
