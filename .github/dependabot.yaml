@@ -15,7 +15,6 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
-      - "gradle"
     reviewers:
       - "Mehtrick"
     groups:
