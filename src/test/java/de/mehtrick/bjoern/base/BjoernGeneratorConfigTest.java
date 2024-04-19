@@ -24,7 +24,7 @@ class BjoernGeneratorConfigTest {
         //given
         BjoernGeneratorConfig bjoernGeneratorConfig = new BjoernGeneratorConfig(new String[]{"path=src/test/resources/specification/bjoern.zgr",
                 "folder=src/test/resources/", "package=de.mehtrick.bjoern", "gendir=src/gen/java", "docdir=src/doc/resources", "docExtension=txt",
-                "extendedTestclass=de.mehtrick.bjoern.AbstractTestclass", "junitVersion=4", "encoding=UTF-16", "template=bla.html", "templateFolder=src/test/templates", "someStupidProperty=fjsa"});
+                "extendedTestclass=de.mehtrick.bjoern.AbstractTestclass", "junitVersion=4", "encoding=UTF-16", "template=bla.html", "templateFolder=src/test/templates", "someStupidProperty=fjsa", "specRecursive=true"});
         //when
         bjoernGeneratorConfig.validate();
         // then
@@ -39,6 +39,7 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.getPckg()).isEqualTo("de.mehtrick.bjoern");
         Assertions.assertThat(bjoernGeneratorConfig.getTemplate()).isEqualTo("bla.html");
         Assertions.assertThat(bjoernGeneratorConfig.getTemplateFolder()).isEqualTo("src/test/templates");
+        Assertions.assertThat(bjoernGeneratorConfig.isSpecRecursive()).isEqualTo(true);
         Assertions.assertThat(bjoernGeneratorConfig.isFoldersSet()).isTrue();
     }
 
@@ -59,6 +60,7 @@ class BjoernGeneratorConfigTest {
         Assertions.assertThat(bjoernGeneratorConfig.getPath()).isEqualTo("src/test/resources/specification/bjoern.zgr");
         Assertions.assertThat(bjoernGeneratorConfig.getPckg()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.getTemplate()).isEqualTo("/asciidoc.ftlh");
+        Assertions.assertThat(bjoernGeneratorConfig.isSpecRecursive()).isEqualTo(false);
         Assertions.assertThat(bjoernGeneratorConfig.getTemplateFolder()).isNullOrEmpty();
         Assertions.assertThat(bjoernGeneratorConfig.isFoldersSet()).isFalse();
     }

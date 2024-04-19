@@ -17,6 +17,7 @@ public class BjoernDocGeneratorTask extends DefaultTask {
             bjoernGeneratorConfig.setTemplate(extension.getTemplate());
             bjoernGeneratorConfig.setTemplateFolder(extension.getTemplateFolder());
             bjoernGeneratorConfig.setDocExtension(extension.getDocExtension());
+            bjoernGeneratorConfig.setSpecRecursive(extension.isSpecRecursive());
             new BjoernDocApplication(bjoernGeneratorConfig).generateBjoernDocs();
 
     }
