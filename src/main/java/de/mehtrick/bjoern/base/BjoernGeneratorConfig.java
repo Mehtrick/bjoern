@@ -1,5 +1,6 @@
 package de.mehtrick.bjoern.base;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.nio.charset.Charset;
@@ -22,6 +23,7 @@ public class BjoernGeneratorConfig {
 	private final String PROPERTY_DOC_EXTENSION = "docExtension";
 	private final String PROPERTY_JUNIT_VERSION = "junitVersion";
 	private final String PROPERTY_ENCODING = "encoding";
+	private final String PROPERTY_SPEC_RECURSIVE = "specRecursive";
 	private String path;
 	private String folder;
 
@@ -34,6 +36,7 @@ public class BjoernGeneratorConfig {
 	private String docExtension = "adoc";
 	private SupportedJunitVersion junitVersion = SupportedJunitVersion.junit5;
 	private Charset encoding = UTF_8;
+	private boolean specRecursive = false;
 
 	public BjoernGeneratorConfig() {
 	}
@@ -56,6 +59,7 @@ public class BjoernGeneratorConfig {
 		setDocExtension(findPropertyInArgs(PROPERTY_DOC_EXTENSION, args));
 		setJunitVersion(findPropertyInArgs(PROPERTY_JUNIT_VERSION, args));
 		setEncoding(findPropertyInArgs(PROPERTY_ENCODING, args));
+		setSpecRecursive(BooleanUtils.toBoolean(findPropertyInArgs(PROPERTY_SPEC_RECURSIVE, args)));
 	}
 
 	public void validate() throws BjoernMissingPropertyException {
@@ -177,4 +181,11 @@ public class BjoernGeneratorConfig {
 	}
 
 
+	public boolean isSpecRecursive() {
+		return specRecursive;
+	}
+
+	public void setSpecRecursive(boolean specRecursive) {
+		this.specRecursive = specRecursive;
+	}
 }
