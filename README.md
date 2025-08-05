@@ -29,7 +29,7 @@ bjoern{
 ```
 **Info:** You need a gradle version > 7.6.2 because there is a bug with jackson dependencies, which are needed to use this project. https://github.com/gradle/gradle/issues/24390
 
-Gradle 9 is now supported.
+Gradle 8 is now supported.
 
 ### Available Tasks
 
