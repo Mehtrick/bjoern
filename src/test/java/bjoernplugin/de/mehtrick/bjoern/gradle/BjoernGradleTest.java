@@ -1,12 +1,12 @@
 package bjoernplugin.de.mehtrick.bjoern.gradle;
 
-import org.gradle.internal.impldep.org.junit.Rule;
-import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import java.nio.file.Path;
 
 public class BjoernGradleTest {
-	@Rule
-	public final TemporaryFolder testProjectDir = new TemporaryFolder();
+	@TempDir
+	Path testProjectDir;
 
 	@Test
 	public void test() throws Exception {
