@@ -1,25 +1,38 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
 updates:
+  # Gradle dependencies
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "master"
-    commit-message:
-      prefix: "dependency-update:"
-      include: "scope"
-    labels:
-      - "dependencies"
-    reviewers:
-      - "Mehtrick"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 1
     groups:
-      # This is the name of your group, it will be used in PR titles and branch names
-      dependencies:
-        # A pattern can be...
+      gradle-dependencies:
         patterns:
-          - "*" # a single dependency name
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+      gradle-major:
+        patterns:
+          - "*"
+        update-types:
+          - "major"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 1
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
