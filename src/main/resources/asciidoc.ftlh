@@ -2,13 +2,13 @@
 :toc:
 
 <#if gitHistory?? && gitHistory?has_content>
-== Git History
+== Git Historie
 [cols="15%,20%,65%"]
 |===
-|*Commit-Datum* |*Committer* |*Commit-Kommentar*
+|*Datum* |*Autor* |*Kommentar*
 
 <#list gitHistory as entry>
-|${entry.date} |${entry.committer} |${entry.message}
+|${entry.date} |${entry.author} |${entry.message}
 </#list>
 |===
 

@@ -6,12 +6,12 @@ package de.mehtrick.bjoern.doc;
 public class GitHistoryEntry {
 
     private final String date;
-    private final String committer;
+    private final String author;
     private final String message;
 
-    public GitHistoryEntry(String date, String committer, String message) {
+    public GitHistoryEntry(String date, String author, String message) {
         this.date = date;
-        this.committer = committer;
+        this.author = author;
         this.message = message;
     }
 
@@ -19,8 +19,8 @@ public class GitHistoryEntry {
         return date;
     }
 
-    public String getCommitter() {
-        return committer;
+    public String getAuthor() {
+        return author;
     }
 
     public String getMessage() {

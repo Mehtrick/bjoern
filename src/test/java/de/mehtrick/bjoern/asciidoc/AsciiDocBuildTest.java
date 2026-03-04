@@ -53,10 +53,10 @@ public class AsciiDocBuildTest {
 		File generatedFile = new File("src/gen/resources/bjoern.adoc");
 		assertThat(generatedFile).exists();
 		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
-		assertThat(content).contains("== Git History");
-		assertThat(content).contains("*Commit-Datum*");
-		assertThat(content).contains("*Committer*");
-		assertThat(content).contains("*Commit-Kommentar*");
+		assertThat(content).contains("== Git Historie");
+		assertThat(content).contains("*Datum*");
+		assertThat(content).contains("*Autor*");
+		assertThat(content).contains("*Kommentar*");
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class AsciiDocBuildTest {
 		File generatedFile = new File("src/gen/resources/bjoern.adoc");
 		assertThat(generatedFile).exists();
 		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
-		assertThat(content).doesNotContain("== Git History");
+		assertThat(content).doesNotContain("== Git Historie");
 	}
 
 }
