@@ -10,7 +10,7 @@ public class MissingNameValidation extends AbstractValidation {
     @Override
     public void validate(String[] lines, int index) throws BjoernValidationsException {
         String trimmedLine = getTrimmedLine(lines, index);
-        if(trimmedLine.startsWith(BjoernKeywords.SCENARIO.keyword)||trimmedLine.startsWith(BjoernKeywords.FEATURE.keyword)){
+        if(trimmedLine.startsWith(BjoernKeywords.SCENARIO.keyword)||trimmedLine.startsWith(BjoernKeywords.FEATURE.keyword)||trimmedLine.startsWith(BjoernKeywords.REFERENCE.keyword)){
             if(trimmedLine.indexOf(":")+1 == trimmedLine.length()){
                 throw new BjoernValidationsException(index,errorText);
             }
