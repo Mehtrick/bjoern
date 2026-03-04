@@ -125,6 +125,22 @@ public class BjoernValidatorTest {
     }
 
     @Test
+    public void missingReferenceValue() {
+        String zgr = "Feature: Feature\r\n" +
+                "Reference:\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Given: \r\n" +
+                "      - Mit  Flaschen Sprite";
+
+        //when
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 2: The keyword needs a value e.g. \"Feature: This is a Feature\" or \"Scenario: This is a Scneario\"");
+    }
+
+    @Test
     public void correctsmaple() {
         String zgr = "Feature: Feature\r\n" +
                 "Background:\r\n" +
