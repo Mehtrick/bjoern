@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +29,10 @@ public class BjoernDocGenerator extends BjoernGeneratorConfigProvided {
         @SuppressWarnings("unchecked")
         //Converts the bjoern object into a map, so that freemarker can use the values of the file
         Map<String, Object> convertValue = new ObjectMapper().convertValue(bjoern, Map.class);
+        if (bjoernGeneratorConfig.isGitHistory()) {
+            List<GitHistoryEntry> history = new GitHistoryService().getHistory(bjoern.getFilePath());
+            convertValue.put("gitHistory", history);
+        }
         Template template = cfg.getTemplate(bjoernGeneratorConfig.getTemplate(),bjoernGeneratorConfig.getEncoding().toString());
         try (StringWriter stringWriter = new StringWriter()) {
             template.process(convertValue, stringWriter);

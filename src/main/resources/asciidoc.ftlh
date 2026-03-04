@@ -6,6 +6,18 @@ Reference: ${referenceAsAsciidoc}
 
 </#if>
 
+<#if gitHistory?? && gitHistory?has_content>
+== Git Historie
+[cols="15%,20%,65%"]
+|===
+|*Datum* |*Autor* |*Kommentar*
+
+<#list gitHistory as entry>
+|${entry.date} |${entry.author} |${entry.message}
+</#list>
+|===
+
+</#if>
 <#if background??>
 == Background
 [cols="10%,90%"]
