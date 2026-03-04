@@ -1,6 +1,18 @@
 = ${feature}
 :toc:
 
+<#if gitHistory?? && gitHistory?has_content>
+== Git History
+[cols="15%,20%,65%"]
+|===
+|*Commit-Datum* |*Committer* |*Commit-Kommentar*
+
+<#list gitHistory as entry>
+|${entry.date} |${entry.committer} |${entry.message}
+</#list>
+|===
+
+</#if>
 <#if background??>
 == Background
 [cols="10%,90%"]

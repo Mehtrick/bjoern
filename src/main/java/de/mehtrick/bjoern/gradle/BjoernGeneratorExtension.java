@@ -14,6 +14,7 @@ public class BjoernGeneratorExtension {
     private String junitVersion;
     private String encoding;
     private Boolean specRecursive = false;
+    private Boolean gitHistory = false;
 
     public BjoernGeneratorExtension() {
     }
@@ -130,6 +131,14 @@ public class BjoernGeneratorExtension {
 
     public Boolean isSpecRecursive() {
         return specRecursive;
+    }
+
+    public Boolean isGitHistory() {
+        return gitHistory;
+    }
+
+    public void setGitHistory(Boolean gitHistory) {
+        this.gitHistory = gitHistory;
     }
 
 }

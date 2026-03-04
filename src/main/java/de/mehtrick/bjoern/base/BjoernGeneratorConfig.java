@@ -24,6 +24,7 @@ public class BjoernGeneratorConfig {
 	private final String PROPERTY_JUNIT_VERSION = "junitVersion";
 	private final String PROPERTY_ENCODING = "encoding";
 	private final String PROPERTY_SPEC_RECURSIVE = "specRecursive";
+	private final String PROPERTY_GIT_HISTORY = "gitHistory";
 	private String path;
 	private String folder;
 
@@ -37,6 +38,7 @@ public class BjoernGeneratorConfig {
 	private SupportedJunitVersion junitVersion = SupportedJunitVersion.junit5;
 	private Charset encoding = UTF_8;
 	private boolean specRecursive = false;
+	private boolean gitHistory = false;
 
 	public BjoernGeneratorConfig() {
 	}
@@ -60,6 +62,7 @@ public class BjoernGeneratorConfig {
 		setJunitVersion(findPropertyInArgs(PROPERTY_JUNIT_VERSION, args));
 		setEncoding(findPropertyInArgs(PROPERTY_ENCODING, args));
 		setSpecRecursive(BooleanUtils.toBoolean(findPropertyInArgs(PROPERTY_SPEC_RECURSIVE, args)));
+		setGitHistory(BooleanUtils.toBoolean(findPropertyInArgs(PROPERTY_GIT_HISTORY, args)));
 	}
 
 	public void validate() throws BjoernMissingPropertyException {
@@ -187,5 +190,13 @@ public class BjoernGeneratorConfig {
 
 	public void setSpecRecursive(boolean specRecursive) {
 		this.specRecursive = specRecursive;
+	}
+
+	public boolean isGitHistory() {
+		return gitHistory;
+	}
+
+	public void setGitHistory(boolean gitHistory) {
+		this.gitHistory = gitHistory;
 	}
 }
