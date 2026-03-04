@@ -59,6 +59,7 @@ src/main/resources/
 
 ```yaml
 Feature: Description of the feature
+Version: "1.0.0"
 Reference: "[TICKET-123](https://example.com/TICKET-123)"
 
 Background:
@@ -84,6 +85,8 @@ Scenarios:
     Then:
       - Other assertion
 ```
+
+The optional `Version` field specifies the version of the spec. In generated Java it becomes a `@version` Javadoc tag; in generated AsciiDoc it is rendered as `Version: <value>` below the feature title.
 
 The optional `Reference` field links a spec to an external ticket or resource. It accepts plain text or a Markdown link `[text](url)`. In generated Java it becomes a `@see` Javadoc tag; in generated AsciiDoc it is rendered as a hyperlink below the feature title.
 
