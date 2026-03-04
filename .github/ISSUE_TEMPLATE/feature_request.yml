@@ -1,0 +1,38 @@
+name: Feature Request
+description: Schlage ein neues Feature für Bjoern vor
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vielen Dank, dass du dir die Zeit nimmst, ein neues Feature vorzuschlagen!
+  - type: textarea
+    id: desired
+    attributes:
+      label: Was wird gewünscht?
+      description: Beschreibe das gewünschte Feature so genau wie möglich.
+      placeholder: Ich würde mir wünschen, dass Bjoern ...
+    validations:
+      required: true
+  - type: textarea
+    id: benefit
+    attributes:
+      label: Was ist der Nutzen?
+      description: Erkläre, welchen Mehrwert dieses Feature für Benutzer von Bjoern bringt.
+      placeholder: Dieses Feature würde helfen, weil ...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Wie könnte eine Lösung beispielhaft aussehen?
+      description: Beschreibe, wie eine mögliche Implementierung oder Nutzung des Features aussehen könnte (z.B. Konfigurationsbeispiel, Codeausschnitt, etc.).
+      placeholder: |
+        Zum Beispiel könnte die Konfiguration so aussehen:
+        ```groovy
+        bjoern {
+          ...
+        }
+        ```
+    validations:
+      required: false

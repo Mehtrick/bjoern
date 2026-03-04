@@ -1,0 +1,57 @@
+name: Bug Report
+description: Melde einen Fehler in Bjoern
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vielen Dank, dass du dir die Zeit nimmst, diesen Fehler zu melden!
+  - type: input
+    id: version
+    attributes:
+      label: Plugin-Version
+      description: Welche Version des Bjoern-Plugins verwendest du?
+      placeholder: z.B. 1.2.3
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Verwendete Konfiguration
+      description: Welche Konfiguration hast du im `bjoern`-Block deiner `build.gradle` verwendet?
+      placeholder: |
+        ```groovy
+        bjoern {
+          path = "..."
+          pckg = "..."
+          gendir = "..."
+        }
+        ```
+      render: groovy
+    validations:
+      required: true
+  - type: textarea
+    id: spec
+    attributes:
+      label: Spec-Datei
+      description: Füge den Inhalt der `.zgr`-Spec-Datei ein, die den Fehler verursacht.
+      placeholder: |
+        ```yaml
+        Feature: ...
+
+        Scenarios:
+          - Scenario: ...
+        ```
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Was ist der Fehler?
+      description: Beschreibe den aufgetretenen Fehler. Füge ggf. Fehlermeldungen oder Stack Traces ein.
+      placeholder: |
+        Wenn ich Bjoern ausführe, erhalte ich folgenden Fehler:
+        ...
+    validations:
+      required: true
