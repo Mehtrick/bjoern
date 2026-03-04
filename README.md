@@ -64,6 +64,7 @@ You will find the typical BDD keywords in it. For more convenience there is a [V
 `example.zgr`
 ```yaml
 Feature: Test eines KassenAutomaten
+Version: "1.0.0"
 Reference: "[TICKET-123](https://example.com/TICKET-123)"
 Background:
   Given:
@@ -92,6 +93,10 @@ Scenarios:
 
 ```
 
+The optional `Version` field specifies the version of the spec:
+- In generated Java: rendered as a `@version` Javadoc tag on the abstract class.
+- In generated docs: rendered as `Version: <value>` below the feature title.
+
 The optional `Reference` field links a spec to an external ticket or resource. It accepts plain text or a Markdown link `[text](url)`:
 - In generated Java: rendered as a `@see <a href="url">text</a>` Javadoc tag on the abstract class.
 - In generated docs: rendered as an AsciiDoc hyperlink (`link:url[text]`) below the feature title.
@@ -110,6 +115,7 @@ import org.junit.Test;
 
 /**
  * Test eines KassenAutomaten
+ * @version 1.0.0
  * @see <a href="https://example.com/TICKET-123">TICKET-123</a> */
 public abstract class AbstractTestEinesKassenautomaten extends AbstractTestclass implements TestEinesKassenautomatenInterface {
   /**
@@ -179,6 +185,8 @@ public interface TestEinesKassenautomatenInterface {
 ```adoc
 = Test Foo
 :toc:
+
+Version: 1.0.0
 
 Reference: link:https://example.com/TICKET-123[TICKET-123]
 
