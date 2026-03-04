@@ -1,24 +1,24 @@
 name: Bug Report
-description: Melde einen Fehler in Bjoern
+description: Report a bug in Bjoern
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Vielen Dank, dass du dir die Zeit nimmst, diesen Fehler zu melden!
+        Thank you for taking the time to report this bug!
   - type: input
     id: version
     attributes:
-      label: Plugin-Version
-      description: Welche Version des Bjoern-Plugins verwendest du?
-      placeholder: z.B. 1.2.3
+      label: Plugin Version
+      description: Which version of the Bjoern plugin are you using?
+      placeholder: e.g. 1.2.3
     validations:
       required: true
   - type: textarea
     id: configuration
     attributes:
-      label: Verwendete Konfiguration
-      description: Welche Konfiguration hast du im `bjoern`-Block deiner `build.gradle` verwendet?
+      label: Used Configuration
+      description: What configuration did you use in the `bjoern` block of your `build.gradle`?
       placeholder: |
         ```groovy
         bjoern {
@@ -33,8 +33,8 @@ body:
   - type: textarea
     id: spec
     attributes:
-      label: Spec-Datei
-      description: Füge den Inhalt der `.zgr`-Spec-Datei ein, die den Fehler verursacht.
+      label: Spec File
+      description: Paste the content of the `.zgr` spec file that causes the bug.
       placeholder: |
         ```yaml
         Feature: ...
@@ -48,10 +48,10 @@ body:
   - type: textarea
     id: error
     attributes:
-      label: Was ist der Fehler?
-      description: Beschreibe den aufgetretenen Fehler. Füge ggf. Fehlermeldungen oder Stack Traces ein.
+      label: What is the error?
+      description: Describe the error that occurred. Include error messages or stack traces if available.
       placeholder: |
-        Wenn ich Bjoern ausführe, erhalte ich folgenden Fehler:
+        When running Bjoern, I get the following error:
         ...
     validations:
       required: true
