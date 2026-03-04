@@ -1,0 +1,10 @@
+Feature: Test mit Changelog
+Changelog: "This is a changelog entry describing what changed in this spec."
+Scenarios: 
+  - Scenario: Einfaches Szenario
+    Given: 
+      - Ein Benutzer
+    When:
+      - Benutzer tut etwas
+    Then:
+      - Ergebnis ist korrekt

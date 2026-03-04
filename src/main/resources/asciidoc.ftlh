@@ -9,6 +9,10 @@ Version: ${version}
 Reference: ${referenceAsAsciidoc}
 
 </#if>
+<#if changelog?? && changelog?has_content>
+Changelog: ${changelog}
+
+</#if>
 
 <#if gitHistory?? && gitHistory?has_content>
 == Git History

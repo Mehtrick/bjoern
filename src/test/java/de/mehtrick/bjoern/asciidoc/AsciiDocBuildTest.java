@@ -54,6 +54,28 @@ public class AsciiDocBuildTest {
 	}
 
 	@Test
+	@DisplayName("Test Doc Generation with Changelog")
+	public void testDocGenerationWithChangelog() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
+		BjoernDocApplication.main(new String[]{"path=src/test/resources/changelog.zgr", "docdir=src/gen/resources"});
+		File generatedFile = new File("src/gen/resources/changelog.adoc");
+		assertThat(generatedFile).exists();
+		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
+		assertThat(content).contains("= Test mit Changelog");
+		assertThat(content).contains("Changelog: This is a changelog entry describing what changed in this spec.");
+	}
+
+	@Test
+	@DisplayName("Test Doc Generation without Changelog does not include changelog section")
+	public void testDocGenerationWithoutChangelog() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
+		BjoernDocApplication.main(new String[]{"path=src/test/resources/version.zgr", "docdir=src/gen/resources"});
+		File generatedFile = new File("src/gen/resources/version.adoc");
+		assertThat(generatedFile).exists();
+		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
+		assertThat(content).contains("= Test mit Version");
+		assertThat(content).doesNotContain("Changelog:");
+	}
+
+	@Test
 	@DisplayName("Test Generation of Empty Given")
 	public void testGenerationOfEmptyGiven() throws BjoernMissingPropertyException, FileNotFoundException, NotSupportedJunitVersionException {
 		BjoernDocApplication.main(new String[]{"path=src/test/resources/empty-given.zgr", "docdir=src/gen/resources"});

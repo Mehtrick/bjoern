@@ -96,6 +96,10 @@ The optional `Reference` field links a spec to an external ticket or resource. I
 - In generated Java: rendered as a `@see <a href="url">text</a>` Javadoc tag on the abstract class.
 - In generated docs: rendered as an AsciiDoc hyperlink (`link:url[text]`) below the feature title.
 
+The optional `Changelog` field allows you to document changes, background information, or technical rationale for the specification. It accepts arbitrary free text:
+- In generated Java: rendered as a `@Changelog` tag in the Javadoc of the abstract class.
+- In generated docs: inserted after the introduction (version/reference), only when present.
+
 ## Code generation
 
 Bjoern will then generate the TestClasses based on the spec
