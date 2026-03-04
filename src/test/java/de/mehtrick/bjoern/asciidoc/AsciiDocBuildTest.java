@@ -24,6 +24,12 @@ public class AsciiDocBuildTest {
 	}
 
 	@Test
+	@DisplayName("Test Doc Generation with Reference")
+	public void testDocGenerationWithReference() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
+		BjoernDocApplication.main(new String[]{"path=src/test/resources/reference.zgr", "docdir=src/gen/resources"});
+	}
+
+	@Test
 	@DisplayName("Test Generation of Empty Given")
 	public void testGenerationOfEmptyGiven() throws BjoernMissingPropertyException, FileNotFoundException, NotSupportedJunitVersionException {
 		BjoernDocApplication.main(new String[]{"path=src/test/resources/empty-given.zgr", "docdir=src/gen/resources"});

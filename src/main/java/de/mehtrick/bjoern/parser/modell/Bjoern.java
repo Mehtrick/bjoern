@@ -3,16 +3,22 @@ package de.mehtrick.bjoern.parser.modell;
 import de.mehtrick.bjoern.parser.BjoernTextParser;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Bjoern {
+	private static final Pattern MARKDOWN_LINK_PATTERN = Pattern.compile("\\[([^\\]]+)\\]\\(([^)]+)\\)");
+
 	private String feature;
+	private String reference;
 	private BjoernBackground background;
 	private List<BjoernScenario> scenarios;
 	private String filePath;
 
 	public Bjoern(BjoernZGRModell yamlModell, String path) {
 		setFeature(yamlModell.getFeature());
+		setReference(yamlModell.getReference());
 		setScenarios(yamlModell.getScenarios().stream().map(BjoernScenario::new).collect(Collectors.toList()));
 		setFilePath(path);
 		if (yamlModell.getBackground() != null) {
@@ -30,6 +36,44 @@ public class Bjoern {
 
 	public void setFeature(String feature) {
 		this.feature = feature;
+	}
+
+	public String getReference() {
+		return this.reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	/**
+	 * Returns the reference formatted as a Javadoc hyperlink if it is a Markdown link ([text](url)),
+	 * otherwise returns the plain reference text.
+	 */
+	public String getReferenceAsJavadoc() {
+		if (reference == null) {
+			return null;
+		}
+		Matcher matcher = MARKDOWN_LINK_PATTERN.matcher(reference);
+		if (matcher.matches()) {
+			return "<a href=\"" + matcher.group(2) + "\">" + matcher.group(1) + "</a>";
+		}
+		return reference;
+	}
+
+	/**
+	 * Returns the reference formatted as an AsciiDoc hyperlink if it is a Markdown link ([text](url)),
+	 * otherwise returns the plain reference text.
+	 */
+	public String getReferenceAsAsciidoc() {
+		if (reference == null) {
+			return null;
+		}
+		Matcher matcher = MARKDOWN_LINK_PATTERN.matcher(reference);
+		if (matcher.matches()) {
+			return "link:" + matcher.group(2) + "[" + matcher.group(1) + "]";
+		}
+		return reference;
 	}
 
 	public BjoernBackground getBackground() {
@@ -58,6 +102,6 @@ public class Bjoern {
 
 
 	public String toString() {
-		return "Bjoern(feature=" + this.getFeature() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
+		return "Bjoern(feature=" + this.getFeature() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
 	}
 }

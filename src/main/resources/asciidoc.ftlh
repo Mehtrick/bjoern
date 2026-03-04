@@ -1,6 +1,11 @@
 = ${feature}
 :toc:
 
+<#if referenceAsAsciidoc??>
+Reference: ${referenceAsAsciidoc}
+
+</#if>
+
 <#if background??>
 == Background
 [cols="10%,90%"]

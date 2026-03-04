@@ -21,8 +21,8 @@ public class BjoernValidatorTest {
         Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
                     bjoernValidator.validate("  WrongKeyword     \r\n      \r\n anotherWrongOne", "defaultpath");
                 }
-        ).withMessageContaining("ValidationError at line 1: The line starts with an invalid Keyword. Found \"  WrongKeyword     \". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!")
-                .withMessageContaining("ValidationError at line 3: The line starts with an invalid Keyword. Found \" anotherWrongOne\". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
+        ).withMessageContaining("ValidationError at line 1: The line starts with an invalid Keyword. Found \"  WrongKeyword     \". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,Reference:,- Scenario:,Scenarios:,-. This check is case-sensitive!")
+                .withMessageContaining("ValidationError at line 3: The line starts with an invalid Keyword. Found \" anotherWrongOne\". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,Reference:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
     }
 
     @Test

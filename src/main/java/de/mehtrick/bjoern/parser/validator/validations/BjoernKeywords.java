@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public enum BjoernKeywords {
 
-    GIVEN("Given:"), WHEN("When:"), THEN("Then:"), BACKGROUND("Background:"), FEATURE("Feature:"), SCENARIO("- Scenario:"), SCENARIOS("Scenarios:"), STATEMENT("-");
+    GIVEN("Given:"), WHEN("When:"), THEN("Then:"), BACKGROUND("Background:"), FEATURE("Feature:"), REFERENCE("Reference:"), SCENARIO("- Scenario:"), SCENARIOS("Scenarios:"), STATEMENT("-");
 
     public String keyword;
 

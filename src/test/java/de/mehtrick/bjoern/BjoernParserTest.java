@@ -26,6 +26,40 @@ public class BjoernParserTest {
 		assertThat(bjoern.getFilePath()).isEqualTo(path);
 		assertThat(bjoern.getFeature()).isEqualTo("Test eines Getraenkeautomaten");
 		assertThat(bjoern.getScenarios()).hasSize(2);
+		assertThat(bjoern.getReference()).isNull();
+	}
+
+	@Test
+	public void testBjoernWithMarkdownLinkReference() {
+		String path = "src/test/resources/reference.zgr";
+		Bjoern bjoern = new BjoernParser().parseSpec(path, Charset.defaultCharset());
+		assertThat(bjoern.getReference()).isEqualTo("[TICKET-123](https://example.com/TICKET-123)");
+		assertThat(bjoern.getReferenceAsJavadoc()).isEqualTo("<a href=\"https://example.com/TICKET-123\">TICKET-123</a>");
+		assertThat(bjoern.getReferenceAsAsciidoc()).isEqualTo("link:https://example.com/TICKET-123[TICKET-123]");
+	}
+
+	@Test
+	public void testBjoernWithPlainTextReference() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/bjoern.zgr", Charset.defaultCharset());
+		bjoern.setReference("TICKET-456");
+		assertThat(bjoern.getReferenceAsJavadoc()).isEqualTo("TICKET-456");
+		assertThat(bjoern.getReferenceAsAsciidoc()).isEqualTo("TICKET-456");
+	}
+
+	@Test
+	public void testReferenceConversionWithMalformedMarkdownLink() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/bjoern.zgr", Charset.defaultCharset());
+		bjoern.setReference("[text](");
+		assertThat(bjoern.getReferenceAsJavadoc()).isEqualTo("[text](");
+		assertThat(bjoern.getReferenceAsAsciidoc()).isEqualTo("[text](");
+	}
+
+	@Test
+	public void testReferenceConversionWithNullReference() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/bjoern.zgr", Charset.defaultCharset());
+		assertThat(bjoern.getReference()).isNull();
+		assertThat(bjoern.getReferenceAsJavadoc()).isNull();
+		assertThat(bjoern.getReferenceAsAsciidoc()).isNull();
 	}
 
 	@Test
