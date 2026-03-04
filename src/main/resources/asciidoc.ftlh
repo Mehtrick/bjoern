@@ -1,7 +1,7 @@
 = ${feature}
 :toc:
 
-<#if referenceAsAsciidoc??>
+<#if referenceAsAsciidoc?? && referenceAsAsciidoc?has_content>
 Reference: ${referenceAsAsciidoc}
 
 </#if>

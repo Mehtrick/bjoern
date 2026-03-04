@@ -45,7 +45,7 @@ public class BjoernFeatureTestClassBuilder extends BjoernGeneratorConfigProvided
         if (StringUtils.isNotBlank(bjoern.getReference())) {
             javadoc.append("\n@see ").append(bjoern.getReferenceAsJavadoc());
         }
-        featureClassBuilder.addJavadoc(javadoc.toString());
+        featureClassBuilder.addJavadoc("$L", javadoc.toString());
     }
 
     private TypeSpec createMethodInterface(Bjoern bjoern, Builder featureClassBuilder) {
