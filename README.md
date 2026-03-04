@@ -54,6 +54,7 @@ Gradle 8 is now supported.
 | junitVersion      | no                                                        | The used junit-version. Possible values are 4 or 5. The value changes the used junit annotations, to secure the correct test functionality                                                       | "5"                                                   | "4"                                           |
 | encoding          | no                                                        | The encoding used for the spec files. **This Encoding ist not used for the generated java files**. Bjoern uses [java poet](https://github.com/square/javapoet) which only generates UTF-8 files. | "UTF-8"                                               | "UTF-16"                                      |
 | specRecursive     | no                                                        | Defines if the folder of specs should be scanned recursive or not                                                                                                                                | false                                                 | true                                          |
+| gitHistory        | no                                                        | Includes the git commit history in the generated documentation. Shows date, author, and commit message for each spec file                                                                       | false                                                 | true                                          |
 
 ## Specification
 
