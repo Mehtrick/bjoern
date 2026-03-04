@@ -24,12 +24,13 @@ dependencies {
     implementation 'com.squareup:javapoet:1.13.0'
     implementation 'org.freemarker:freemarker:2.3.32'
     implementation 'junit:junit:4.13.2'
-    implementation 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    
     testImplementation 'org.assertj:assertj-core:3.25.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 }
 
@@ -38,26 +39,22 @@ test {
 }
 
 
-pluginBundle {
+gradlePlugin {
     website = 'https://github.com/Mehtrick/bjoern'
     vcsUrl = 'https://github.com/Mehtrick/bjoern'
-    tags = ['java', 'test', 'junit5', 'bjoern', 'bdd']
-}
-
-
-gradlePlugin {
     plugins {
         bjoern {
             id = 'de.mehtrick.bjoern.gradle-plugin'
             displayName = 'Bjoern Gradle Plugin'
             implementationClass = 'de.mehtrick.bjoern.gradle.BjoernPlugin'
             description = 'Bjoern is a universal bdd test generater (and a person). The main focus is to generate java-classes from bdd-style text files to ensure synchronisation between the specification and the code.'
+            tags = ['java', 'test', 'junit5', 'bjoern', 'bdd']
         }
     }
 }
 
 jar {
-    archivesBaseName = "bjoern-gradle-plugin"
-    version = System.getenv("RELEASE_VERSION")
+    archiveBaseName = "bjoern-gradle-plugin"
+    archiveVersion = System.getenv("RELEASE_VERSION")
 }
 
