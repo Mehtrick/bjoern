@@ -61,7 +61,8 @@ public class AsciiDocBuildTest {
 		assertThat(generatedFile).exists();
 		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
 		assertThat(content).contains("= Test mit Changelog");
-		assertThat(content).contains("Changelog: This is a changelog entry describing what changed in this spec.");
+		assertThat(content).contains("First line of the changelog.");
+		assertThat(content).contains("Second line with a pipe \\| character.");
 	}
 
 	@Test

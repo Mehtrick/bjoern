@@ -102,7 +102,8 @@ class BjoernFeatureTestClassBuilderTest extends AbstractBuilderTest {
         //then
         Assertions.assertThat(mappedFeature.javadoc.toString()).contains("Test mit Changelog");
         Assertions.assertThat(mappedFeature.javadoc.toString()).contains("@Changelog");
-        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("This is a changelog entry describing what changed in this spec.");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("First line of the changelog.");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("Second line with a pipe | character.");
     }
 
 }

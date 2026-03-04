@@ -9,8 +9,8 @@ Version: ${version}
 Reference: ${referenceAsAsciidoc}
 
 </#if>
-<#if changelog?? && changelog?has_content>
-Changelog: ${changelog}
+<#if changelogAsAsciidoc?? && changelogAsAsciidoc?has_content>
+Changelog: ${changelogAsAsciidoc}
 
 </#if>
 

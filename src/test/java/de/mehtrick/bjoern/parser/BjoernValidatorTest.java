@@ -159,4 +159,40 @@ public class BjoernValidatorTest {
         //THEN
         //No Error
     }
+
+    @Test
+    public void changelogMultilineLiteralBlock() {
+        String zgr = "Feature: Feature\r\n" +
+                "Changelog: |\r\n" +
+                "  First line of changelog.\r\n" +
+                "  Second line with | pipe.\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        //WHEN
+        bjoernValidator.validate(zgr, "default");
+
+        //THEN
+        //No Error - multiline Changelog block scalar continuation lines must not trigger InvalidKeywordValidation
+    }
+
+    @Test
+    public void changelogMultilineFoldedBlock() {
+        String zgr = "Feature: Feature\r\n" +
+                "Changelog: >\r\n" +
+                "  First line of changelog.\r\n" +
+                "  Second line.\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        //WHEN
+        bjoernValidator.validate(zgr, "default");
+
+        //THEN
+        //No Error - folded block scalar continuation lines must also be accepted
+    }
 }

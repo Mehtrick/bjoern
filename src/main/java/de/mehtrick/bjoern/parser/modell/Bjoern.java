@@ -1,6 +1,7 @@
 package de.mehtrick.bjoern.parser.modell;
 
 import de.mehtrick.bjoern.parser.BjoernTextParser;
+import de.mehtrick.bjoern.parser.replacer.AsciidocReplacer;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.List;
@@ -66,6 +67,16 @@ public class Bjoern {
 
 	public void setChangelog(String changelog) {
 		this.changelog = changelog;
+	}
+
+	/**
+	 * Returns the changelog with AsciiDoc-specific characters escaped (e.g. pipe characters).
+	 */
+	public String getChangelogAsAsciidoc() {
+		if (changelog == null) {
+			return null;
+		}
+		return AsciidocReplacer.replace(changelog);
 	}
 
 	/**

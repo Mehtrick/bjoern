@@ -1,5 +1,7 @@
 Feature: Test mit Changelog
-Changelog: "This is a changelog entry describing what changed in this spec."
+Changelog: |
+  First line of the changelog.
+  Second line with a pipe | character.
 Scenarios: 
   - Scenario: Einfaches Szenario
     Given: 
