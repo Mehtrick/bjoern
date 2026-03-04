@@ -44,7 +44,7 @@ body:
         ```
       render: yaml
     validations:
-      required: true
+      required: false
   - type: textarea
     id: error
     attributes:
