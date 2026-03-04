@@ -63,6 +63,30 @@ public class BjoernParserTest {
 	}
 
 	@Test
+	public void testReferenceHtmlEscapingInJavadoc() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/bjoern.zgr", Charset.defaultCharset());
+		bjoern.setReference("[<b>text</b>](https://example.com?a=1&b=2)");
+		assertThat(bjoern.getReferenceAsJavadoc())
+				.isEqualTo("<a href=\"https://example.com?a=1&amp;b=2\">&lt;b&gt;text&lt;/b&gt;</a>");
+	}
+
+	@Test
+	public void testReferenceAsciidocUrlNotHtmlEscaped() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/bjoern.zgr", Charset.defaultCharset());
+		bjoern.setReference("[TICKET-123](https://example.com?a=1&b=2)");
+		assertThat(bjoern.getReferenceAsAsciidoc())
+				.isEqualTo("link:https://example.com?a=1&b=2[TICKET-123]");
+	}
+
+	@Test
+	public void testReferenceWithNonHttpUrlSchemeRendersAsPlainText() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/bjoern.zgr", Charset.defaultCharset());
+		bjoern.setReference("[click me](javascript:alert(1))");
+		assertThat(bjoern.getReferenceAsJavadoc()).isEqualTo("[click me](javascript:alert(1))");
+		assertThat(bjoern.getReferenceAsAsciidoc()).isEqualTo("[click me](javascript:alert(1))");
+	}
+
+	@Test
 	public void testWrongFileExctension() {
 		try {
 			new BjoernParser().parseSpec("src/test/resources/bjoern.text", Charset.defaultCharset());

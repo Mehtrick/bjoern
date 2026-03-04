@@ -1,8 +1,10 @@
 package de.mehtrick.bjoern.parser.modell;
 
 import de.mehtrick.bjoern.parser.BjoernTextParser;
+import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -47,8 +49,9 @@ public class Bjoern {
 	}
 
 	/**
-	 * Returns the reference formatted as a Javadoc hyperlink if it is a Markdown link ([text](url)),
-	 * otherwise returns the plain reference text.
+	 * Returns the reference formatted as a Javadoc hyperlink if it is a Markdown link ([text](url))
+	 * with an allowed URL scheme (http/https), otherwise returns the plain reference text.
+	 * Link text and URL are HTML-escaped to prevent markup injection.
 	 */
 	public String getReferenceAsJavadoc() {
 		if (reference == null) {
@@ -56,14 +59,21 @@ public class Bjoern {
 		}
 		Matcher matcher = MARKDOWN_LINK_PATTERN.matcher(reference);
 		if (matcher.matches()) {
-			return "<a href=\"" + matcher.group(2) + "\">" + matcher.group(1) + "</a>";
+			String text = matcher.group(1);
+			String url = matcher.group(2);
+			if (!isAllowedUrlScheme(url)) {
+				return reference;
+			}
+			return "<a href=\"" + StringEscapeUtils.escapeHtml4(url) + "\">" + StringEscapeUtils.escapeHtml4(text) + "</a>";
 		}
 		return reference;
 	}
 
 	/**
-	 * Returns the reference formatted as an AsciiDoc hyperlink if it is a Markdown link ([text](url)),
-	 * otherwise returns the plain reference text.
+	 * Returns the reference formatted as an AsciiDoc hyperlink if it is a Markdown link ([text](url))
+	 * with an allowed URL scheme (http/https), otherwise returns the plain reference text.
+	 * Link text is escaped to prevent AsciiDoc macro injection. Open brackets in the URL are
+	 * percent-encoded since '[' is the AsciiDoc macro attribute delimiter.
 	 */
 	public String getReferenceAsAsciidoc() {
 		if (reference == null) {
@@ -71,9 +81,23 @@ public class Bjoern {
 		}
 		Matcher matcher = MARKDOWN_LINK_PATTERN.matcher(reference);
 		if (matcher.matches()) {
-			return "link:" + matcher.group(2) + "[" + matcher.group(1) + "]";
+			String text = matcher.group(1);
+			String url = matcher.group(2);
+			if (!isAllowedUrlScheme(url)) {
+				return reference;
+			}
+			String safeUrl = url.replace("[", "%5B").replace("]", "%5D");
+			return "link:" + safeUrl + "[" + text.replace("]", "\\]") + "]";
 		}
 		return reference;
+	}
+
+	private static boolean isAllowedUrlScheme(String url) {
+		if (url == null || url.isEmpty()) {
+			return false;
+		}
+		String lower = url.toLowerCase(Locale.ROOT);
+		return lower.startsWith("http://") || lower.startsWith("https://");
 	}
 
 	public BjoernBackground getBackground() {
