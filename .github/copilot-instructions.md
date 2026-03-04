@@ -59,6 +59,7 @@ src/main/resources/
 
 ```yaml
 Feature: Description of the feature
+Reference: "[TICKET-123](https://example.com/TICKET-123)"
 
 Background:
   Given:
@@ -83,6 +84,8 @@ Scenarios:
     Then:
       - Other assertion
 ```
+
+The optional `Reference` field links a spec to an external ticket or resource. It accepts plain text or a Markdown link `[text](url)`. In generated Java it becomes a `@see` Javadoc tag; in generated AsciiDoc it is rendered as a hyperlink below the feature title.
 
 ## Code Generation Process
 

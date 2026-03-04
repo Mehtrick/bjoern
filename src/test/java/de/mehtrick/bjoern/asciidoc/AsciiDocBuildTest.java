@@ -32,6 +32,17 @@ public class AsciiDocBuildTest {
 	}
 
 	@Test
+	@DisplayName("Test Doc Generation with Reference")
+	public void testDocGenerationWithReference() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
+		BjoernDocApplication.main(new String[]{"path=src/test/resources/reference.zgr", "docdir=src/gen/resources"});
+		File generatedFile = new File("src/gen/resources/reference.adoc");
+		assertThat(generatedFile).exists();
+		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
+		assertThat(content).contains("= Test mit Reference");
+		assertThat(content).contains("Reference: link:https://example.com/TICKET-123[TICKET-123]");
+	}
+
+	@Test
 	@DisplayName("Test Generation of Empty Given")
 	public void testGenerationOfEmptyGiven() throws BjoernMissingPropertyException, FileNotFoundException, NotSupportedJunitVersionException {
 		BjoernDocApplication.main(new String[]{"path=src/test/resources/empty-given.zgr", "docdir=src/gen/resources"});
@@ -74,10 +85,10 @@ public class AsciiDocBuildTest {
 			File generatedFile = new File(docDir, "test.adoc");
 			assertThat(generatedFile).exists();
 			String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
-			assertThat(content).contains("== Git Historie");
-			assertThat(content).contains("*Datum*");
-			assertThat(content).contains("*Autor*");
-			assertThat(content).contains("*Kommentar*");
+			assertThat(content).contains("== Git History");
+			assertThat(content).contains("*Date*");
+			assertThat(content).contains("*Author*");
+			assertThat(content).contains("*Message*");
 			assertThat(content).contains("Testuser");
 			assertThat(content).contains("Test commit");
 		} finally {
@@ -92,7 +103,7 @@ public class AsciiDocBuildTest {
 		File generatedFile = new File("src/gen/resources/bjoern.adoc");
 		assertThat(generatedFile).exists();
 		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
-		assertThat(content).doesNotContain("== Git Historie");
+		assertThat(content).doesNotContain("== Git History");
 	}
 
 }

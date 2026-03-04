@@ -64,6 +64,7 @@ You will find the typical BDD keywords in it. For more convenience there is a [V
 `example.zgr`
 ```yaml
 Feature: Test eines KassenAutomaten
+Reference: "[TICKET-123](https://example.com/TICKET-123)"
 Background:
   Given:
     - Ein typ der was trinken will
@@ -91,6 +92,10 @@ Scenarios:
 
 ```
 
+The optional `Reference` field links a spec to an external ticket or resource. It accepts plain text or a Markdown link `[text](url)`:
+- In generated Java: rendered as a `@see <a href="url">text</a>` Javadoc tag on the abstract class.
+- In generated docs: rendered as an AsciiDoc hyperlink (`link:url[text]`) below the feature title.
+
 ## Code generation
 
 Bjoern will then generate the TestClasses based on the spec
@@ -104,7 +109,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test eines KassenAutomaten */
+ * Test eines KassenAutomaten
+ * @see <a href="https://example.com/TICKET-123">TICKET-123</a> */
 public abstract class AbstractTestEinesKassenautomaten extends AbstractTestclass implements TestEinesKassenautomatenInterface {
   /**
    * Getränk nicht vorhanden */
@@ -173,6 +179,8 @@ public interface TestEinesKassenautomatenInterface {
 ```adoc
 = Test Foo
 :toc:
+
+Reference: link:https://example.com/TICKET-123[TICKET-123]
 
 == Background
 [cols="10%,90%"]

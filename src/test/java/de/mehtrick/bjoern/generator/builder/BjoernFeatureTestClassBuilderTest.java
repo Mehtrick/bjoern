@@ -69,4 +69,16 @@ class BjoernFeatureTestClassBuilderTest extends AbstractBuilderTest {
         Assertions.assertThat(mappedFeature.methodSpecs).hasSize(3);
     }
 
+    @Test
+    void testJavadocWithReference() {
+        //given
+        bjoern = getBjoern("src/test/resources/reference.zgr");
+        //when
+        TypeSpec mappedFeature = new BjoernFeatureTestClassBuilder(bjoernCodeGeneratorConfig).build(bjoern).getFeatureClass();
+        //then
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("Test mit Reference");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("@see");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("<a href=\"https://example.com/TICKET-123\">TICKET-123</a>");
+    }
+
 }

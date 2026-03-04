@@ -1,11 +1,16 @@
 = ${feature}
 :toc:
 
+<#if referenceAsAsciidoc?? && referenceAsAsciidoc?has_content>
+Reference: ${referenceAsAsciidoc}
+
+</#if>
+
 <#if gitHistory?? && gitHistory?has_content>
-== Git Historie
+== Git History
 [cols="15%,20%,65%"]
 |===
-|*Datum* |*Autor* |*Kommentar*
+|*Date* |*Author* |*Message*
 
 <#list gitHistory as entry>
 |${entry.date} |${entry.author} |${entry.message}

@@ -21,8 +21,8 @@ public class BjoernValidatorTest {
         Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
                     bjoernValidator.validate("  WrongKeyword     \r\n      \r\n anotherWrongOne", "defaultpath");
                 }
-        ).withMessageContaining("ValidationError at line 1: The line starts with an invalid Keyword. Found \"  WrongKeyword     \". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!")
-                .withMessageContaining("ValidationError at line 3: The line starts with an invalid Keyword. Found \" anotherWrongOne\". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
+        ).withMessageContaining("ValidationError at line 1: The line starts with an invalid Keyword. Found \"  WrongKeyword     \". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,Reference:,- Scenario:,Scenarios:,-. This check is case-sensitive!")
+                .withMessageContaining("ValidationError at line 3: The line starts with an invalid Keyword. Found \" anotherWrongOne\". Allowed Keywords are: Given:,When:,Then:,Background:,Feature:,Reference:,- Scenario:,Scenarios:,-. This check is case-sensitive!");
     }
 
     @Test
@@ -122,6 +122,22 @@ public class BjoernValidatorTest {
                 }
         ).withMessageContaining("ValidationError at line 5: A statement shall not be empty")
                 .withMessageContaining("ValidationError at line 9: A statement shall not be empty");
+    }
+
+    @Test
+    public void missingReferenceValue() {
+        String zgr = "Feature: Feature\r\n" +
+                "Reference:\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Given: \r\n" +
+                "      - Mit  Flaschen Sprite";
+
+        //when
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 2: The keyword needs a value e.g. \"Feature: This is a Feature\" or \"Scenario: This is a Scneario\"");
     }
 
     @Test
