@@ -15,11 +15,14 @@ import java.util.List;
  *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Feature", "Reference", "Scenarios" })
+@JsonPropertyOrder({ "Feature", "Version", "Reference", "Scenarios" })
 public class BjoernZGRModell implements Serializable {
 
 	@JsonProperty("Feature")
 	private String feature;
+
+	@JsonProperty("Version")
+	private String version;
 
 	@JsonProperty("Reference")
 	private String reference;
@@ -39,6 +42,16 @@ public class BjoernZGRModell implements Serializable {
 	@JsonProperty("Feature")
 	public void setFeature(String feature) {
 		this.feature = feature;
+	}
+
+	@JsonProperty("Version")
+	public String getVersion() {
+		return version;
+	}
+
+	@JsonProperty("Version")
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	@JsonProperty("Reference")
@@ -72,6 +85,6 @@ public class BjoernZGRModell implements Serializable {
 	}
 
 	public String toString() {
-		return "BjoernZGRModell(feature=" + this.getFeature() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", bjoernZGRScenarios=" + this.bjoernZGRScenarios + ")";
+		return "BjoernZGRModell(feature=" + this.getFeature() + ", version=" + this.getVersion() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", bjoernZGRScenarios=" + this.bjoernZGRScenarios + ")";
 	}
 }

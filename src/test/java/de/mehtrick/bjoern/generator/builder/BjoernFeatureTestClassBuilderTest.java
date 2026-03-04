@@ -81,4 +81,16 @@ class BjoernFeatureTestClassBuilderTest extends AbstractBuilderTest {
         Assertions.assertThat(mappedFeature.javadoc.toString()).contains("<a href=\"https://example.com/TICKET-123\">TICKET-123</a>");
     }
 
+    @Test
+    void testJavadocWithVersion() {
+        //given
+        bjoern = getBjoern("src/test/resources/version.zgr");
+        //when
+        TypeSpec mappedFeature = new BjoernFeatureTestClassBuilder(bjoernCodeGeneratorConfig).build(bjoern).getFeatureClass();
+        //then
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("Test mit Version");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("@version");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("1.0.0");
+    }
+
 }

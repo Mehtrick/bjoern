@@ -32,6 +32,17 @@ public class AsciiDocBuildTest {
 	}
 
 	@Test
+	@DisplayName("Test Doc Generation with Version")
+	public void testDocGenerationWithVersion() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
+		BjoernDocApplication.main(new String[]{"path=src/test/resources/version.zgr", "docdir=src/gen/resources"});
+		File generatedFile = new File("src/gen/resources/version.adoc");
+		assertThat(generatedFile).exists();
+		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
+		assertThat(content).contains("= Test mit Version");
+		assertThat(content).contains("Version: 1.0.0");
+	}
+
+	@Test
 	@DisplayName("Test Doc Generation with Reference")
 	public void testDocGenerationWithReference() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
 		BjoernDocApplication.main(new String[]{"path=src/test/resources/reference.zgr", "docdir=src/gen/resources"});

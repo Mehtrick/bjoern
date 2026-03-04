@@ -13,6 +13,7 @@ public class Bjoern {
 	private static final Pattern MARKDOWN_LINK_PATTERN = Pattern.compile("\\[([^\\]]+)\\]\\(([^)]+)\\)");
 
 	private String feature;
+	private String version;
 	private String reference;
 	private BjoernBackground background;
 	private List<BjoernScenario> scenarios;
@@ -20,6 +21,7 @@ public class Bjoern {
 
 	public Bjoern(BjoernZGRModell yamlModell, String path) {
 		setFeature(yamlModell.getFeature());
+		setVersion(yamlModell.getVersion());
 		setReference(yamlModell.getReference());
 		setScenarios(yamlModell.getScenarios().stream().map(BjoernScenario::new).collect(Collectors.toList()));
 		setFilePath(path);
@@ -38,6 +40,14 @@ public class Bjoern {
 
 	public void setFeature(String feature) {
 		this.feature = feature;
+	}
+
+	public String getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 	public String getReference() {
@@ -126,6 +136,6 @@ public class Bjoern {
 
 
 	public String toString() {
-		return "Bjoern(feature=" + this.getFeature() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
+		return "Bjoern(feature=" + this.getFeature() + ", version=" + this.getVersion() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
 	}
 }
