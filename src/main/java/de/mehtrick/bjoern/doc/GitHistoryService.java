@@ -1,5 +1,6 @@
 package de.mehtrick.bjoern.doc;
 
+import de.mehtrick.bjoern.parser.replacer.AsciidocReplacer;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.lib.PersonIdent;
@@ -33,22 +34,31 @@ public class GitHistoryService {
         try {
             File specFile = new File(filePath).getAbsoluteFile();
             FileRepositoryBuilder builder = new FileRepositoryBuilder();
-            Repository repository = builder.findGitDir(specFile).build();
+            builder.findGitDir(specFile);
 
-            File workTree = repository.getWorkTree();
-            String relativePath = workTree.toPath().relativize(specFile.toPath()).toString().replace(File.separatorChar, '/');
+            if (builder.getGitDir() == null) {
+                log.debug("No git repository found for file {}, returning empty history", filePath);
+                return Collections.emptyList();
+            }
 
             List<GitHistoryEntry> entries = new ArrayList<>();
-            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
-            try (Git git = new Git(repository)) {
+            try (Repository repository = builder.build(); Git git = new Git(repository)) {
+                File workTree = repository.getWorkTree();
+                String relativePath = workTree.toPath()
+                        .relativize(specFile.toPath())
+                        .toString()
+                        .replace(File.separatorChar, '/');
+
                 LogCommand logCommand = git.log().addPath(relativePath);
                 for (RevCommit commit : logCommand.call()) {
                     PersonIdent author = commit.getAuthorIdent();
+                    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+                    sdf.setTimeZone(author.getTimeZone());
                     String date = sdf.format(author.getWhen());
-                    String committer = author.getName();
-                    String message = commit.getShortMessage();
-                    entries.add(new GitHistoryEntry(date, committer, message));
+                    String authorName = AsciidocReplacer.replace(author.getName() != null ? author.getName() : "");
+                    String message = AsciidocReplacer.replace(commit.getShortMessage());
+                    entries.add(new GitHistoryEntry(date, authorName, message));
                 }
             }
 
