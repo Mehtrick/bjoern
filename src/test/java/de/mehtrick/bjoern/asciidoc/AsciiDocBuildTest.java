@@ -35,6 +35,11 @@ public class AsciiDocBuildTest {
 	@DisplayName("Test Doc Generation with Reference")
 	public void testDocGenerationWithReference() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
 		BjoernDocApplication.main(new String[]{"path=src/test/resources/reference.zgr", "docdir=src/gen/resources"});
+		File generatedFile = new File("src/gen/resources/reference.adoc");
+		assertThat(generatedFile).exists();
+		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
+		assertThat(content).contains("= Test mit Reference");
+		assertThat(content).contains("Reference: link:https://example.com/TICKET-123[TICKET-123]");
 	}
 
 	@Test
