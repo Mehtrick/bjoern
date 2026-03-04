@@ -1,6 +1,10 @@
 = ${feature}
 :toc:
 
+<#if version??>
+Version: ${version}
+
+</#if>
 <#if referenceAsAsciidoc??>
 Reference: ${referenceAsAsciidoc}
 
