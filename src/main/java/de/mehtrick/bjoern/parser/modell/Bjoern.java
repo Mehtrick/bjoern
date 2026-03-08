@@ -1,6 +1,7 @@
 package de.mehtrick.bjoern.parser.modell;
 
 import de.mehtrick.bjoern.parser.BjoernTextParser;
+import de.mehtrick.bjoern.parser.replacer.AsciidocReplacer;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Bjoern {
 	private String feature;
 	private String version;
 	private String reference;
+	private String changelog;
 	private BjoernBackground background;
 	private List<BjoernScenario> scenarios;
 	private String filePath;
@@ -23,6 +25,7 @@ public class Bjoern {
 		setFeature(yamlModell.getFeature());
 		setVersion(yamlModell.getVersion());
 		setReference(yamlModell.getReference());
+		setChangelog(yamlModell.getChangelog());
 		setScenarios(yamlModell.getScenarios().stream().map(BjoernScenario::new).collect(Collectors.toList()));
 		setFilePath(path);
 		if (yamlModell.getBackground() != null) {
@@ -56,6 +59,24 @@ public class Bjoern {
 
 	public void setReference(String reference) {
 		this.reference = reference;
+	}
+
+	public String getChangelog() {
+		return this.changelog;
+	}
+
+	public void setChangelog(String changelog) {
+		this.changelog = changelog;
+	}
+
+	/**
+	 * Returns the changelog with AsciiDoc-specific characters escaped (e.g. pipe characters).
+	 */
+	public String getChangelogAsAsciidoc() {
+		if (changelog == null) {
+			return null;
+		}
+		return AsciidocReplacer.replace(changelog);
 	}
 
 	/**
@@ -136,6 +157,6 @@ public class Bjoern {
 
 
 	public String toString() {
-		return "Bjoern(feature=" + this.getFeature() + ", version=" + this.getVersion() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
+		return "Bjoern(feature=" + this.getFeature() + ", version=" + this.getVersion() + ", reference=" + this.getReference() + ", changelog=" + this.getChangelog() + ", background=" + this.getBackground() + ", scenarios=" + this.getScenarios() + ", filePath=" + this.getFilePath() + ")";
 	}
 }
