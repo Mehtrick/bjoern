@@ -14,6 +14,127 @@ description: Use when writing, reviewing, or refactoring .zgr specification file
 
 Generated code lives in `src/gen/` and is **regenerated on every run** — never edit it.
 
+## When to Use Bjoern
+
+Bjoern is ideal for **acceptance-oriented tests** where **business logic** is paramount and the **specification serves as living documentation**.
+
+### Test Type Suitability
+
+| Test Type | Suitability | Recommendation |
+|-----------|-------------|----------------|
+| **Use Cases / User Journeys** | ★★★★★ | **Ideal** - Primary use case |
+| **Acceptance Tests** | ★★★★★ | **Ideal** - Stakeholders understand specs |
+| **Business Logic / Domain Rules** | ★★★★★ | **Ideal** for complex domain rules |
+| **API Tests** | ★★★★☆ | **Very good** with technical abstraction |
+| **Integration Tests** | ★★★★☆ | **Very good** for multi-component workflows |
+| **UI Tests** | ★★★☆☆ | Good with Page Object Pattern |
+| **Security Tests** | ★★★☆☆ | Only for business security requirements |
+| **Unit Tests** | ★★☆☆☆ | Only for complex business logic |
+| **Performance Tests** | ★☆☆☆☆ | **Not suitable** |
+
+### Use Cases (Primary Use Case)
+
+Bjoern excels at testing **use cases** - complete user journeys that deliver business value.
+
+**What makes a good use case for Bjoern:**
+- Has clear business value
+- Involves multiple steps/interactions
+- Has observable outcomes
+- Can be described in business language
+- Stakeholders care about the behavior
+
+**Example: E-Commerce Checkout Use Case**
+```yaml
+Feature: Customer checkout process
+
+Scenario: Customer completes purchase with credit card
+  Given:
+    - Customer "alice" has items in cart
+    - Cart total is "150" Euro
+    - Customer has payment method "Credit Card"
+  When:
+    - Customer proceeds to checkout
+    - Customer enters shipping address "Main St 123, Berlin"
+    - Customer confirms payment with "Credit Card"
+  Then:
+    - Order is created with number "ORD-2024-001"
+    - Payment of "150" Euro is processed
+    - Confirmation email is sent to "alice@example.com"
+    - Cart is empty
+
+Scenario: Checkout fails due to payment declined
+  Given:
+    - Customer "bob" has items in cart
+    - Cart total is "200" Euro
+    - Payment method "Credit Card" is declined
+  When:
+    - Customer proceeds to checkout
+    - Customer confirms payment with "Credit Card"
+  Then:
+    - Order is not created
+    - Error message is "Payment declined"
+    - Cart still contains items
+    - No email is sent
+```
+
+**Example: User Registration Use Case**
+```yaml
+Feature: User registration and onboarding
+
+Scenario: New user registers successfully
+  Given:
+    - Email "newuser@example.com" is not registered
+  When:
+    - User submits registration with email "newuser@example.com" and password "SecurePass123"
+  Then:
+    - User account is created with role "USER"
+    - Verification email is sent to "newuser@example.com"
+    - User is redirected to verification page
+
+Scenario: Registration fails with existing email
+  Given:
+    - Email "existing@example.com" is already registered
+  When:
+    - User submits registration with email "existing@example.com"
+  Then:
+    - Registration is rejected
+    - Error message is "Email already registered"
+    - No account is created
+```
+
+### When to Use Bjoern
+
+✅ **Use Bjoern when:**
+- Business requirements are the focus
+- Non-developers should read the specs
+- Living documentation is desired
+- Business rules are complex and varied
+- Cross-component workflows are tested
+- Use cases need to be documented and validated
+
+❌ **Don't use Bjoern when:**
+- Tests are purely technical (performance, memory)
+- Granular unit tests are needed
+- No business domain exists
+- Team doesn't want/need BDD culture
+
+### Hybrid Approach (Recommended)
+
+```
+├── Unit Tests (JUnit/Mockito)
+│   └── Technical correctness
+├── Bjoern Specs
+│   ├── Use Cases / User Journeys
+│   ├── Acceptance tests
+│   ├── Integration tests
+│   └── API tests
+└── Specialized Tests
+    ├── Performance (Gatling, JMeter)
+    └── Security (OWASP ZAP)
+```
+
+**Best strategy:** Use Bjoern for the **business level** (What should the system do?), other tools for the **technical level** (How performant/secure is it?).
+
 ## .zgr File Structure
 
 ```yaml
@@ -783,6 +904,13 @@ BUILD SUCCESSFUL
 ```
 
 ## Checklist for .zgr Files
+
+### Suitability Check (First!)
+- [ ] Test type is suitable for Bjoern (Use Cases, Acceptance, Business Logic, Integration, API)
+- [ ] Test describes business behavior, not technical implementation
+- [ ] Test has clear business value and observable outcomes
+- [ ] Stakeholders can understand the scenarios
+- [ ] NOT a pure unit test, performance test, or technical test
 
 ### Syntax & Formatting
 - [ ] All varying values are quoted: `"value"`
