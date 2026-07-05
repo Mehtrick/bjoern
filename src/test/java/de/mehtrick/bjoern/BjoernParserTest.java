@@ -30,6 +30,14 @@ public class BjoernParserTest {
 	}
 
 	@Test
+	public void testDeprecatedScenarioParsed() {
+		Bjoern bjoern = new BjoernParser().parseSpec("src/test/resources/deprecated.zgr", Charset.defaultCharset());
+		assertThat(bjoern.getScenarios()).hasSize(2);
+		assertThat(bjoern.getScenarios().get(0).isDeprecated()).isTrue();
+		assertThat(bjoern.getScenarios().get(1).isDeprecated()).isFalse();
+	}
+
+	@Test
 	public void testBjoernWithMarkdownLinkReference() {
 		String path = "src/test/resources/reference.zgr";
 		Bjoern bjoern = new BjoernParser().parseSpec(path, Charset.defaultCharset());

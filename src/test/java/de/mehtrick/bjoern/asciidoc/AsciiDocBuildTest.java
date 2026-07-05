@@ -140,4 +140,17 @@ public class AsciiDocBuildTest {
 		assertThat(content).doesNotContain("== Git History");
 	}
 
+	@Test
+	@DisplayName("Test Doc Generation with deprecated scenario shows Veraltet hint")
+	public void testDocGenerationWithDeprecatedScenario() throws IOException, BjoernMissingPropertyException, NotSupportedJunitVersionException {
+		BjoernDocApplication.main(new String[]{"path=src/test/resources/deprecated.zgr", "docdir=src/gen/resources"});
+		File generatedFile = new File("src/gen/resources/deprecated.adoc");
+		assertThat(generatedFile).exists();
+		String content = new String(Files.readAllBytes(generatedFile.toPath()), StandardCharsets.UTF_8);
+		assertThat(content).contains("= Test mit Deprecated Scenarios");
+		assertThat(content).contains("== Scenario: Veraltetes Szenario [.red]#Veraltet#");
+		assertThat(content).contains("== Scenario: Aktuelles Szenario");
+		assertThat(content).doesNotContain("== Scenario: Aktuelles Szenario [.red]#Veraltet#");
+	}
+
 }

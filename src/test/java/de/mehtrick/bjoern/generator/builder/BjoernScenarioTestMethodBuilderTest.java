@@ -59,4 +59,49 @@ class BjoernScenarioTestMethodBuilderTest extends AbstractBuilderTest {
         Assertions.assertThat(mappedScenario.annotations).hasSize(2);
         Assertions.assertThat(mappedScenario.annotations.get(0).type.toString()).isEqualTo(Test.class.getCanonicalName());
     }
+
+    @Test
+    void testDeprecatedScenarioMappedJUnit4() {
+        //given
+        bjoern = getBjoern("src/test/resources/deprecated.zgr");
+
+        //when
+        List<MethodSpec> buildBjoernScenarios = BjoernScenarioTestMethodBuilder.build(bjoern, SupportedJunitVersion.junit4);
+
+        //then
+        Assertions.assertThat(buildBjoernScenarios).hasSize(2);
+        MethodSpec deprecatedScenario = buildBjoernScenarios.get(0);
+        MethodSpec activeScenario = buildBjoernScenarios.get(1);
+
+        Assertions.assertThat(deprecatedScenario.annotations).hasSize(2);
+        Assertions.assertThat(deprecatedScenario.annotations.get(0).type.toString()).isEqualTo(org.junit.Test.class.getCanonicalName());
+        Assertions.assertThat(deprecatedScenario.annotations.get(1).type.toString()).isEqualTo(Deprecated.class.getCanonicalName());
+        Assertions.assertThat(deprecatedScenario.javadoc.toString()).contains("@deprecated Veraltet");
+
+        Assertions.assertThat(activeScenario.annotations).hasSize(1);
+        Assertions.assertThat(activeScenario.annotations.get(0).type.toString()).isEqualTo(org.junit.Test.class.getCanonicalName());
+        Assertions.assertThat(activeScenario.javadoc.toString()).doesNotContain("@deprecated");
+    }
+
+    @Test
+    void testDeprecatedScenarioMappedJUnit5() {
+        //given
+        bjoern = getBjoern("src/test/resources/deprecated.zgr");
+
+        //when
+        List<MethodSpec> buildBjoernScenarios = BjoernScenarioTestMethodBuilder.build(bjoern, SupportedJunitVersion.junit5);
+
+        //then
+        Assertions.assertThat(buildBjoernScenarios).hasSize(2);
+        MethodSpec deprecatedScenario = buildBjoernScenarios.get(0);
+        MethodSpec activeScenario = buildBjoernScenarios.get(1);
+
+        Assertions.assertThat(deprecatedScenario.annotations).hasSize(3);
+        Assertions.assertThat(deprecatedScenario.annotations.get(0).type.toString()).isEqualTo(Test.class.getCanonicalName());
+        Assertions.assertThat(deprecatedScenario.annotations.get(2).type.toString()).isEqualTo(Deprecated.class.getCanonicalName());
+        Assertions.assertThat(deprecatedScenario.javadoc.toString()).contains("@deprecated Veraltet");
+
+        Assertions.assertThat(activeScenario.annotations).hasSize(2);
+        Assertions.assertThat(activeScenario.javadoc.toString()).doesNotContain("@deprecated");
+    }
 }

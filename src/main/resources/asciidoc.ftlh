@@ -40,7 +40,7 @@ Changelog: ${changelogAsAsciidoc}
 
 
 <#list scenarios as scenario>
-== Scenario: ${scenario.name}
+== Scenario: ${scenario.name}<#if scenario.deprecated> [.red]#Veraltet#</#if>
 [cols="10%,90%"]
 |===
 <#if scenario.given??>
