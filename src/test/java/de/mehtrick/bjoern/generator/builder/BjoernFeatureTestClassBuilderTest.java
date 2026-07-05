@@ -93,4 +93,17 @@ class BjoernFeatureTestClassBuilderTest extends AbstractBuilderTest {
         Assertions.assertThat(mappedFeature.javadoc.toString()).contains("1.0.0");
     }
 
+    @Test
+    void testJavadocWithChangelog() {
+        //given
+        bjoern = getBjoern("src/test/resources/changelog.zgr");
+        //when
+        TypeSpec mappedFeature = new BjoernFeatureTestClassBuilder(bjoernCodeGeneratorConfig).build(bjoern).getFeatureClass();
+        //then
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("Test mit Changelog");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("@Changelog");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("First line of the changelog.");
+        Assertions.assertThat(mappedFeature.javadoc.toString()).contains("Second line with a pipe | character.");
+    }
+
 }

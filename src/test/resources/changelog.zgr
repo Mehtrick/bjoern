@@ -1,0 +1,12 @@
+Feature: Test mit Changelog
+Changelog: |
+  First line of the changelog.
+  Second line with a pipe | character.
+Scenarios: 
+  - Scenario: Einfaches Szenario
+    Given: 
+      - Ein Benutzer
+    When:
+      - Benutzer tut etwas
+    Then:
+      - Ergebnis ist korrekt

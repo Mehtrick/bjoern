@@ -15,7 +15,7 @@ import java.util.List;
  *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Feature", "Version", "Reference", "Scenarios" })
+@JsonPropertyOrder({ "Feature", "Version", "Reference", "Changelog", "Scenarios" })
 public class BjoernZGRModell implements Serializable {
 
 	@JsonProperty("Feature")
@@ -26,6 +26,9 @@ public class BjoernZGRModell implements Serializable {
 
 	@JsonProperty("Reference")
 	private String reference;
+
+	@JsonProperty("Changelog")
+	private String changelog;
 
 	@JsonProperty("Background")
 	private BjoernZGRBackground background;
@@ -64,6 +67,16 @@ public class BjoernZGRModell implements Serializable {
 		this.reference = reference;
 	}
 
+	@JsonProperty("Changelog")
+	public String getChangelog() {
+		return changelog;
+	}
+
+	@JsonProperty("Changelog")
+	public void setChangelog(String changelog) {
+		this.changelog = changelog;
+	}
+
 	@JsonProperty("Scenarios")
 	public List<BjoernZGRScenario> getScenarios() {
 		return bjoernZGRScenarios;
@@ -85,6 +98,6 @@ public class BjoernZGRModell implements Serializable {
 	}
 
 	public String toString() {
-		return "BjoernZGRModell(feature=" + this.getFeature() + ", version=" + this.getVersion() + ", reference=" + this.getReference() + ", background=" + this.getBackground() + ", bjoernZGRScenarios=" + this.bjoernZGRScenarios + ")";
+		return "BjoernZGRModell(feature=" + this.getFeature() + ", version=" + this.getVersion() + ", reference=" + this.getReference() + ", changelog=" + this.getChangelog() + ", background=" + this.getBackground() + ", bjoernZGRScenarios=" + this.bjoernZGRScenarios + ")";
 	}
 }

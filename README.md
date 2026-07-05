@@ -101,6 +101,10 @@ The optional `Reference` field links a spec to an external ticket or resource. I
 - In generated Java: rendered as a `@see <a href="url">text</a>` Javadoc tag on the abstract class.
 - In generated docs: rendered as an AsciiDoc hyperlink (`link:url[text]`) below the feature title.
 
+The optional `Changelog` field allows you to document changes, background information, or technical rationale for the specification. It accepts arbitrary free text:
+- In generated Java: rendered as a `@Changelog` tag in the Javadoc of the abstract class.
+- In generated docs: inserted after the introduction (version/reference), only when present.
+
 ## Code generation
 
 Bjoern will then generate the TestClasses based on the spec
@@ -250,3 +254,35 @@ Generates documentations based on the bjoern files. It uses apache freemarker as
 
 gradlew build
 ```
+
+## AI Agent Support
+
+This repository includes a skill file for AI coding agents that provides best practices for writing Bjoern `.zgr` specification files.
+
+The skill covers:
+- Parameterization for statement reuse
+- BDD best practices (declarative, business language)
+- Proper Then-statement assertions
+- Transaction safety considerations
+- YAML formatting rules
+
+### Loading the Skill
+
+**opencode:**
+```bash
+# The skill is automatically detected from .agents/ directory
+# Or configure in opencode.json:
+{
+  "skills": {
+    "paths": [".agents"]
+  }
+}
+```
+
+**Other AI tools:**
+Copy `.agents/bjoern-zgr/SKILL.md` to your tool's skill/rules directory:
+- Claude Code: `CLAUDE.md` or `.claude/`
+- Cursor: `.cursorrules` or `.cursor/rules/`
+- GitHub Copilot: `.github/copilot-instructions.md`
+
+The skill content is tool-agnostic Markdown and can be adapted to any AI assistant.
