@@ -105,6 +105,22 @@ The optional `Changelog` field allows you to document changes, background inform
 - In generated Java: rendered as a `@Changelog` tag in the Javadoc of the abstract class.
 - In generated docs: inserted after the introduction (version/reference), only when present.
 
+The optional `Deprecated` field marks a single scenario as deprecated. It must be placed inside a scenario (at the same indentation level as `Given:`/`When:`/`Then:`) and its value must be the boolean `true` or `false`:
+- In generated Java: the test method is annotated with `@Deprecated` and the Javadoc contains a `@deprecated Veraltet` tag.
+- In generated docs: deprecated scenarios are visually marked as `[.red]#Veraltet#`.
+
+```yaml
+Scenarios:
+  - Scenario: Old checkout flow
+    Deprecated: true
+    Given:
+      - An old payment provider
+    When:
+      - The user checks out
+    Then:
+      - A deprecation warning is shown
+```
+
 ## Code generation
 
 Bjoern will then generate the TestClasses based on the spec
