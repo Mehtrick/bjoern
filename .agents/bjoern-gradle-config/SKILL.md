@@ -7,14 +7,40 @@ description: Use when configuring the Bjoern Gradle plugin in build.gradle files
 
 ## Plugin Setup
 
+### Finding the Latest Version
+
+**IMPORTANT:** Always use the latest Bjoern version. Check these sources:
+
+1. **Gradle Plugin Portal:** https://plugins.gradle.org/plugin/de.mehtrick.bjoern.gradle-plugin
+2. **Maven Central:** https://search.maven.org/artifact/de.mehtrick/bjoern-gradle-plugin
+3. **GitHub Releases:** https://github.com/Mehtrick/bjoern/releases
+4. **Project version.config:** Check the `bjoernversion` property in the Bjoern repository
+
+To find the latest version programmatically:
+```bash
+# Check Gradle Plugin Portal
+curl -s https://plugins.gradle.org/plugin/de.mehtrick.bjoern.gradle-plugin | grep -o 'version "[^"]*"' | head -1
+
+# Or visit the plugin portal URL directly
+```
+
 ### Apply the Plugin
+
+Replace `LATEST_VERSION` with the actual version from the sources above:
 
 ```gradle
 plugins {
-    id "de.mehtrick.bjoern.gradle-plugin" version "1.3.3"
+    id "de.mehtrick.bjoern.gradle-plugin" version "LATEST_VERSION"
 }
 
 apply plugin: 'de.mehtrick.bjoern.gradle-plugin'
+```
+
+**Example with a specific version (check for updates!):**
+```gradle
+plugins {
+    id "de.mehtrick.bjoern.gradle-plugin" version "1.3.3" // Check for latest!
+}
 ```
 
 ### Required Dependencies
@@ -401,7 +427,7 @@ This adds commit information to generated docs, showing:
 ```gradle
 plugins {
     id 'java'
-    id "de.mehtrick.bjoern.gradle-plugin" version "1.3.3"
+    id "de.mehtrick.bjoern.gradle-plugin" version "LATEST_VERSION" // Check plugin portal for latest!
 }
 
 apply plugin: 'de.mehtrick.bjoern.gradle-plugin'
@@ -444,6 +470,7 @@ compileTestJava.dependsOn bjoernGen
 
 When configuring the plugin, verify:
 
+- [ ] **Using the latest Bjoern version** (check Gradle Plugin Portal, Maven Central, or GitHub Releases)
 - [ ] Gradle version > 7.6.2 (preferably 8.x)
 - [ ] `folder` or `path` is set correctly
 - [ ] `pckg` matches your project package structure
