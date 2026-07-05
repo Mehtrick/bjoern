@@ -15,11 +15,13 @@ import java.util.List;
  *
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Scenario", "Given", "When", "Then" })
+@JsonPropertyOrder({ "Scenario", "Deprecated", "Given", "When", "Then" })
 class BjoernZGRScenario implements Serializable {
 
 	@JsonProperty("Scenario")
 	private String scenario;
+	@JsonProperty("Deprecated")
+	private boolean deprecated;
 	@JsonProperty("Given")
 	private List<String> given = null;
 	@JsonProperty("When")
@@ -36,6 +38,16 @@ class BjoernZGRScenario implements Serializable {
 	@JsonProperty("Scenario")
 	public void setScenario(String scenario) {
 		this.scenario = scenario;
+	}
+
+	@JsonProperty("Deprecated")
+	public boolean isDeprecated() {
+		return deprecated;
+	}
+
+	@JsonProperty("Deprecated")
+	public void setDeprecated(boolean deprecated) {
+		this.deprecated = deprecated;
 	}
 
 	@JsonProperty("Given")
@@ -69,6 +81,6 @@ class BjoernZGRScenario implements Serializable {
 	}
 
 	public String toString() {
-		return "BjoernZGRScenario(scenario=" + this.getScenario() + ", given=" + this.getGiven() + ", when=" + this.getWhen() + ", then=" + this.getThen() + ")";
+		return "BjoernZGRScenario(scenario=" + this.getScenario() + ", deprecated=" + this.isDeprecated() + ", given=" + this.getGiven() + ", when=" + this.getWhen() + ", then=" + this.getThen() + ")";
 	}
 }

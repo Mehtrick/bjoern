@@ -13,10 +13,12 @@ import java.util.List;
  */
 public class BjoernScenario extends BjoernBackground {
     private String name;
+    private boolean deprecated;
     private List<BjoernStatement> when = new ArrayList<>();
 
     public BjoernScenario(BjoernZGRScenario bjoernZGRScenario) {
         setName(bjoernZGRScenario.getScenario());
+        setDeprecated(bjoernZGRScenario.isDeprecated());
         this.setGiven(parseStatements(bjoernZGRScenario.getGiven(), BDDKeyword.GIVEN));
         this.setWhen(parseStatements(bjoernZGRScenario.getWhen(), BDDKeyword.WHEN));
         this.setThen(parseStatements(bjoernZGRScenario.getThen(), BDDKeyword.THEN));
@@ -34,6 +36,14 @@ public class BjoernScenario extends BjoernBackground {
         this.name = name;
     }
 
+    public boolean isDeprecated() {
+        return this.deprecated;
+    }
+
+    public void setDeprecated(boolean deprecated) {
+        this.deprecated = deprecated;
+    }
+
     public List<BjoernStatement> getWhen() {
         return this.when;
     }
@@ -43,7 +53,7 @@ public class BjoernScenario extends BjoernBackground {
     }
 
     public String toString() {
-        return "BjoernScenario(name=" + this.getName() + ", when=" + this.getWhen() + ")";
+        return "BjoernScenario(name=" + this.getName() + ", deprecated=" + this.isDeprecated() + ", when=" + this.getWhen() + ")";
     }
 
 }

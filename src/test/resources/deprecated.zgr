@@ -1,0 +1,17 @@
+Feature: Test mit Deprecated Scenarios
+Scenarios:
+  - Scenario: Veraltetes Szenario
+    Deprecated: true
+    Given:
+      - Ein Benutzer
+    When:
+      - Benutzer tut etwas
+    Then:
+      - Ergebnis ist korrekt
+  - Scenario: Aktuelles Szenario
+    Given:
+      - Ein Benutzer
+    When:
+      - Benutzer tut etwas
+    Then:
+      - Ergebnis ist korrekt

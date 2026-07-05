@@ -38,6 +38,10 @@ public class BjoernScenarioTestMethodBuilder {
                 .addModifiers(Modifier.PUBLIC).addException(Exception.class).addJavadoc(scenario.getName());
         main.addAnnotation(junitVersion.getTestAnnotationClass());
         junitVersion.addExtraAnnotations(main,scenario);
+        if (scenario.isDeprecated()) {
+            main.addAnnotation(Deprecated.class);
+            main.addJavadoc("\n@deprecated Veraltet");
+        }
         if (scenario.getGiven() != null) {
             scenario.getGiven()
                     .forEach(given -> main.addStatement(BjoernStatementParser.createMethodCallOutOfStatemet(given)));
