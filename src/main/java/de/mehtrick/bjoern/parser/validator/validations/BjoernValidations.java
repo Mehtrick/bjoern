@@ -41,6 +41,11 @@ public enum BjoernValidations {
         protected void validate(String[] lines, int index) throws BjoernValidationsException {
             new MissingStatementContent(errorText).validate(lines,index);
         }
+    }, DEPRECATED_VALIDATION("Invalid Deprecated: declaration. %s") {
+        @Override
+        protected void validate(String[] lines, int index) throws BjoernValidationsException {
+            new DeprecatedValidation(errorText).validate(lines,index);
+        }
     };
 
     final String errorText;

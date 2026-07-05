@@ -179,6 +179,110 @@ public class BjoernValidatorTest {
     }
 
     @Test
+    public void testDeprecatedValidUsage() {
+        String zgr = "Feature: Feature\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Deprecated: true\r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        bjoernValidator.validate(zgr, "default");
+    }
+
+    @Test
+    public void testDeprecatedValidUsageFalse() {
+        String zgr = "Feature: Feature\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Deprecated: false\r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        bjoernValidator.validate(zgr, "default");
+    }
+
+    @Test
+    public void testDeprecatedRootLevel() {
+        String zgr = "Feature: Feature\r\n" +
+                "Deprecated: true\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 2:")
+                .withMessageContaining("Deprecated: is only allowed inside a Scenarios block, but was found at root level");
+    }
+
+    @Test
+    public void testDeprecatedNoValue() {
+        String zgr = "Feature: Feature\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Deprecated:\r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 4:")
+                .withMessageContaining("Deprecated: requires a boolean value (true or false) but none was provided");
+    }
+
+    @Test
+    public void testDeprecatedNonBooleanValue() {
+        String zgr = "Feature: Feature\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Deprecated: maybe\r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 4:")
+                .withMessageContaining("Deprecated: value must be true or false but found \"maybe\"");
+    }
+
+    @Test
+    public void testDeprecatedWrongIndentation() {
+        String zgr = "Feature: Feature\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "  Deprecated: true\r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 4:")
+                .withMessageContaining("Deprecated: must be indented with 4 spaces but found 2");
+    }
+
+    @Test
+    public void testDeprecatedBeforeScenariosKeyword() {
+        String zgr = "Feature: Feature\r\n" +
+                "  Deprecated: true\r\n" +
+                "Scenarios: \r\n" +
+                "  - Scenario: Scenario \r\n" +
+                "    Given: \r\n" +
+                "      - Ein Benutzer";
+
+        Assertions.assertThatExceptionOfType(BjoernValidatorException.class).isThrownBy(() -> {
+                    bjoernValidator.validate(zgr, "default");
+                }
+        ).withMessageContaining("ValidationError at line 2:")
+                .withMessageContaining("Deprecated: is only allowed inside a Scenarios block, but was found at root level");
+    }
+
+    @Test
     public void changelogMultilineFoldedBlock() {
         String zgr = "Feature: Feature\r\n" +
                 "Changelog: >\r\n" +
