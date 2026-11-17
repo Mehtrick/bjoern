@@ -56,6 +56,10 @@ Gradle 8 is now supported.
 | specRecursive     | no                                                        | Defines if the folder of specs should be scanned recursive or not                                                                                                                                | false                                                 | true                                          |
 | gitHistory        | no                                                        | Includes the git commit history in the generated documentation. Shows date, author, and commit message for each spec file                                                                       | false                                                 | true                                          |
 
+### Git History
+
+Set `gitHistory = true` to include each specification's Git commit history in the generated documentation.
+
 ## Specification
 
 The specification is yaml based. Bjoern uses the .zgr file extension to determine the specification files.
@@ -93,19 +97,27 @@ Scenarios:
 
 ```
 
+### Version
+
 The optional `Version` field specifies the version of the spec:
 - In generated Java: rendered as a `@version` Javadoc tag on the abstract class.
 - In generated docs: rendered as `Version: <value>` below the feature title.
+
+### Reference
 
 The optional `Reference` field links a spec to an external ticket or resource. It accepts plain text or a Markdown link `[text](url)`:
 - In generated Java: rendered as a `@see <a href="url">text</a>` Javadoc tag on the abstract class.
 - In generated docs: rendered as an AsciiDoc hyperlink (`link:url[text]`) below the feature title.
 
+### Changelog
+
 The optional `Changelog` field allows you to document changes, background information, or technical rationale for the specification. It accepts arbitrary free text:
 - In generated Java: rendered as a `@Changelog` tag in the Javadoc of the abstract class.
 - In generated docs: inserted after the introduction (version/reference), only when present.
 
-The optional `Deprecated` field marks a single scenario as deprecated. It must be placed inside a scenario (at the same indentation level as `Given:`/`When:`/`Then:`) and its value must be a boolean (`true` or `false`):
+### Deprecated
+
+The optional `Deprecated` field marks a single scenario as deprecated. It must be placed inside a scenario (at the same indentation level as `Given:`/`When:`/`Then:`) and its value must be the boolean `true` or `false`:
 - In generated Java: the test method is annotated with `@Deprecated` and the Javadoc contains a `@deprecated Veraltet` tag.
 - In generated docs: deprecated scenarios are visually marked as `[.red]#Veraltet#`.
 
